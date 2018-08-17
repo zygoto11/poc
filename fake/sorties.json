@@ -1,6 +1,6 @@
 [
-  { "scope":"public","name":"sortie footing","icon":"umbrella-beach" },
-   { "scope":"public","name":"sortie cinéma","icon":"film" },
-    { "scope":"public","name":"resto","icon":"utensils" },
+  { "scope":"public","name":"sortie footing","icon":"umbrella-beach" ,"date":"2014-01-05"},
+   { "scope":"public","name":"sortie cinéma","icon":"film","date":"2018-01-05" },
+    { "scope":"public","name":"resto","icon":"utensils","date":"2018-01-05" },
  { "scope":"private","name":"sortie apero","date":"2018-01-05","icon":"beer" }
 ]

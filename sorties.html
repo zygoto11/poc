@@ -1,4 +1,4 @@
-<hr>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -19,30 +19,41 @@
     </div>
   </div>
 </div>
-
-<a type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
-  Créer une nouvelle sortie <i class="fa fa-plus-circle"></i>
-</a>
-<a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-none" >
-  Afficher la liste des sorties <i class="fa fa-user"></i>
-</a>
-	
-<hr>
-
+<br>
 <div class="container-fluid">
 <div class="row">
-    <div class="col-md-3">
-	<!-- Button trigger modal -->
+<div class="col-md">
+<a type="button" class="btn btn-secondary d-block d-sm-inline" data-toggle="modal" data-target="#exampleModalCenter">
+  Créer une nouvelle sortie <i class="fa fa-plus-circle"></i>
+</a>
+<a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-inline" ng-if="showsorties===false">
+  Afficher la liste des sorties <i class="fa fa-user"></i>
+</a>
+</div>
+</div>
+</div>
+<br><hr>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md" ng-if="showsorties">
+	
+	<div ng-repeat="group in sorties | groupBy : 'date'">
+	  <div class="list-group" >
 
-
-	 {{sorties.length}}
-	  <div class="alert alert-dark" role="alert" ng-repeat="x in sorties | orderBy : 'name'">
-	  <a href="#!sorties/{{x.name}}">open</a>
+	  <li class="list-group-item list-group-item-dark">{{group[0].date | date}}</li>
+	  <div ng-repeat="x in group">
+	  <a href="#!sorties/{{x.name}}" class="list-group-item list-group-item-action">
 	  <i class="fa fa-{{x.icon}}"></i>
 	  
 	  <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
-  {{x.name}} {{x.scope}} {{x.date | date}} 
-</div>
+  {{x.name}} {{x.scope}} 
+	  </a>
+	  
+	  </div>
+
+	  </div><br></div>
+	
+
 
 </div>
 <div class="col" ng-if="sortie">

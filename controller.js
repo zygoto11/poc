@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute",'ui.bootstrap','ngStorage','ngMessages','ngMockE2E']);
+var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages','ngMockE2E']);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -49,7 +49,8 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 });
 
 
-app.controller("sortiesCtrl", function ($scope,$http, $routeParams) {
+app.controller("sortiesCtrl", function ($scope,$http, $routeParams,$route) {
+	$scope.showsorties = true;
 	$http.get("fake/sorties.json")
     .then(function(response) {
         $scope.sorties = response.data;
@@ -62,9 +63,11 @@ app.controller("sortiesCtrl", function ($scope,$http, $routeParams) {
 	if ($routeParams.sortie) {
 		
 		$scope.sortie = $routeParams.sortie;
-		
+		$scope.showsorties = false;
 		
 		}
+		
+
 });
 
 
@@ -90,6 +93,5 @@ app.controller("memberCtrl", function ($scope, $routeParams) {
     $scope.user = $routeParams.username
 	;
 });
-
 
 
