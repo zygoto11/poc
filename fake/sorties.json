@@ -1,6 +1,8 @@
 [
-  { "scope":"public","name":"sortie footing","icon":"umbrella-beach" ,"date":"2014-01-05"},
+  { "scope":"public","name":"sortie footing","icon":"walking" ,"date":"2014-01-05"},
    { "scope":"public","name":"sortie cinéma","icon":"film","date":"2018-01-05" },
     { "scope":"public","name":"resto","icon":"utensils","date":"2018-01-05" },
- { "scope":"private","name":"sortie apero","date":"2018-01-05","icon":"beer" }
+ { "scope":"private","name":"sortie apero","date":"2018-01-05","icon":"beer" },
+ { "scope":"public","name":"marche bord de canal","icon":"walking" ,"date":"2018-08-18"},
+ { "scope":"public","name":"bol d'air du soir","icon":"walking" ,"date":"2018-08-19"}
 ]
