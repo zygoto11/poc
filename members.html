@@ -1,31 +1,12 @@
-
-<div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="active">
-
-	  <div class="btn-group-toggle btn-group" data-toggle="buttons">
-  <label class="btn btn-light border border-dark active">
-    <input type="checkbox" checked autocomplete="off"><i class="fa fa-user text-primary"></i>
-  </label>
-    <label class="btn btn-light border border-dark active">
-    <input type="checkbox" checked autocomplete="off"><i class="fa fa-user text-danger"></i>
-  </label>
-  
-</div>
-<hr>
-	  
-	
-    </nav>
-<div id="content">
-        <div class="container-fluid">
+<a type="button" href="#!members" class="btn btn-secondary d-block d-sm-inline" ng-if="showusers===false">
+  Afficher la liste des membres <i class="fa fa-list"></i>
+</a>
+<div class="container-fluid">
 
 <div class="row">
 
-    <div class="col">
-            <button type="button" ng-click="sidebarCollapse()" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-                <span>Toggle Sidebar</span>
-            </button><br><br>
+    <div class="col" ng-if="showusers">
+
 
 <table class="table table-sm">
 <thead>
@@ -39,9 +20,9 @@
   <tbody>
 
   <tr ng-repeat="x in users | orderBy : 'username'">
-    <td><a href="#!member/{{x.username}}">{{ x.username }}</a></td>
+    <td><a href="#!members/{{x.username}}">{{ x.username }}</a></td>
     <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
-	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-danger"></i></td>
+	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
 	<td ng-if="x.avatar"><img width="120px" height="120px" class="img-fluid img-thumbnail" src="photos/{{x.username}}.jpg"></img></td>
   </tr>
   </tbody>
@@ -49,12 +30,85 @@
 
 
     </div>
+	
+	<div class="col" ng-if="user">
+	
+	<h2>{{user}}</h2>
+	<hr>
+	<h3>Profil</h3>
+	last activity<br>
+	prochaines sorties<br>
+	blabla<br>
+	<h3>Trophees</h3>
+	
+	<div class="card-columns">
+  <div class="card bg-success">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer une sortie</h5>
+      <p class="card-text">vous avez créer 1 sortie</p>
+    </div>
+  </div>
+  
+  <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 5 sortie</h5>
+      <p class="card-text">vous avez créer 5 sorties</p>
+    </div>
+  </div>
+  
+  <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 20 sorties</h5>
+      <p class="card-text">vous avez créer 20 sorties</p>
+    </div>
+  </div>
+  
+    <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 20 sorties</h5>
+      <p class="card-text">vous avez créer 20 sorties</p>
+    </div>
+  </div>
+
+    <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 20 sorties</h5>
+      <p class="card-text">vous avez créer 20 sorties</p>
+    </div>
+  </div>
+
+    <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 20 sorties</h5>
+      <p class="card-text">vous avez créer 20 sorties</p>
+    </div>
+  </div>
+
+    <div class="card bg-danger">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Créer 20 sorties</h5>
+      <p class="card-text">vous avez créer 20 sorties</p>
+    </div>
+  </div>
+
+
+</div>
+	
+	
+	</div>
 
   </div>
 			
 			
         </div>
 
-</div>
+
 
 

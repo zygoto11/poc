@@ -21,9 +21,9 @@ app.config(function($routeProvider) {
         templateUrl : "members.html",
 		controller : "membersCtrl"
     })
-    .when("/member/:username", {
-        templateUrl : "member.html",
-		controller : "memberCtrl"
+    .when("/members/:username", {
+        templateUrl : "members.html",
+		controller : "membersCtrl"
     })
 	;
 });
@@ -71,11 +71,9 @@ app.controller("sortiesCtrl", function ($scope,$http, $routeParams,$route) {
 });
 
 
-app.controller("membersCtrl", function ($scope) {
+app.controller("membersCtrl", function ($scope, $routeParams) {
 	
-	$scope.sidebarCollapse = function(){
-		$('#sidebar').toggleClass('active');
-	};
+$scope.showusers = true;
 	
     $scope.users = [
   { avatar:true,gender: 'male',username:'bart',firstname:'bart',birthdate:'1984' },
@@ -84,14 +82,19 @@ app.controller("membersCtrl", function ($scope) {
   { avatar:true,gender: 'female',username:'lisa',firstname:'lisa',birthdate:'1984' },
   { avatar:true,gender: 'female',username:'maggie',firstname:'maggie',birthdate:'1984' },
   { avatar:true,gender: 'male',username:'furet',firstname:'furet',birthdate:'1900' }
-	]
-	;
+	];
+	
+		
+	
+	if ($routeParams.username) {
+		
+		$scope.user = $routeParams.username;
+		$scope.showusers = false;
+		
+		}
+	
 });
 
 
-app.controller("memberCtrl", function ($scope, $routeParams) {
-    $scope.user = $routeParams.username
-	;
-});
 
 
