@@ -1,0 +1,60 @@
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="active">
+
+	  <div class="btn-group-toggle btn-group" data-toggle="buttons">
+  <label class="btn btn-light border border-dark active">
+    <input type="checkbox" checked autocomplete="off"><i class="fa fa-user text-primary"></i>
+  </label>
+    <label class="btn btn-light border border-dark active">
+    <input type="checkbox" checked autocomplete="off"><i class="fa fa-user text-danger"></i>
+  </label>
+  
+</div>
+<hr>
+	  
+	
+    </nav>
+<div id="content">
+        <div class="container-fluid">
+
+<div class="row">
+
+    <div class="col">
+            <button type="button" ng-click="sidebarCollapse()" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button><br><br>
+
+<table class="table table-sm">
+<thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Gender</th>
+	  <th scope="col">Avatar</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+  <tr ng-repeat="x in users | orderBy : 'username'">
+    <td><a href="#!member/{{x.username}}">{{ x.username }}</a></td>
+    <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
+	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-danger"></i></td>
+	<td ng-if="x.avatar"><img width="120px" height="120px" class="img-fluid img-thumbnail" src="photos/{{x.username}}.jpg"></img></td>
+  </tr>
+  </tbody>
+</table>
+
+
+    </div>
+
+  </div>
+			
+			
+        </div>
+
+</div>
+
+

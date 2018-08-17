@@ -1,0 +1,64 @@
+<hr>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+  Créer une nouvelle sortie <i class="fa fa-plus-circle"></i>
+</a>
+<a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-none" >
+  Afficher la liste des sorties <i class="fa fa-user"></i>
+</a>
+	
+<hr>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-3">
+	<!-- Button trigger modal -->
+
+
+	 {{sorties.length}}
+	  <div class="alert alert-dark" role="alert" ng-repeat="x in sorties | orderBy : 'name'">
+	  <a href="#!sorties/{{x.name}}">open</a>
+	  <i class="fa fa-{{x.icon}}"></i>
+	  
+	  <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
+  {{x.name}} {{x.scope}} {{x.date | date}} 
+</div>
+
+</div>
+<div class="col" ng-if="sortie">
+
+<div class="card">
+  <h5 class="card-header">{{sortie}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">blabla</h5>
+	
+	
+	
+    <p class="card-text">blablabla</p>
+   
+  </div>
+</div>
+
+</div>
+
+</div>
