@@ -17,6 +17,14 @@ app.config(function($routeProvider) {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
     })
+	.when("/profile", {
+        templateUrl : "profile.html",
+		controller : "profileCtrl"
+    })
+	.when("/messages", {
+        templateUrl : "messages.html",
+		controller : "messagesCtrl"
+    })
     .when("/members", {
         templateUrl : "members.html",
 		controller : "membersCtrl"
@@ -71,24 +79,23 @@ app.controller("sortiesCtrl", function ($scope,$http, $routeParams,$route) {
 });
 
 
-app.controller("membersCtrl", function ($scope, $routeParams) {
+app.controller("membersCtrl", function ($scope,$http, $routeParams) {
 	
 $scope.showusers = true;
 	
-    $scope.users = [
-  { avatar:true,gender: 'male',username:'bart',firstname:'bart',birthdate:'1984' },
-  { avatar:true,gender: 'male',username:'homer',firstname:'homer',birthdate:'1984' },
-  { avatar:true,gender: 'female',username:'marge',firstname:'marge',birthdate:'1984' },
-  { avatar:true,gender: 'female',username:'lisa',firstname:'lisa',birthdate:'1984' },
-  { avatar:true,gender: 'female',username:'maggie',firstname:'maggie',birthdate:'1984' },
-  { avatar:true,gender: 'male',username:'furet',firstname:'furet',birthdate:'1900' }
-	];
+	$http.get("fake/users.json")
+    .then(function(response) {
+        $scope.users = response.data;
+    });
+	
+	
+
 	
 		
 	
 	if ($routeParams.username) {
 		
-		$scope.user = $routeParams.username;
+		$scope.user = $routeParams.username.toLowerCase();
 		$scope.showusers = false;
 		
 		}
@@ -96,5 +103,12 @@ $scope.showusers = true;
 });
 
 
+app.controller("profileCtrl", function ($scope,$http, $routeParams) {	
+});
+
+app.controller("messagesCtrl", function ($scope,$http, $routeParams) {
+	
+	
+});
 
 

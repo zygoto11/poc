@@ -1,0 +1,8 @@
+[
+  { "avatar":true,"gender": "male","username":"bart","firstname":"bart","birthdate":"1984" },
+  { "avatar":true,"gender": "male","username":"homer","firstname":"homer","birthdate":"1984" },
+  { "avatar":true,"gender": "female","username":"marge","firstname":"marge","birthdate":"1984" },
+  { "avatar":true,"gender": "female","username":"lisa","firstname":"lisa","birthdate":"1984" },
+  { "avatar":true,"gender": "female","username":"maggie","firstname":"maggie","birthdate":"1984" },
+  { "avatar":true,"gender": "male","username":"furet","firstname":"furet","birthdate":"1900" }
+	]
