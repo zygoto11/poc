@@ -43,10 +43,21 @@
 	  <li class="list-group-item list-group-item-dark">{{group[0].date | date}}</li>
 	  <div ng-repeat="x in group">
 	  <a href="#!sorties/{{x.name}}" class="list-group-item list-group-item-action">
-	  <i class="fa fa-{{x.icon}}"></i>
+	 
+
+   <div class="row justify-content-between">
+    <div class="col-4">
+ <i class="fa fa-{{x.icon}}"></i>
 	  
 	  <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
-  {{x.name}} {{x.scope}} 
+  {{x.name}}
+    </div>
+    <div class="col-4">
+      2/12 <span class="badge badge-primary">Homer</span>
+    </div>
+  </div>
+  
+  
 	  </a>
 	  
 	  </div>
@@ -64,15 +75,14 @@
 <hr>
 <h3>Desc</h3>
 
-<div id="demo" class="carousel slide" data-ride="carousel">
 
-  <!-- Indicators -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
 
+<div id="demo" class="carousel slide col-md-3" data-ride="carousel">
+ <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -85,6 +95,8 @@
       <img src="https://picsum.photos/598/300/?random">
     </div>
   </div>
+  
+
 
   <!-- Left and right controls -->
   <a class="carousel-control-prev" data-target="#demo" data-slide="prev">
