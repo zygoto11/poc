@@ -25,7 +25,9 @@
     <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
 	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
 	<td ng-if="x.avatar"><img width="120px" height="120px" class="img-fluid img-thumbnail" src="photos/{{x.username}}.jpg"></img></td>
-	<td><i class="fa fa-grin-beam fa-lg text-success"></i></td>
+	<td ng-if="x.username === 'bart'"><i class="fa fa-angry fa-lg text-danger"></i></td>
+	<td ng-if="x.username === 'lisa'"><i class="fa fa-grin fa-lg"></i></td>
+	<td ng-if="x.username !== 'bart' && x.username !=='lisa'"><i class="fa fa-grin-beam fa-lg text-success"></i></td>
   </tr>
   </tbody>
 </table>
