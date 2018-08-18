@@ -1,10 +1,14 @@
-var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages','ngMockE2E']);
+var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ui.bootstrap.typeahead','ngStorage','ngMessages','ngMockE2E']);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "home.html"
     })
     .when("/sorties", {
+        templateUrl : "sorties.html",
+		controller : "sortiesCtrl"
+    })
+	.when("/newsortie", {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
     })
@@ -57,15 +61,30 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 });
 
 
-app.controller("sortiesCtrl", function ($scope,$http, $routeParams,$route) {
+app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$route) {
 	$scope.showsorties = true;
+	$scope.shownewsortie = false;
+	
 	$http.get("fake/sorties.json")
     .then(function(response) {
         $scope.sorties = response.data;
     });
 	
 	
+	if($location.path()=="/newsortie"){
+		$scope.shownewsortie = true;
+		$scope.showsorties = false;
+		
 
+  
+   $scope.poilist = [{'name':'Celt','location':'rue d\'armagnac'},
+   {'name':'Divine Comédie','location':'rue de la zaza'},
+   {'name':'la cavayere','location':'route du lac'},
+   {'name':'paicherou','location':'à côté du tennis'}
+];
+  
+		
+	}
 	
 	
 	if ($routeParams.sortie) {
