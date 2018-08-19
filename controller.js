@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ui.bootstrap.typeahead','ngStorage','ngMessages','ngMockE2E']);
+var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages',"ngSanitize"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -61,11 +61,13 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 });
 
 
-app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$route) {
+app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$route,$localStorage) {
 	$scope.showsorties = true;
 	$scope.shownewsortie = false;
+	$scope.showdeletesortie = true;
+	$scope.userid = $localStorage.currentUser.id;
 	
-	$http.get("fake/sorties.json")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
     .then(function(response) {
         $scope.sorties = response.data;
     });
@@ -74,7 +76,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 	if($location.path()=="/newsortie"){
 		$scope.shownewsortie = true;
 		$scope.showsorties = false;
-		
+		$scope.showdeletesortie = true;
 
   
    $scope.poilist = [{'name':'Celt','location':'rue d\'armagnac'},
@@ -82,6 +84,18 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
    {'name':'la cavayere','location':'route du lac'},
    {'name':'paicherou','location':'à côté du tennis'}
 ];
+  
+		$scope.createsortie = function(sortie){
+			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: sortie, leader: 1,action:"createsortie" })
+            .then(function (response) {
+					
+					$location.path('/sorties');
+			
+				});
+			
+		}
+  
   
 		
 	}
@@ -91,6 +105,44 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 		
 		$scope.sortie = $routeParams.sortie;
 		$scope.showsorties = false;
+		$scope.showdeletesortie = false;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listinscriptions&sortieid="+$scope.sortie)
+			.then(function(response) {
+			$scope.inscriptions = response.data;
+		});
+		
+		
+		$scope.register = function(sortie){
+			
+			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=registersortie&sortieid='+sortie+'&userid='+$scope.userid)
+            .then(function (response) {					
+					$route.reload();	
+				});
+			
+		}
+		
+		$scope.unregister = function(sortie){
+			
+			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=unregistersortie&sortieid='+sortie+'&userid='+$scope.userid)
+            .then(function (response) {					
+					$route.reload();	
+				});
+			
+		}
+		
+		
+		$scope.deletesortie = function(sortie){
+			
+			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=deletesortie&id='+sortie)
+            .then(function (response) {					
+					$location.path('/sorties');
+					$route.reload();				
+			
+				});
+			
+		}
+		
 		
 		}
 		
@@ -98,11 +150,11 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 });
 
 
-app.controller("membersCtrl", function ($scope,$http, $routeParams) {
+app.controller("membersCtrl", function ($scope,$http, $routeParams,$localStorage) {
 	
 $scope.showusers = true;
 	
-	$http.get("fake/users.json")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
         $scope.users = response.data;
     });
@@ -122,7 +174,11 @@ $scope.showusers = true;
 });
 
 
-app.controller("profileCtrl", function ($scope,$http, $routeParams) {	
+app.controller("profileCtrl", function ($scope,$http, $routeParams,$localStorage) {	
+
+$scope.username = $localStorage.currentUser.username;
+
+
 });
 
 app.controller("messagesCtrl", function ($scope,$http, $routeParams) {

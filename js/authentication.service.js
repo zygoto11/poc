@@ -8,16 +8,16 @@ app.factory("AuthenticationService", function ($http, $localStorage) {
         return service;
 
         function Login(username, password, callback) {
-            $http.post('/api/authenticate', { username: username, password: password })
+            $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { username: username, password: password,action:"login" })
                 .then(function (response) {
                     // login successful if there's a token in the response
                     if (response.data.token) {
 
                         // store username and token in local storage to keep user logged in between page refreshes
-                        $localStorage.currentUser = { username: username, token: response.token };
+                        $localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
 
                         // add jwt token to auth header for all requests made by the $http service
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
 
                         // execute callback with true to indicate successful login
                         callback(true);

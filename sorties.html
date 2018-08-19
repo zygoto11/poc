@@ -1,3 +1,25 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        c'est votre dernier mot ?
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-secondary" data-dismiss="modal">euh</a>
+        <a data-dismiss="modal" data-backdrop="false" type="button" href="#!sorties" ng-click="deletesortie(sortie)" class="btn btn-danger d-block d-sm-inline" ng-if="showdeletesortie===false">
+  Je suis sûr 
+</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <br>
 <div class="container-fluid">
 <div class="row">
@@ -8,6 +30,11 @@
 <a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-inline" ng-if="showsorties===false">
   Afficher la liste des sorties <i class="fa fa-list"></i>
 </a>
+
+<a type="button" class="btn btn-danger d-block d-sm-inline" data-toggle="modal" data-target="#exampleModal" ng-if="showdeletesortie===false">
+   Supprimer cette sortie ? <i class="fa fa-trash-alt"></i>
+</a>
+
 </div>
 </div>
 </div>
@@ -19,15 +46,18 @@
 	
 
 	
-	<form>
+	<form name="createsort">
   <div class="form-group">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie">
+    <input type="text" ng-model="newsortie" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
   </div>
     
+
+	
+	
 	    <input type="text" ng-model="customSelected" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
 	Lieu: {{customSelected.location}}
 	<br>
-	<a type="button"  class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></a>
+	<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>
 	
 </form>
 	
@@ -38,20 +68,20 @@
 	<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">
 	  <div class="list-group" >
 
-	  <li class="list-group-item list-group-item-dark">{{group[0].date | date}}</li>
+	  <li class="list-group-item list-group-item-dark"><small>{{group[0].date | date}}</small></li>
 	  <div ng-repeat="x in group">
-	  <a href="#!sorties/{{x.name}}" class="list-group-item list-group-item-action">
+	  <a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
 	 
 
-   <div class="row justify-content-between">
-    <div class="col-4">
+   <div class="row row">
+    <div class="col">
  <i class="fa fa-{{x.icon}}"></i>
 	  
 	  <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
-  {{x.name}}
+ <small>{{x.name}}</small>
     </div>
-    <div class="col-4">
-      2/12 <span class="badge badge-primary">Homer</span>
+    <div class="col">
+     <small class="float-right"> 2/12 <span class="badge badge-primary">{{x.leader}}</span></small>
     </div>
   </div>
   
@@ -108,8 +138,18 @@
 
 <hr>
 <h3>Inscrits</h3>
-<span class="badge badge-primary">Homer</span>
-<span class="badge badge-pink">Marge</span>
+
+<span ng-repeat="inscrit in inscriptions" class="badge badge-primary">{{inscrit.username}}</span>
+
+
+<hr>
+<a type="button"  class="btn btn-success d-block d-sm-inline" ng-click="register(sortie)">
+  S'inscrire <i class="fa fa-plus-circle"></i>
+</a>
+<a type="button" class="btn btn-danger d-block d-sm-inline" ng-click="unregister(sortie)">
+  Se désinscrire <i class="fa fa-minus-circle"></i>
+</a>
+
 <hr>
 <h3>Commentaires <i class="fa fa-comments"></i></h3>
 <br>

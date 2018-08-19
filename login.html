@@ -5,15 +5,13 @@
     <h2>Login</h2>
     <form name="form" ng-submit="form.$valid && vm.login()" novalidate>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
-            <label for="username">Username</label>
-            <input type="text" name="username" class="form-control" ng-model="vm.username" required />
+            <input placeholder="Username" type="text" name="username" class="form-control" ng-model="vm.username" required />
             <div ng-messages="form.$submitted && form.username.$error" class="help-block">
                 <div ng-message="required">Username is required</div>
             </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" ng-model="vm.password" required />
+            <input placeholder="Password" type="password" name="password" class="form-control" ng-model="vm.password" required />
             <div ng-messages="form.$submitted && form.password.$error" class="help-block">
                 <div ng-message="required">Password is required</div>
             </div>
