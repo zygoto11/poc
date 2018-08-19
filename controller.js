@@ -66,6 +66,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 	$scope.shownewsortie = false;
 	$scope.showdeletesortie = true;
 	$scope.userid = $localStorage.currentUser.id;
+	$scope.username = $localStorage.currentUser.username;
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
     .then(function(response) {
@@ -177,7 +178,7 @@ $scope.showusers = true;
 app.controller("profileCtrl", function ($scope,$http, $routeParams,$localStorage) {	
 
 $scope.username = $localStorage.currentUser.username;
-
+$scope.userid = $localStorage.currentUser.id;
 
 });
 
