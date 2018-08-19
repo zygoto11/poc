@@ -87,7 +87,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
   
 		$scope.createsortie = function(sortie){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: sortie, leader: 1,action:"createsortie" })
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: sortie, leader: $scope.userid,action:"createsortie" })
             .then(function (response) {
 					
 					$location.path('/sorties');
