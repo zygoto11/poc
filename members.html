@@ -36,14 +36,38 @@
 	
 	<div class="col" ng-if="user">
 	
-	<h2>{{user}}</h2>
+		<h2>{{user}}</h2>
 	<hr>
-	<h3>Profil</h3>
-	last activity<br>
+	
+	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-profil-tab" data-toggle="pill" data-target="#pills-profil" role="tab" aria-controls="pills-profil" aria-selected="true"><small>Profil <i class="fa fa-user"></i></small> </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-trophies-tab" data-toggle="pill" data-target="#pills-trophies" role="tab" aria-controls="pills-trophies" aria-selected="false"><small>Trophees <i class="fa fa-trophy"></i></small></a>
+  </li>
+
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-profil" role="tabpanel" aria-labelledby="pills-profil-tab">
+  
+  
+  <div class="row">
+<div class="col-md-2">
+  <div class="embed-responsive embed-responsive-4by3">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/O5omkuVdwUY?rel=0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+  
+  	last activity<br>
 	prochaines sorties<br>
 	blabla<br>
-	<h3>Trophees</h3>
-	
+  
+	</div>
+	  <div class="tab-pane fade" id="pills-trophies" role="tabpanel" aria-labelledby="pills-trophies-tab">
+	  
+	  	
 	<div class="card-columns">
   <div class="card bg-success">
     <img class="card-img-top" src="..." alt="Card image cap">
@@ -103,6 +127,14 @@
 
 
 </div>
+	  
+	</div>
+	</div>
+	
+	
+
+
+
 	
 	
 	</div>
