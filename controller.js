@@ -90,14 +90,20 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
    {'name':'paicherou','location':'à côté du tennis'}
 ];
   
-		$scope.createsortie = function(name,desc){
+		$scope.createsortie = function(name,desc,date,time,icon,scope){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, leader: $scope.userid,action:"createsortie" })
+			//"2018-08-07T22:00:00.000Z"
+			
+			var sortiedate = moment(date).format("YYYY-MM-DD");
+			var sortietime = moment(time).format("hh:mm");
+
+			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, desc:desc,date:sortiedate,time:sortietime,icon:icon,scope:scope, leader: $scope.userid,action:"createsortie" })
             .then(function (response) {
 					
 					$location.path('/sorties');
 			
-				});
+				}); 
 			
 		}
   

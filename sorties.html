@@ -92,7 +92,7 @@
 				
 				<input type="text" placeholder="Emplacement de la sortie" ng-model="newsortie.location" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
 				<br><br>
-				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
+				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc,newsortie.date,newsortie.time,newsortie.icon,newsortie.scope)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
 			</form>	
 			<hr>
 			<div class="alert alert-info">debug :{{newsortie}}</div>
@@ -108,13 +108,16 @@
 
    <div class="row row">
     <div class="col">
+  <span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.time}}</span>
  <i class="fa fa-{{x.icon}}"></i>
 	  
-	  <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
+	  
  <small>{{x.name}}</small>
     </div>
     <div class="col">
-     <small class="float-right"> 2/12 <span class="badge badge-primary">{{x.leader}}</span></small>
+     <small class="float-right"> 
+	 <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
+	 2/12 <span class="badge badge-primary">{{x.leader}}</span></small>
     </div>
   </div>
   
