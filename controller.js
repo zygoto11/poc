@@ -118,6 +118,12 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 		$scope.showsorties = false;
 		$scope.showdeletesortie = false;
 		
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describesortie&id="+$scope.sortie)
+			.then(function(response) {
+			$scope.descsortie = response.data;
+		});
+		
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listinscriptions&sortieid="+$scope.sortie)
 			.then(function(response) {
 			$scope.inscriptions = response.data;
