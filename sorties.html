@@ -50,11 +50,11 @@
                         Visibilité
                     </legend>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio1" value="public" name="radioScope">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio1" value="public" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio1"> Tout le monde </label>
                     </div>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="private" name="radioScope">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="private" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio2"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
                     </div>
                 </fieldset>
@@ -66,31 +66,31 @@
                         Type de sortie (faire une dropdown/select)
                     </legend>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio1" value="option3" name="radioType">
+                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio1" value="walking" name="radioType">
                         <label class="form-check-label" for="Radio1"> Sport <i class="fa fa-walking"></i></label>
                     </div>
 					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio2" value="option4" name="radioType">
+                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio2" value="utensils" name="radioType">
                         <label class="form-check-label" for="Radio2"> Restaurant <i class="fa fa-utensils"></i></label>
                     </div>
 					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio3" value="option5" name="radioType">
+                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio3" value="beer" name="radioType">
                         <label class="form-check-label" for="Radio3"> Apéro <i class="fa fa-beer"></i></label>
                     </div>
                 </fieldset>
 				<hr>
 				<div class="form-group">
-					<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Date">
+					<input ng-model="newsortie.date" type="date" class="form-control" id="formGroupExampleInput" placeholder="Date" required>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Time">
+					<input ng-model="newsortie.time" type="time" class="form-control" id="formGroupExampleInput" placeholder="Time" required>
+					 					 
 				</div>
 				<hr>
 				 <textarea ng-model="newsortie.desc" class="form-control" placeholder="Description de la sortie" required></textarea>
 				<hr>
 				
-				<input type="text" placeholder="Emplacement de la sortie" ng-model="customSelected" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
-					{{customSelected.location}}
+				<input type="text" placeholder="Emplacement de la sortie" ng-model="newsortie.location" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
 				<br><br>
 				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
 			</form>	
