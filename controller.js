@@ -197,6 +197,10 @@ $scope.userid = $localStorage.currentUser.id;
 
 app.controller("messagesCtrl", function ($scope,$http, $routeParams) {
 	
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+    .then(function(response) {
+        $scope.users = response.data;
+    });
 	
 });
 
