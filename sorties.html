@@ -22,56 +22,85 @@
 
 <br>
 <div class="container-fluid">
-<div class="row">
-<div class="col-md">
-<a type="button" href="#!newsortie" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewsortie===false">
-  Créer une nouvelle sortie <i class="fa fa-plus-circle"></i>
-</a>
-<a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-inline" ng-if="showsorties===false">
-  Afficher la liste des sorties <i class="fa fa-list"></i>
-</a>
-
-<a type="button" class="btn btn-danger d-block d-sm-inline" data-toggle="modal" data-target="#exampleModal" ng-if="showdeletesortie===false">
-   Supprimer cette sortie ? <i class="fa fa-trash-alt"></i>
-</a>
-
-</div>
-</div>
+	<div class="row">
+		<div class="col-md">
+			<a type="button" href="#!newsortie" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewsortie===false">
+				Créer une nouvelle sortie <i class="fa fa-plus-circle"></i>
+			</a>
+			<a type="button" href="#!sorties" class="btn btn-secondary d-block d-sm-inline" ng-if="showsorties===false">
+				Afficher la liste des sorties <i class="fa fa-list"></i>
+			</a>
+			<a type="button" class="btn btn-danger d-block d-sm-inline" data-toggle="modal" data-target="#exampleModal" ng-if="showdeletesortie===false">
+			   Supprimer cette sortie ? <i class="fa fa-trash-alt"></i>
+			</a>
+		</div>
+	</div>
 </div>
 <br>
 <div class="container-fluid">
-<div class="row">
-	<div class="col-md typeahead-demo" ng-if="shownewsortie">
-	
-	
-
-	
-	<form name="createsort">
-  <div class="form-group">
-    <input type="text" ng-model="newsortie" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
-  </div>
-    
-
-	
-	
-	    <input type="text" ng-model="customSelected" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
-	Lieu: {{customSelected.location}}
-	<br>
-	<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>
-	
-</form>
-	
-	</div>
-
-    <div class="col-md" ng-if="showsorties">
-	
-	<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">
-	  <div class="list-group" >
-
-	  <li class="list-group-item list-group-item-dark"><small>{{group[0].date | date}}</small></li>
-	  <div ng-repeat="x in group">
-	  <a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
-	 
+	<div class="row">
+		<div class="col-md typeahead-demo" ng-if="shownewsortie">	
+			<form name="createsort">
+				<div class="form-group">
+					<input type="text" ng-model="newsortie" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
+				</div> 
+				<hr>
+				<fieldset>
+                    <legend>
+                        Visibilité
+                    </legend>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineRadio1" value="option1" name="radioInline" checked>
+                        <label class="form-check-label" for="inlineRadio1"> Tout le monde </label>
+                    </div>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                        <label class="form-check-label" for="inlineRadio2"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
+                    </div>
+                </fieldset>
+				<hr>
+				<fieldset>
+                    <legend>
+                        Type de sortie
+                    </legend>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input class="form-check-input" type="radio" id="Radio1" value="option3" name="radioInline" checked>
+                        <label class="form-check-label" for="Radio1"> Sport <i class="fa fa-walking"></i></label>
+                    </div>
+					<div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input class="form-check-input" type="radio" id="Radio2" value="option4" name="radioInline">
+                        <label class="form-check-label" for="Radio2"> Restaurant <i class="fa fa-utensils"></i></label>
+                    </div>
+					<div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input class="form-check-input" type="radio" id="Radio3" value="option5" name="radioInline">
+                        <label class="form-check-label" for="Radio3"> Apéro <i class="fa fa-beer"></i></label>
+                    </div>
+                </fieldset>
+				<hr>
+				<div class="form-group">
+					<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Date">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Time">
+				</div>
+				<hr>
+				 <textarea class="form-control" placeholder="Description de la sortie"></textarea>
+				<hr>
+				
+				<input type="text" placeholder="Emplacement de la sortie" ng-model="customSelected" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
+					{{customSelected.location}}
+				<br><br>
+				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
+			</form>	
+		</div>
+		<div class="col-md" ng-if="showsorties">	
+			<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">
+				<div class="list-group">
+					<li class="list-group-item list-group-item-dark">
+						<small>{{group[0].date | date}}</small>
+					</li>
+					<div ng-repeat="x in group">
+						<a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
 
    <div class="row row">
     <div class="col">
