@@ -42,7 +42,7 @@
 		<div class="col-md typeahead-demo" ng-if="shownewsortie">	
 			<form name="createsort">
 				<div class="form-group">
-					<input type="text" ng-model="newsortie" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
+					<input type="text" ng-model="newsortie.name" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
 				</div> 
 				<hr>
 				<fieldset>
@@ -50,29 +50,31 @@
                         Visibilité
                     </legend>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineRadio1" value="option1" name="radioInline" checked>
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio1" value="public" name="radioScope">
                         <label class="form-check-label" for="inlineRadio1"> Tout le monde </label>
                     </div>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="private" name="radioScope">
                         <label class="form-check-label" for="inlineRadio2"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
                     </div>
                 </fieldset>
 				<hr>
+				
+				
 				<fieldset>
                     <legend>
-                        Type de sortie
+                        Type de sortie (faire une dropdown/select)
                     </legend>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio1" value="option3" name="radioInline" checked>
+                        <input class="form-check-input" type="radio" id="Radio1" value="option3" name="radioType">
                         <label class="form-check-label" for="Radio1"> Sport <i class="fa fa-walking"></i></label>
                     </div>
 					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio2" value="option4" name="radioInline">
+                        <input class="form-check-input" type="radio" id="Radio2" value="option4" name="radioType">
                         <label class="form-check-label" for="Radio2"> Restaurant <i class="fa fa-utensils"></i></label>
                     </div>
 					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input class="form-check-input" type="radio" id="Radio3" value="option5" name="radioInline">
+                        <input class="form-check-input" type="radio" id="Radio3" value="option5" name="radioType">
                         <label class="form-check-label" for="Radio3"> Apéro <i class="fa fa-beer"></i></label>
                     </div>
                 </fieldset>
@@ -84,14 +86,16 @@
 					<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Time">
 				</div>
 				<hr>
-				 <textarea class="form-control" placeholder="Description de la sortie"></textarea>
+				 <textarea ng-model="newsortie.desc" class="form-control" placeholder="Description de la sortie" required></textarea>
 				<hr>
 				
 				<input type="text" placeholder="Emplacement de la sortie" ng-model="customSelected" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
 					{{customSelected.location}}
 				<br><br>
-				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
+				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
 			</form>	
+			<hr>
+			<div class="alert alert-info">debug :{{newsortie}}</div>
 		</div>
 		<div class="col-md" ng-if="showsorties">	
 			<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">

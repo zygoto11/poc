@@ -78,6 +78,10 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 		$scope.shownewsortie = true;
 		$scope.showsorties = false;
 		$scope.showdeletesortie = true;
+		
+		//default values for form
+		$scope.newsortie = {};
+		$scope.newsortie.scope = "public";
 
   
    $scope.poilist = [{'name':'Celt','location':'rue d\'armagnac'},
@@ -86,9 +90,9 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
    {'name':'paicherou','location':'à côté du tennis'}
 ];
   
-		$scope.createsortie = function(sortie){
+		$scope.createsortie = function(name,desc){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: sortie, leader: $scope.userid,action:"createsortie" })
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, leader: $scope.userid,action:"createsortie" })
             .then(function (response) {
 					
 					$location.path('/sorties');
@@ -159,6 +163,9 @@ $scope.showusers = true;
     .then(function(response) {
         $scope.users = response.data;
     });
+	
+
+
 	
 	
 
