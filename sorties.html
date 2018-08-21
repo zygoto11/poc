@@ -175,7 +175,7 @@ Description : <span>{{descsortie[0].description}}</span><br>
 <div class="col-md">
 
 
-<div class="row" ng-repeat="comment in comments | orderBy: timestamp">
+<div class="row" ng-repeat="comment in comments | orderBy: timestamp : reverse" ng-class-odd="'alert-info'" ng-class-even="'alert-primary'">
         	    <div class="col-md-2">
         	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px" class="img img-rounded img-fluid"/>
         	        <p class="text-secondary text-center">{{comment.timestamp}}</p>
@@ -186,7 +186,7 @@ Description : <span>{{descsortie[0].description}}</span><br>
 
         	       </p>
         	       <div class="clearfix"></div>
-        	        <p>{{comment.comment}}</p>
+        	        <div class="alert">{{comment.comment}}</div>
 
         	    </div>
 	        </div>
