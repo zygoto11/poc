@@ -60,24 +60,27 @@
                 </fieldset>
 				<hr>
 				
+
 				
-				<fieldset>
-                    <legend>
-                        Type de sortie (faire une dropdown/select)
-                    </legend>
-                    <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio1" value="walking" name="radioType">
-                        <label class="form-check-label" for="Radio1"> Sport <i class="fa fa-walking"></i></label>
-                    </div>
-					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio2" value="utensils" name="radioType">
-                        <label class="form-check-label" for="Radio2"> Restaurant <i class="fa fa-utensils"></i></label>
-                    </div>
-					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.icon" class="form-check-input" type="radio" id="Radio3" value="beer" name="radioType">
-                        <label class="form-check-label" for="Radio3"> Apéro <i class="fa fa-beer"></i></label>
-                    </div>
-                </fieldset>
+				<div class="btn-group btn-group-toggle">
+<label class="btn btn-secondary active" uib-btn-radio="'walking'" ng-model="newsortie.icon"><i class="fa fa-walking"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'beer'" ng-model="newsortie.icon"><i class="fa fa-beer"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'utensils'" ng-model="newsortie.icon"><i class="fa fa-utensils"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'film'" ng-model="newsortie.icon"><i class="fa fa-film"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'chess'" ng-model="newsortie.icon"><i class="fa fa-chess"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'theater-masks'" ng-model="newsortie.icon"><i class="fa fa-theater-masks"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'music'" ng-model="newsortie.icon"><i class="fa fa-music"></i></label>
+</div>
+<div class="alert alert-info" ng-if="newsortie.icon">
+<span ng-if="newsortie.icon ==='beer'">Apéro</span>
+<span ng-if="newsortie.icon ==='utensils'">Restaurant</span>
+<span ng-if="newsortie.icon ==='walking'">Sport</span>
+<span ng-if="newsortie.icon ==='film'">Cinéma</span>
+<span ng-if="newsortie.icon ==='chess'">Jeux</span>
+<span ng-if="newsortie.icon ==='theater-masks'">Theatre</span>
+<span ng-if="newsortie.icon ==='music'">Concert</span>
+</div>
+				
 				<hr>
 				<div class="form-group">
 					<input ng-model="newsortie.date" type="date" class="form-control" id="formGroupExampleInput" placeholder="Date" required>
