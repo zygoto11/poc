@@ -129,6 +129,11 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 			$scope.inscriptions = response.data;
 		});
 		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listcomments&sortieid="+$scope.sortie)
+			.then(function(response) {
+			$scope.comments = response.data;
+		});
+		
 		
 		$scope.register = function(sortie){
 			
@@ -142,6 +147,15 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 		$scope.unregister = function(sortie){
 			
 			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=unregistersortie&sortieid='+sortie+'&userid='+$scope.userid)
+            .then(function (response) {					
+					$route.reload();	
+				});
+			
+		}
+		
+		$scope.addcomment = function(sortie,comment){
+			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , sortieid:sortie,comment:comment,action:"addcomment" })
             .then(function (response) {					
 					$route.reload();	
 				});

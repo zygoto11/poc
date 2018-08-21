@@ -175,45 +175,30 @@ Description : <span>{{descsortie[0].description}}</span><br>
 <div class="col-md">
 
 
-<div class="row">
+<div class="row" ng-repeat="comment in comments | orderBy: timestamp">
         	    <div class="col-md-2">
         	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px" class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">15 Minutes Ago</p>
+        	        <p class="text-secondary text-center">{{comment.timestamp}}</p>
         	    </div>
         	    <div class="col-md-10">
         	        <p>
-        	            <a class="float-left" href="#!members/Bart"><strong>Bart</strong></a>
+        	            <a class="float-left" href="#!members/{{comment.username}}"><strong>{{comment.username}}</strong></a>
 
         	       </p>
         	       <div class="clearfix"></div>
-        	        <p>Aie caramba</p>
+        	        <p>{{comment.comment}}</p>
 
         	    </div>
 	        </div>
 			
-			<div class="row">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px"  class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">10 Minutes Ago</p>
-        	    </div>
-        	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left" href="#!members/Homer"><strong>Homer</strong></a>
-
-        	       </p>
-        	       <div class="clearfix"></div>
-        	        <p>ouh punaise</p>
-
-        	    </div>
-	        </div>
 			
  
 </div>
 
 <div class="form-group">
-  <textarea class="form-control" rows="5" id="comment"></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-</div>
+  <textarea ng-model="comment" class="form-control" rows="5" id="comment" placeholder="Ajouter un commentaire..."></textarea><br>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="addcomment(descsortie[0].id,comment)"> <i class="fa fa-reply"></i> Envoyer</a>
+</div><br><br>
    
 
   
