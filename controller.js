@@ -42,6 +42,20 @@ app.config(function($routeProvider) {
 
 
 
+app.directive('datatableSetup', ['$timeout',
+    function($timeout) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                $timeout(function () {
+                   // do something
+                });
+            }
+        }
+    }
+]);
+
+
 app.run(function($rootScope, $http, $location, $localStorage) {
 	
 	 // keep user logged in after page refresh
@@ -213,14 +227,44 @@ app.controller("profileCtrl", function ($scope,$http, $routeParams,$localStorage
 $scope.username = $localStorage.currentUser.username;
 $scope.userid = $localStorage.currentUser.id;
 
+$('#example').DataTable();
+
+
 });
 
-app.controller("messagesCtrl", function ($scope,$http, $routeParams) {
+app.controller("messagesCtrl", function ($scope,$http, $routeParams,$localStorage) {
 	
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+	$scope.userid = $localStorage.currentUser.id;
+	
+	
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
-        $scope.users = response.data;
+        $scope.users = response.data;		
     });
+	
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listmessages")
+    .then(function(response) {
+        $scope.messages = response.data;
+			
+			angular.element(document).ready(function() {  
+			dTable = $('#tablemessages');  
+			dTable.DataTable();  
+});  
+			
+    });
+	
+	
+	
+	
+	$scope.createmessage = function(to,msgname){
+			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , to:to,msgname:msgname,action:"createmessage" })
+            .then(function (response) {					
+					$route.reload();	
+				});
+			
+	}
+	
 	
 });
 

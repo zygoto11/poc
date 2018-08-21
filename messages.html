@@ -11,59 +11,33 @@
 <hr>
 <div class="container-fluid">
 <div class="row">
-<div class="col-md-3">
+<div class="col-md">
+
+	<table id="tablemessages" class="table table-striped dt-responsive" style="width:100%">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Titre</th>
+				<th>Nb posts</th>
+				<th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="msg in messages">
+                <td><span class="badge badge-info">{{msg.userfrom}}</span></td>
+                <td><span class="badge badge-info">{{msg.userto}}</span></td>
+                <td>{{msg.title}}</td>
+				<td>5</td>
+				<td>{{msg.timestamp}}</td>
+            </tr>
+			</tbody>
+			</table>
 
 
-<ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center active">
-    blabla très bonne pizza
-    <span class="badge badge-primary badge-pill">14</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    j'ai plus de pq
-    <span class="badge badge-primary badge-pill">2</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    salut ça va ?
-    <span class="badge badge-primary badge-pill">1</span>
-  </li>
-</ul>
-
-</div>
-<div class="col-md border border-primary">
-<div class="row">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px" class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">15 Minutes Ago</p>
-        	    </div>
-        	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left" href="#!members/Bart"><strong>Bart</strong></a>
-
-        	       </p>
-        	       <div class="clearfix"></div>
-        	        <p>pizza zaza</p>
-
-        	    </div>
-	        </div>
-			
-			<div class="row">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px"  class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">10 Minutes Ago</p>
-        	    </div>
-        	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left" href="#!members/Homer"><strong>Homer</strong></a>
-
-        	       </p>
-        	       <div class="clearfix"></div>
-        	        <p>pas pizza zaza</p>
-
-        	    </div>
-	        </div>
 
 </div>
+
 
 
 </div>
