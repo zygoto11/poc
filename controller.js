@@ -324,6 +324,12 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		
 		$scope.message = $routeParams.message;
 		$scope.showmessages = false;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describemessage&id="+$scope.message)
+		.then(function(response) {
+        $scope.descmessage = response.data;		
+		});
+		
 	
 		}
 	
@@ -334,7 +340,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 	
 	$scope.createmessage = function(to,msgname,msgcontent){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:to,msgname:msgname,action:"createmessage" })
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:to,msgname:msgname,msgcontent:msgcontent,action:"createmessage" })
             .then(function (response) {					
 					$location.path('/messages');	
 				});
