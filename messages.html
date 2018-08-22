@@ -1,6 +1,27 @@
 <br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md">
+			<a type="button" href="#!newmessage" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewmessage===false">
+				Créer une nouveau message <i class="fa fa-plus-circle"></i>
+			</a>
+			<a type="button" href="#!messages" class="btn btn-secondary d-block d-sm-inline" ng-if="showmessages===false">
+				Afficher la liste des messages <i class="fa fa-list"></i>
+			</a>
+		</div>
+	</div>
+</div>	   
+	   <br>
+
+			   
+	   
+	   
+<div class="container-fluid">
+<div class="row">
+<div class="col-md" ng-if="shownewmessage">	
+
 <input type="text" 
-	   ng-model="listusers" 
+	   ng-model="newmessage.dest" 
 	   placeholder="Liste des membres" 
 	   uib-typeahead="user as user.username for user in users | filter:{username:$viewValue}" 
 	   class="form-control" 
@@ -8,11 +29,24 @@
 	   typeahead-min-length="1"
 	   data-role="tagsinput">
 
-
+<input type="text" 
+	   ng-model="newmessage.name" 
+	   placeholder="Sujet" 
+	   class="form-control" >	   
 	   
-<div class="container-fluid">
-<div class="row">
-<div class="col-md">
+<div class="form-group">
+  <textarea ng-model="newmessage.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
+</div><br><br> 
+	 
+<div class="alert alert-info">{{newmessage}}</div>
+	 
+</div>
+
+
+
+
+<div class="col-md" ng-if="showmessages">
 
 	<table id="tablemessages" class="table table-striped dt-responsive" style="width:100%">
         <thead>
@@ -28,14 +62,20 @@
             <tr ng-repeat="msg in messages">
                 <td><span class="badge badge-info">{{msg.userfrom}}</span></td>
                 <td><span class="badge badge-info">{{msg.userto}}</span></td>
-                <td>{{msg.title}}</td>
+                <td><a href="#!messages/{{msg.id}}">{{msg.title}}</a></td>
 				<td>5</td>
-				<td>{{msg.timestamp}}</td>
+				<td>{{msg.timestamp  | pgtimestamp | date:'dd-MM-yyyy (HH:mm)'}}</td>
             </tr>
 			</tbody>
 			</table>
 
 
+
+</div>
+
+<div class="col-md" ng-if="message">
+
+blabla
 
 </div>
 

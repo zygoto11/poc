@@ -25,7 +25,15 @@ app.config(function($routeProvider) {
         templateUrl : "profile.html",
 		controller : "profileCtrl"
     })
+	.when("/newmessage", {
+        templateUrl : "messages.html",
+		controller : "messagesCtrl"
+    })
 	.when("/messages", {
+        templateUrl : "messages.html",
+		controller : "messagesCtrl"
+    })
+	.when("/messages/:message", {
         templateUrl : "messages.html",
 		controller : "messagesCtrl"
     })
@@ -287,10 +295,11 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listlogs&user
 
 });
 
-app.controller("messagesCtrl", function ($scope,$http, $routeParams,$localStorage) {
+app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
 	
 	$scope.userid = $localStorage.currentUser.id;
-	
+	$scope.showmessages = true;
+	$scope.shownewmessage = false;
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
@@ -311,13 +320,27 @@ app.controller("messagesCtrl", function ($scope,$http, $routeParams,$localStorag
 	
 	
 	
-	$scope.createmessage = function(to,msgname){
+		if ($routeParams.message) {
+		
+		$scope.message = $routeParams.message;
+		$scope.showmessages = false;
+	
+		}
+	
+	
+	if($location.path()=="/newmessage"){
+		$scope.shownewmessage = true;
+		$scope.showmessages = false;
+	
+	$scope.createmessage = function(to,msgname,msgcontent){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , to:to,msgname:msgname,action:"createmessage" })
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:to,msgname:msgname,action:"createmessage" })
             .then(function (response) {					
-					$route.reload();	
+					$location.path('/messages');	
 				});
 			
+	}
+	
 	}
 	
 	
