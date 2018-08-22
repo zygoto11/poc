@@ -324,6 +324,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		
 		$scope.message = $routeParams.message;
 		$scope.showmessages = false;
+		$scope.userid = $localStorage.currentUser.id;
 		
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describemessage&id="+$scope.message)
 		.then(function(response) {
@@ -349,12 +350,13 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		$scope.shownewmessage = true;
 		$scope.showmessages = false;
 		$scope.userid = $localStorage.currentUser.id;
-		$scope.createmessage = function(to,msgname,msgcontent){
+		$scope.createmessage = function(dest,msgname,msgcontent){
+
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:to,msgname:msgname,msgcontent:msgcontent,action:"createmessage" })
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:dest,msgname:msgname,msgcontent:msgcontent,action:"createmessage" })
             .then(function (response) {					
 					$location.path('/messages');	
-				});
+				}); 
 			
 	}
 	
