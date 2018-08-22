@@ -330,6 +330,17 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
         $scope.descmessage = response.data;		
 		});
 		
+		
+		$scope.replymessage = function(msgcontent){
+			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , msgid:$scope.message,msgcontent:msgcontent,action:"replymessage" })
+            .then(function (response) {					
+				$route.reload();		
+				});
+			
+		}
+		
+		
 	
 		}
 	
@@ -337,8 +348,8 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 	if($location.path()=="/newmessage"){
 		$scope.shownewmessage = true;
 		$scope.showmessages = false;
-	
-	$scope.createmessage = function(to,msgname,msgcontent){
+		$scope.userid = $localStorage.currentUser.id;
+		$scope.createmessage = function(to,msgname,msgcontent){
 			
 			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:to,msgname:msgname,msgcontent:msgcontent,action:"createmessage" })
             .then(function (response) {					
@@ -346,6 +357,9 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 				});
 			
 	}
+	
+
+	
 	
 	}
 	

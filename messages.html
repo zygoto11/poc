@@ -43,9 +43,6 @@
 	 
 </div>
 
-
-
-
 <div class="col-md" ng-if="showmessages">
 
 	<table id="tablemessages" class="table table-striped dt-responsive" style="width:100%">
@@ -74,8 +71,17 @@
 </div>
 
 <div class="col-md" ng-if="message">
-
-{{descmessage}}
+            <div class="alert alert-info" ng-repeat="desc in descmessage">
+			
+               <span class="badge badge-info" ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}}</span>
+                {{desc.content}}<br>
+				{{desc.timestamp  | pgtimestamp | date:'dd-MM-yyyy (HH:mm)'}}
+            </div>
+			
+<div class="form-group">
+  <textarea ng-model="replymsg.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="replymessage(replymsg.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
+</div>
 
 </div>
 
