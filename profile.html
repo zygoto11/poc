@@ -22,10 +22,25 @@
 <div class="col-md">
 
 <label class="btn btn-default">
-    <img class="img-fluid img-thumbnail" src="data:image/png;base64,{{noavatar}}" alt=""> <input type="file" hidden>
-	<div class="alert alert-info">click on image to update</div>
+    <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" id="img{{$index}}" alt=""> <input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
+	<div class="alert alert-info">click to update<br>
+<a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> rotate</span></a>	
+</div>
 </label>
 
+
+</div>
+<div class="col-md">
+<h3>Infos</h3>
+<input type="text" placeholder="Prénom" class="form-control" disabled><br>
+<input type="text" placeholder="Email" class="form-control" disabled><br>
+<input type="text" placeholder="Password" class="form-control" disabled><br>
+<input type="text" placeholder="Password confirm" class="form-control" disabled><br>
+<input type="text" placeholder="Date de naissance" class="form-control" disabled><br>
+<input type="text" placeholder="location" class="form-control" disabled><br>
+
+</div>
+<div class="col-md">
 <h3>Visibilité</h3>
 
 <div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
@@ -56,34 +71,20 @@
     <div class="tab-pane fade" id="pills-log" role="tabpanel" aria-labelledby="pills-log-tab">
 	
 	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
-	
-	<table id="example" class="table table-striped table-bordered" style="width:100%">
+
+	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Action</th>
+				<th>Description</th>
+				<th>Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
+            <tr ng-repeat="log in logs">
+                <td>{{log.action}}</td>
+				<td>{{log.description}}</td>
+				<td>{{log.timestamp | pgtimestamp | date:'dd-MM-yyyy (hh:mm)'}}</td>
             </tr>
 			</tbody>
 			</table>
