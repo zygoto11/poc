@@ -120,7 +120,13 @@
     <div class="col">
      <small class="float-right"> 
 	 <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
-	 2/12 <span class="badge badge-primary">{{x.leader}}</span></small>
+	 2/12<br> 
+	 <span ng-repeat="user in users | filter:{'username': x.leader}:true">{{x.leader}} 
+			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
+			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
+	</span>
+	 
+	 </small>
     </div>
   </div>
   

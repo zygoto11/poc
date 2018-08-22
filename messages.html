@@ -57,7 +57,7 @@
                 <td ng-if="msg.userfrom !==username"><span class="badge badge-info">{{msg.userfrom}}</span></td>
                 <td ng-if="msg.userto !==username"><span class="badge badge-info">{{msg.userto}}</span></td>
                 <td><a href="#!messages/{{msg.id}}">{{msg.title}}</a></td>
-				<td>{{msg.timestamp  | pgtimestamp | date:'dd-MM-yyyy (HH:mm)'}}</td>
+				<td><small>{{msg.timestamp  | pgtimestamp | date:'dd-MM-yyyy (HH:mm)'}}<small></td>
             </tr>
 			</tbody>
 			</table>
@@ -68,8 +68,11 @@
 
 <div class="col-md" ng-if="message">
             <div class="alert alert-info" ng-repeat="desc in descmessage">
-			
-               <span class="badge badge-info" ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}}</span>
+				
+               <span class="badge badge-teal" ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}} 
+			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
+			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
+			   </span>
                 {{desc.content}}<br>
 				{{desc.timestamp  | pgtimestamp | date:'dd-MM-yyyy (HH:mm)'}}
             </div>

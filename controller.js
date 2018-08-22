@@ -100,6 +100,12 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
         $scope.sorties = response.data;
     });
 	
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+    .then(function(response) {
+        $scope.users = response.data;
+    });
+	
+	
 	
 	if($location.path()=="/newsortie"){
 		$scope.shownewsortie = true;
