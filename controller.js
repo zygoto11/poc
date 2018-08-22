@@ -298,6 +298,7 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listlogs&user
 app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
 	
 	$scope.userid = $localStorage.currentUser.id;
+	$scope.username = $localStorage.currentUser.username;
 	$scope.showmessages = true;
 	$scope.shownewmessage = false;
 	
