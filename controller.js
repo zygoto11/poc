@@ -128,15 +128,15 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 			//"2018-08-07T22:00:00.000Z"
 			
 			var sortiedate = moment(date).format("YYYY-MM-DD");
-			var sortietime = moment(time).format("hh:mm");
-
+			var sortietime = moment(time).format("HH:mm");
+			var timestamp = moment(sortiedate + ' ' + sortietime);
 			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, desc:desc,date:sortiedate,time:sortietime,icon:icon,scope:scope, leader: $scope.userid,action:"createsortie" })
-            .then(function (response) {
+			  $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope, leader: $scope.userid,action:"createsortie" })
+             .then(function (response) {
 					
-					$location.path('/sorties');
+					 $location.path('/sorties');
 			
-				}); 
+				 }); 
 			
 		}
   

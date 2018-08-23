@@ -24,7 +24,7 @@
 
 
 <div class="form-group">
-<tags-input class="bootstrap" ng-model="newmessage.dest" display-property="username" placeholder="Ajouter un destinataire" addFromAutocompleteOnly="true">
+<tags-input class="bootstrap" ng-model="newmessage.dest" display-property="username" placeholder="Ajouter un destinataire" add-from-autocomplete-only="true">
       <auto-complete source="users"></auto-complete>
     </tags-input>
 <input type="text" 
@@ -36,7 +36,7 @@
   <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest[0].id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
 </div><br><br> 
 	 
-
+<div class="alert alert-info">{{newmessage}}</div>
 	 
 </div>
 

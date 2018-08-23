@@ -104,14 +104,14 @@
 			<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">
 				<div class="list-group">
 					<li class="list-group-item list-group-item-dark">
-						<small>{{group[0].date | date}}</small>
+						<small>{{group[0].timestamp | pgtimestamp | date:'dd-MM-yyyy'}}</small>
 					</li>
 					<div ng-repeat="x in group">
 						<a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
 
    <div class="row row">
     <div class="col">
-  <span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.time}}</span>
+  <span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span>
  <i class="fa fa-{{x.icon}}"></i>
 	  
 	  
@@ -121,7 +121,7 @@
      <small class="float-right"> 
 	 <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
 	 2/12<br> 
-	 <span ng-repeat="user in users | filter:{'username': x.leader}:true">{{x.leader}} 
+	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 	</span>
@@ -155,8 +155,8 @@
   <div class="tab-pane fade show active" id="pills-sortie" role="tabpanel" aria-labelledby="pills-sortie-tab">
   
   
-Date: <span class="badge badge-info">{{descsortie[0].date}}</span><br>
-Heure: <span class="badge badge-info">{{descsortie[0].time}}</span><br>
+Date: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'dd-MM-yyyy'}}</span><br>
+Heure: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'HH:mm'}}</span><br>
 Organisateur <span class="badge badge-info">{{descsortie[0].leader}}</span><br>
 Description : <span>{{descsortie[0].description}}</span><br>
 
