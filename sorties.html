@@ -104,7 +104,7 @@
 			<div ng-repeat="group in sorties | orderBy : 'date'  | groupBy : 'date'">
 				<div class="list-group">
 					<li class="list-group-item list-group-item-dark">
-						<small>{{group[0].timestamp | pgtimestamp | date:'dd-MM-yyyy'}}</small>
+						<small>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}</small>
 					</li>
 					<div ng-repeat="x in group">
 						<a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
@@ -155,7 +155,7 @@
   <div class="tab-pane fade show active" id="pills-sortie" role="tabpanel" aria-labelledby="pills-sortie-tab">
   
   
-Date: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'dd-MM-yyyy'}}</span><br>
+Date: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}</span><br>
 Heure: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'HH:mm'}}</span><br>
 Organisateur <span class="badge badge-info" ng-repeat="user in users | filter:{'id': descsortie[0].leader}:true">{{user.username}}</span><br>
 Description : <span>{{descsortie[0].description}}</span><br>
@@ -184,7 +184,7 @@ Description : <span>{{descsortie[0].description}}</span><br>
 <div class="row" ng-repeat="comment in comments | orderBy: timestamp : reverse" ng-class-odd="'alert-info'" ng-class-even="'alert-primary'">
         	    <div class="col-md-2">
         	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px" class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">{{comment.timestamp  | pgtimestamp | date:'dd-MM-yyyy (hh:mm)'}}</p>
+        	        <p class="text-secondary text-center">{{comment.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}</p>
         	    </div>
         	    <div class="col-md-10">
         	        <p>
