@@ -20,25 +20,23 @@
 <div class="row">
 <div class="col-md" ng-if="shownewmessage">	
 
+
+
+
 <div class="form-group">
-<input type="text" 
-	   ng-model="newmessage.dest" 
-	   placeholder="Liste des membres" 
-	   uib-typeahead="user as user.username for user in users | filter:{username:$viewValue}" 
-	   class="form-control" 
-	   typeahead-show-hint="true" 
-	   typeahead-min-length="1"
-	   data-role="tagsinput">
+<tags-input class="bootstrap" ng-model="newmessage.dest" display-property="username" placeholder="Ajouter un destinataire" addFromAutocompleteOnly="true">
+      <auto-complete source="users"></auto-complete>
+    </tags-input>
 <input type="text" 
 	   ng-model="newmessage.name" 
 	   placeholder="Sujet" 
 	   class="form-control" >	   
 	   
   <textarea ng-model="newmessage.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest[0].id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
 </div><br><br> 
 	 
-<div class="alert alert-info">{{newmessage}}</div>
+
 	 
 </div>
 
