@@ -20,11 +20,11 @@
 
 <div class="row">
 <div class="col-md">
-
 <label class="btn btn-default">
     <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" id="img{{$index}}" alt=""> <input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
 	<div class="alert alert-info">click to update<br>
 <a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> rotate</span></a>	
+<a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a>{{rd}}
 </div>
 </label>
 
