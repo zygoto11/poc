@@ -101,7 +101,7 @@
 			<div class="alert alert-info">debug :{{newsortie}}</div>
 		</div>
 		<div class="col-md" ng-if="showsorties">	
-			<div ng-repeat="group in sorties | orderBy : 'date' : true | groupBy : 'date'">
+			<div ng-repeat="group in sorties | orderBy : 'date'  | groupBy : 'date'">
 				<div class="list-group">
 					<li class="list-group-item list-group-item-dark">
 						<small>{{group[0].timestamp | pgtimestamp | date:'dd-MM-yyyy'}}</small>
