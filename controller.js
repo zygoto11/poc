@@ -331,7 +331,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
         $scope.users = response.data;		
     });
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listmessages")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listmessages&userid="+$scope.userid)
     .then(function(response) {
         $scope.messages = response.data;
 			

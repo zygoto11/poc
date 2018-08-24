@@ -53,8 +53,8 @@
         </thead>
         <tbody>
             <tr ng-repeat="msg in messages">
-                <td ng-if="msg.userfrom !==username"><span class="badge badge-info">{{msg.userfrom}}</span></td>
-                <td ng-if="msg.userto !==username"><span class="badge badge-info">{{msg.userto}}</span></td>
+                <td ng-if="msg.userfrom !==userid"><span class="badge badge-info" ng-repeat="user in users | filter:{'id': msg.userfrom}:true">{{user.username}} </span></td>
+                <td ng-if="msg.userto !==userid"><span class="badge badge-info" ng-repeat="user in users | filter:{'id': msg.userto}:true">{{user.username}} </span></td>
                 <td><a href="#!messages/{{msg.id}}">{{msg.title}}</a></td>
 				<td><small>{{msg.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}<small></td>
             </tr>
