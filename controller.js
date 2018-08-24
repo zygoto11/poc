@@ -251,8 +251,10 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&
 			.then(function(response) {
 			$scope.user = response.data;
 			
+
 			$scope.thumbnail = {	
-				dataUrl:$scope.user[0].avatar	
+				dataUrl:$scope.user[0].avatar,
+				rd:$scope.user[0].avatarrd
 			};
 			
 });
@@ -280,7 +282,7 @@ $scope.fileReaderSupported = window.FileReader != null;
 
 	$scope.saveavatar = function(avatar,rd){
 		
-		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , avatar:avatar,action:"saveavatar" })
+		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , avatar:avatar,avatarrd:rd,action:"saveavatar" })
             .then(function (response) {					
 
 				});

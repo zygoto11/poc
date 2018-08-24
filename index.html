@@ -44,42 +44,6 @@
 
 </head>
 <body ng-app="myApp">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" data-toggle="collapse" data-target=".navbar-collapse.show" href="#"><i class="fa fa-home"></i></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#!sorties"><i class="fa fa-handshake"></i> Sorties</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#!members"><i class="fa fa-users"></i> Membres</a>
-      </li>
-    </ul>
-	<ul class="navbar-nav">
-	
-	 <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#!profile">
-		<i class="fa fa-cog"></i> Profil</a>
-      </li>
-	
-	 <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#!messages">
-		<i class="fa fa-envelope"></i> Messages <span class="badge badge-pill badge-danger">2</span></a>
-      </li>
-	  <!--put hidden-xs and add link to logoff into profile -->
-	    <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#!login"><i class="fa fa-sign-out-alt"></i>  Se déconnecter</a>
-      </li>
-	
-	</ul>
-	
-
-  </div>
-</nav>
 <div ng-view></div>
 </body>
 </html>
