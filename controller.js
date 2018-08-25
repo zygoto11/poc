@@ -41,7 +41,7 @@ app.config(function($routeProvider) {
         templateUrl : "members.html",
 		controller : "membersCtrl"
     })
-    .when("/members/:username", {
+    .when("/members/:userid", {
         templateUrl : "members.html",
 		controller : "membersCtrl"
     })
@@ -222,19 +222,20 @@ $scope.showusers = true;
     .then(function(response) {
         $scope.users = response.data;
     });
-	
 
-
-	
-	
-
-
+	if ($routeParams.userid) {
 		
-	
-	if ($routeParams.username) {
-		
-		$scope.user = $routeParams.username.toLowerCase();
 		$scope.showusers = false;
+		$scope.userid = $routeParams.userid;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&id="+$scope.userid)
+			.then(function(response) {
+			$scope.user = response.data;
+			
+			
+	});
+		
+		
 		
 		}
 	
