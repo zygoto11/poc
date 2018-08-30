@@ -27,8 +27,7 @@
       <th scope="col">Username</th>
       <th scope="col">Gender</th>
 	  <th scope="col">Avatar</th>
-	  <th scope="col">Amis</th>
-
+	  <th scope="col">Certified</th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +37,7 @@
     <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
 	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
 	<td ng-if="x.avatar"><img width="120px" height="120px" class="img-fluid img-thumbnail" src="{{x.avatar}}"></img></td>
+	<td><i ng-if="x.certified ==='t'" class="fa fa-star text-green"></i></td>
   </tr>
   </tbody>
 </table>
