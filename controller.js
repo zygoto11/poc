@@ -37,6 +37,14 @@ app.config(function($routeProvider) {
         templateUrl : "messages.html",
 		controller : "messagesCtrl"
     })
+	.when("/forums", {
+        templateUrl : "forums.html",
+		controller : "forumsCtrl"
+    })
+	.when("/forums/:forumid", {
+        templateUrl : "forums.html",
+		controller : "forumsCtrl"
+    })
     .when("/members", {
         templateUrl : "members.html",
 		controller : "membersCtrl"
@@ -390,6 +398,34 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 	
 	
 	}
+	
+	
+});
+
+
+app.controller("forumsCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
+	
+	$scope.userid = $localStorage.currentUser.id;
+	$scope.username = $localStorage.currentUser.username;
+	$scope.showforums = true;
+		
+		if ($routeParams.forumid) {
+		
+		$scope.forumid = $routeParams.forumid;
+		$scope.showforums = false;
+		$scope.userid = $localStorage.currentUser.id;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listtopics&forumid="+$scope.forumid)
+		.then(function(response) {
+        $scope.topics = response.data;		
+		});
+		
+		
+		
+		
+	
+		}
+	
 	
 	
 });

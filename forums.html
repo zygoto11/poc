@@ -1,0 +1,37 @@
+<div ng-include="'header.html'"></div>
+<br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md">
+			<a type="button" href="#!forums" class="btn btn-secondary d-block d-sm-inline" ng-if="showforums===false">
+				Afficher la liste des forums <i class="fa fa-list"></i>
+			</a>
+		</div>
+	</div>
+</div>	   
+	   <br>
+
+			   
+	   
+	   
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-md" ng-if="showforums">
+
+<a href="#!forums/1">annonces</a><br>
+<a href="#!forums/2">blabla</a><br>
+<a href="#!forums/3">bugs</a><br>
+
+{{topics}}
+
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
