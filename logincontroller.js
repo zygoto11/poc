@@ -1,4 +1,4 @@
-app.controller("Login.IndexController", function ($location, AuthenticationService) {
+app.controller("Login.IndexController", function ($http,$scope,$location, AuthenticationService) {
 	
 	 var vm = this;
 
@@ -10,6 +10,11 @@ app.controller("Login.IndexController", function ($location, AuthenticationServi
             // reset login status
             AuthenticationService.Logout();
         };
+		
+			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
+				.then(function(response) {
+				$scope.sorties = response.data;
+			});
 
         function login() {
             vm.loading = true;

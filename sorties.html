@@ -102,41 +102,41 @@
 			<div class="alert alert-info">debug :{{newsortie}}</div>
 		</div>
 		<div class="col-md" ng-if="showsorties">	
-			<div ng-repeat="group in sorties | orderBy : 'date'  | groupBy : 'date'">
-				<div class="list-group">
-					<li class="list-group-item list-group-item-dark">
-						<small>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}</small>
-					</li>
-					<div ng-repeat="x in group">
-						<a href="#!sorties/{{x.id}}" class="list-group-item list-group-item-action">
+			
+	
+				
 
-   <div class="row row">
-    <div class="col">
-  <span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span>
- <i class="fa fa-{{x.icon}}"></i>
-	  
-	  
- <small>{{x.name}}</small>
-    </div>
-    <div class="col">
-     <small class="float-right"> 
-	 <i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
-	 2/12<br> 
-	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
+				  <table class="table table-condensed table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Date</th>
+        <th>Sortie</th>
+        <th>Inscrits</th>
+		<th>Organisateur</th>
+      </tr>
+    </thead>
+
+	
+    <tbody ng-repeat="group in sorties | orderBy : 'date'  | groupBy : 'date'">
+	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr>
+	
+      <tr ng-repeat="x in group">
+        <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
+        <td><a href="#!sorties/{{x.id}}"><i class="fa fa-{{x.icon}}"></i><small>{{x.name}}</small></a></td>
+        <td><i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i> 2/12</td>
+		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
-	</span>
-	 
-	 </small>
-    </div>
-  </div>
-  
-  
-	  </a>
-	  
-	  </div>
+	</span></td>
+      </tr>
+	  </tbody>
+	  </table>
+					
 
-	  </div><br></div>
+	  
+
+
+<br></div>
 	
 
 
