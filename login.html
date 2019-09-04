@@ -14,15 +14,15 @@
     <h2>Carca</h2>
     <form name="form" ng-submit="form.$valid && vm.login()" novalidate>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
-            <input placeholder="Pseudo/email" type="text" name="username" class="form-control" ng-model="vm.username" required />
+            <input placeholder="Pseudo ou E-mail" type="text" name="username" class="form-control" ng-model="vm.username" required />
             <div ng-messages="form.$submitted && form.username.$error" class="help-block">
-                <div ng-message="required">Username is required</div>
+                <div ng-message="required" class="alert alert-danger">Ce champ est requis</div>
             </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
             <input placeholder="Mot de passe" type="password" name="password" class="form-control" ng-model="vm.password" required />
             <div ng-messages="form.$submitted && form.password.$error" class="help-block">
-                <div ng-message="required">Password is required</div>
+                <div ng-message="required" class="alert alert-danger">Ce champ est requis</div>
             </div>
         </div>
         <div class="form-group">
@@ -40,9 +40,9 @@
 <img class="img-fluid img-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/1_carcassonne_aerial_2016.jpg/800px-1_carcassonne_aerial_2016.jpg" width="800px" height="600px"> <br>
 <small><a href="https://commons.wikimedia.org/wiki/File:1_carcassonne_aerial_2016.jpg">© lien copyright</a></small>
 </div>
-<div class="col-sm-3">
+<div class="col-sm-4">
 <h4>Prochaines sorties</h4>
-  <table class="table table-condensed table-sm">
+  <table class="table table-condensed table-sm table-hover">
     <thead class="thead-light">
       <tr>
         <th>Date</th>
@@ -54,14 +54,14 @@
 
 	
     <tbody ng-repeat="group in sorties | limitTo : 5 | orderBy : 'date'  | groupBy : 'date'">
-	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr>
+	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM'}}<td></tr>
 	
       <tr ng-repeat="x in group">
         <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
-        <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
-        <td><i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i> 2/12</td>
+        <td><a href="#!sorties/{{x.id}}" ng-click="" class="text-secondary"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
+        <td><span class="badge badge-secondary">2</span></td>
 		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
-			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
+			   <i ng-if="user.gender==='male'" class="fa fa-user text-navy-light"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 	</span></td>
       </tr>
