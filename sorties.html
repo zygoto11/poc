@@ -208,13 +208,13 @@ Description : <span>{{descsortie[0].description}}</span><br>
 <hr>
 <h3>Inscrits</h3>
 
-<span ng-repeat="inscrit in inscriptions" class="badge badge-primary">{{inscrit.username}}</span>
+<span ng-repeat="inscrit in inscriptions" ><small class="badge badge-primary">{{inscrit.username}}</small> </span>
 
 
 <hr>
 <a type="button"  class="btn btn-success d-block d-sm-inline" ng-click="register(sortie)">
   S'inscrire <i class="fa fa-plus-circle"></i>
-</a>
+</a> 
 <a type="button" class="btn btn-danger d-block d-sm-inline" ng-click="unregister(sortie)">
   Se désinscrire <i class="fa fa-minus-circle"></i>
 </a>
