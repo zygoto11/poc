@@ -11,6 +11,9 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
             AuthenticationService.Logout();
         };
 		
+
+		
+		
 			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/readonly.php?action=listsorties")
 				.then(function(response) {
 				$scope.sorties = response.data;
