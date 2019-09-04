@@ -7,32 +7,38 @@
     </ul>
 </nav>
 
-<div class="jumbotron">
-        <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-<div class="col-md-6 col-md-offset-3">
+<div class="jumbotron"  >
+        <div class="container-fluid">
+<div class="row">
+<div class="col-md-3 col-md-offset-3">
     <h2>Carca</h2>
     <form name="form" ng-submit="form.$valid && vm.login()" novalidate>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
-            <input placeholder="Username" type="text" name="username" class="form-control" ng-model="vm.username" required />
+            <input placeholder="Pseudo/email" type="text" name="username" class="form-control" ng-model="vm.username" required />
             <div ng-messages="form.$submitted && form.username.$error" class="help-block">
                 <div ng-message="required">Username is required</div>
             </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
-            <input placeholder="Password" type="password" name="password" class="form-control" ng-model="vm.password" required />
+            <input placeholder="Mot de passe" type="password" name="password" class="form-control" ng-model="vm.password" required />
             <div ng-messages="form.$submitted && form.password.$error" class="help-block">
                 <div ng-message="required">Password is required</div>
             </div>
         </div>
         <div class="form-group">
-            <button ng-disabled="vm.loading" class="btn btn-primary">Login</button>
+            <button ng-disabled="vm.loading" class="btn btn-primary">Se connecter</button>
             <img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
         <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
     </form>
-</div><hr>
-se connecter avec : <i class="fab fa-facebook"></i> <i class="fab fa-google"></i> <i class="fab fa-slack-hash"></i> <i class="fab fa-twitter"></i> (pas encore implementé)
+	se connecter avec : <i class="fab fa-facebook"></i> <i class="fab fa-google"></i> <i class="fab fa-slack-hash"></i> <i class="fab fa-twitter"></i> (pas encore implementé)
+</div>
+<div class="col-sm-3">
+<img class="img-fluid img-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/1_carcassonne_aerial_2016.jpg/800px-1_carcassonne_aerial_2016.jpg" width="800px" height="600px"> <br>
+<small>© https://commons.wikimedia.org/wiki/File:1_carcassonne_aerial_2016.jpg</small>
+</div>
+<hr>
+
 </div></div></div>
 
 
