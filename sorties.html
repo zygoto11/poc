@@ -1,4 +1,8 @@
 <div ng-include="'header.html'"></div>
+
+
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -101,11 +105,50 @@
 			<hr>
 			<div class="alert alert-info">debug :{{newsortie}}</div>
 		</div>
-		<div class="col-md" ng-if="showsorties">	
+		
+		<div class="container-fluid" ng-if="showsorties"><div class="row">
 			
-	
-				
+<div class="col-sm-3 d-none d-sm-block">
 
+<div class="card">
+<h4 class="card-header">Sorties</h4>
+<div class="card-body">
+
+{{sorties.length}} Sorties
+<hr>
+<h4>Filtres</h4>
+<div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1"> Aujourd'hui </label>
+                    </div>
+                    <div class="form-check abc-checkbox abc-checkbox-primary form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1" checked>
+                        <label class="form-check-label" for="inlineCheckbox2"> Dans la semaine </label>
+                    </div><hr>
+
+			<div class="btn-group btn-group-toggle">
+<label class="btn btn-secondary active" uib-btn-radio="'walking'" ng-model="newsortie.icon"><i class="fa fa-walking"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'beer'" ng-model="newsortie.icon"><i class="fa fa-beer"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'utensils'" ng-model="newsortie.icon"><i class="fa fa-utensils"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'film'" ng-model="newsortie.icon"><i class="fa fa-film"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'chess'" ng-model="newsortie.icon"><i class="fa fa-chess"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'theater-masks'" ng-model="newsortie.icon"><i class="fa fa-theater-masks"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'music'" ng-model="newsortie.icon"><i class="fa fa-music"></i></label>
+</div>
+<div class="alert alert-info" ng-if="newsortie.icon">
+<span ng-if="newsortie.icon ==='beer'">Apéro</span>
+<span ng-if="newsortie.icon ==='utensils'">Restaurant</span>
+<span ng-if="newsortie.icon ==='walking'">Sport</span>
+<span ng-if="newsortie.icon ==='film'">Cinéma</span>
+<span ng-if="newsortie.icon ==='chess'">Jeux</span>
+<span ng-if="newsortie.icon ==='theater-masks'">Theatre</span>
+<span ng-if="newsortie.icon ==='music'">Concert</span>
+</div>
+</div>
+</div>
+</div>	
+				
+<div class="col-sm ml-auto">
 				  <table class="table table-condensed table-sm">
     <thead class="thead-light">
       <tr>
@@ -122,7 +165,7 @@
 	
       <tr ng-repeat="x in group">
         <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
-        <td><a href="#!sorties/{{x.id}}"><i class="fa fa-{{x.icon}}"></i><small>{{x.name}}</small></a></td>
+        <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
         <td><i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i> 2/12</td>
 		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
@@ -132,15 +175,15 @@
 	  </tbody>
 	  </table>
 					
-
+</div>
 	  
 
-
-<br></div>
+</div>
+</div>
 	
 
 
-</div>
+
 <div class="col" ng-if="sortie">
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
