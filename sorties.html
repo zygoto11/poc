@@ -168,6 +168,7 @@
         <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
         <td><i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i> 2/12</td>
 		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
+			   <img height="40px" class="img img-rounded img-responsive" src="{{user.avatar}}" onMouseOver="this.class=''"></img>
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 	</span></td>
@@ -201,7 +202,12 @@
   
 Date: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}</span><br>
 Heure: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'HH:mm'}}</span><br>
-Organisateur <span class="badge badge-info" ng-repeat="user in users | filter:{'id': descsortie[0].leader}:true">{{user.username}}</span><br>
+Organisateur 
+<span class="badge badge-info" ng-repeat="user in users | filter:{'id': descsortie[0].leader}:true">{{user.username}} 
+<img class="img-responsive" height="120px" class="img-fluid img-thumbnail" src="{{user.avatar}}" onMouseOver="this.class=''"></img>
+</span>
+
+<br>
 Description : <span>{{descsortie[0].description}}</span><br>
 
 
@@ -226,15 +232,14 @@ Description : <span>{{descsortie[0].description}}</span><br>
 
 
 <div class="row" ng-repeat="comment in comments | orderBy: timestamp : reverse" ng-class-odd="'alert-info'" ng-class-even="'alert-primary'">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="50px" class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">{{comment.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}</p>
+        	    <div class="col-md-2" ng-repeat="user in users | filter:{'username': comment.username}:true">
+        	        <img  src="{{user.avatar}}" height="50px" class="img img-responsive"/>
+										
+        	        <small class="text-secondary">{{comment.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}</small>
+					<p><a class="float-left" href="#!members/{{comment.username}}"><strong>{{comment.username}}</strong></a></p>
         	    </div>
         	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left" href="#!members/{{comment.username}}"><strong>{{comment.username}}</strong></a>
 
-        	       </p>
         	       <div class="clearfix"></div>
         	        <div class="alert">{{comment.comment}}</div>
 

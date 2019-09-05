@@ -26,6 +26,10 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
 				.then(function(response) {
 				$scope.inscriptions = response.data;
 			});
+			
+			
+			
+			
 
         function login() {
             vm.loading = true;
