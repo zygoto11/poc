@@ -1,6 +1,6 @@
 app.controller("createAccountCtrl", function ($scope,$http, $routeParams,$localStorage) {
 
-$http.get("/data/cities.json")
+$http.get("https://zygoto11.github.io/poc/data/cities.json")
     .then(function(response) {
         $scope.cities = response.data;
 			var $input = $(".typeahead");
