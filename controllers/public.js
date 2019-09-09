@@ -58,7 +58,7 @@ app.controller("validationAccountCtrl", function ($scope,$http, $routeParams,$lo
 			//add if
 			$localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
 			$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-			$location.path('/profile');
+			$location.path('/profile?showhelp=yes');
 			
 			
 		});	
@@ -78,7 +78,7 @@ app.controller("connectAccountCtrl", function ($scope,$http, $routeParams,$local
 			//add if
 			$localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
 			$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-			$location.path('/profile');
+			$location.path('/sorties');
 			
 			
 		});	
