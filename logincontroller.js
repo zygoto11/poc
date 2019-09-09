@@ -32,15 +32,29 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
 			
 
         function login() {
-            vm.loading = true;
             AuthenticationService.Login(vm.username, vm.password, function (result) {
                 if (result === true) {
                     $location.path('/sorties');
                 } else {
-                    vm.error = 'Username or password is incorrect';
+                    vm.error = 'Pseudo ou mot de passe incorrect !';
                     vm.loading = false;
                 }
             });
         };
+		
+		$scope.send_magic =function(username){
+			
+			if (username) {
+			
+			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/public/send_magic.php?username="+username)
+				.then(function(response) {
+				$scope.magic = response.data;
+				
+			});
+			
+			}
+			
+		}
+		
 	
 });
