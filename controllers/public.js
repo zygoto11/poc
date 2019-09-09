@@ -40,13 +40,30 @@ $scope.createuser = function(username,email){
 						
 					}
 						
-					//$location.path('/messages');	
 				}); 
 			
 }
+	
+});
 
-
-
-
+app.controller("validationAccountCtrl", function ($scope,$http, $routeParams,$localStorage,$location) {
+	
+		if ($routeParams.token) {
+		
+		$scope.token = $routeParams.token;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/public/validate_user.php?token="+$scope.token)
+			.then(function(response) {
+		
+			//add if
+			$localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
+			$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+			$location.path('/sorties');
+			
+			
+		});
+		
+		
+		}
 	
 });
