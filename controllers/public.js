@@ -36,7 +36,7 @@ $scope.createuser = function(username,email){
 					}
 					else {
 						
-						alert("OK");
+						$scope.api_ok = "Votre compte a été créé, vous devez l'activer en cliquant sur le lien qui vous a été envoyé par email";
 						
 					}
 						
