@@ -58,11 +58,30 @@ app.controller("validationAccountCtrl", function ($scope,$http, $routeParams,$lo
 			//add if
 			$localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
 			$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-			$location.path('/sorties');
+			$location.path('/profile');
 			
 			
-		});
+		});	
 		
+		}
+	
+});
+
+app.controller("connectAccountCtrl", function ($scope,$http, $routeParams,$localStorage,$location) {
+	
+		if ($routeParams.token) {
+		$scope.token = $routeParams.token;
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/public/validate_magic.php?token="+$scope.token)
+			.then(function(response) {
+		
+			//add if
+			$localStorage.currentUser = { username: response.data.username,id:response.data.id, token: response.data.token };
+			$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+			$location.path('/profile');
+			
+			
+		});	
 		
 		}
 	
