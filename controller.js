@@ -1,9 +1,6 @@
 var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages',"ngSanitize",'angular-loading-bar','ngTagsInput']);
 app.config(function($routeProvider) {
     $routeProvider
-    .when("/", {
-        templateUrl : "home.html"
-    })
     .when("/sorties", {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
@@ -16,12 +13,6 @@ app.config(function($routeProvider) {
         templateUrl : "login.html",
 		controller : "Login.IndexController",
 		controllerAs: 'vm'
-    })
-	.when("/intro", {
-        templateUrl : "intro.html"
-    })
-	.when("/api", {
-        templateUrl : "api.html"
     })
 	.when("/createaccount", {
         templateUrl : "createaccount.html",

@@ -46,9 +46,11 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
 			
 			if (username) {
 			
+			username.toLowerCase();
 			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/public/send_magic.php?username="+username)
 				.then(function(response) {
-				$scope.magic = response.data;
+				//$scope.magic = response.data;
+				$scope.magic = "Un email vous a été envoyé !";
 				
 			});
 			
