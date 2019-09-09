@@ -27,6 +27,10 @@ app.config(function($routeProvider) {
         templateUrl : "createaccount.html",
 		controller : "createAccountCtrl"
     })
+	.when("/validation", {
+        templateUrl : "validation.html",
+		controller : "validationAccountCtrl"
+    })
 	.when("/sorties/:sortie", {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
@@ -100,7 +104,7 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 
         // redirect to login page if not logged in and trying to access a restricted page
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/login','/intro','/createaccount','/api'];
+            var publicPages = ['/login','/intro','/createaccount','/api','/validation'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             if (restrictedPage && !$localStorage.currentUser) {
                 $location.path('/login');
