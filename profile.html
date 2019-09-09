@@ -12,7 +12,6 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
 </div>
 <div class="row">
 <div class="col">
-<h3>Welcome <span class="badge badge-success">{{username}}</span></h3>
 
 	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
@@ -21,38 +20,66 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
   <li class="nav-item">
     <a class="nav-link" id="pills-log-tab" data-toggle="pill" data-target="#pills-log" role="tab" aria-controls="pills-log" aria-selected="false"><small>Journal de bord <i class="fa fa-book"></i></small></a>
   </li>
-  
-
 
 </ul>
+
+
+
+
+
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-options" role="tabpanel" aria-labelledby="pills-options-tab">
-  
-  <div class="container-fluid">
-
+<div class="container-fluid">
 <div class="row">
-<div class="col-md">
+<div class="col-sm-6">
+
+<div class="card border-dark bg-light mb-3">
+  <div class="card-header">Ton Profil</div>
+  <div class="card-body text-dark">
+    <p class="card-text">
+
+
 <label class="btn btn-default">
-    <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" width="120px" height="120px" id="img{{$index}}" alt=""> <input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
-	<div class="alert alert-info">click to update<br>
-<a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> rotate</span></a>	
-<a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a>{{rd}}
+    <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" width="120px" height="120px" id="img{{$index}}" alt="">
+	<input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
+<!--a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> Pivoter l'image</span></a>	
+<a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a-->
+</label> 
+<div ng-if="showhelp" class="alert alert-info alert-dismissible">Clique sur ton avatar pour le changer
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
-</label>
+<hr>
 
-
+<h5>Sexe</h5>
+<div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio1" value="neutre" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio1"> <i class="fa fa-user"></i> Ne pas indiquer</label>
 </div>
-<div class="col-md">
-<h3>Infos</h3>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio2" value="man" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio2">  <i class="fa fa-user text-primary"></i> Homme  </label>
+                    </div>
+					<div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio3" value="woman" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio3"> <i class="fa fa-user text-pink"></i> Femme </label>
+                    </div>
+
+<h5>Ville</h5>
+<div class="input-group mb-3">
+  <input type="text" class="typeahead form-control" ng-model="profil.city" placeholder="Ville" data-provide="typeahead">
+  <div class="input-group-append">
+    <button class="btn btn-secondary" type="button" id="button-addon2">Effacer <i class="fa fa-times"></i></button>
+  </div>
+</div>
+
 <input type="text" placeholder="Prénom" class="form-control" disabled><br>
 <input type="text" placeholder="Email" class="form-control" disabled><br>
 <input type="text" placeholder="Password" class="form-control" disabled><br>
 <input type="text" placeholder="Password confirm" class="form-control" disabled><br>
 <input type="text" placeholder="Date de naissance" class="form-control" disabled><br>
 <input type="text" placeholder="location" class="form-control" disabled><br>
-
-</div>
-<div class="col-md">
 <h3>Visibilité</h3>
 
 <div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
@@ -72,8 +99,68 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
                     <div class="form-check abc-checkbox abc-checkbox-primary form-check-inline">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1" checked>
                         <label class="form-check-label" for="inlineCheckbox4"> Par mail </label>
-                    </div>
-					
+ </div>
+
+
+
+
+
+
+	</p>
+  </div>
+</div>
+
+
+
+
+</div>
+
+<div class="col-sm-6">
+
+ 
+<div class="card-deck"> 
+<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Liste d'amis n°1</div>
+  <div class="card-body text-dark">
+    <p class="card-text">
+	<i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
+	<i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
+	</p>
+  </div>
+</div>
+<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Liste d'amis n°2</div>
+  <div class="card-body text-dark">
+    <p class="card-text">
+	homer <i class="fa fa-user text-primary"></i><br>
+	marge <i class="fa fa-user text-pink"></i>
+	</p>
+  </div>
+</div>
+</div>
+
+<div class="card-deck">
+<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Liste d'amis n°3</div>
+  <div class="card-body text-dark">
+    <p class="card-text">Liste vide</p>
+  </div>
+</div>
+<div class="card border-danger bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Liste d'indésirables</div>
+  <div class="card-body text-dark">
+    <p class="card-text">Liste vide</p>
+  </div>
+</div>
+</div>
+
+<div class="alert alert-success">
+  <a class="bg-success" ng-click="showhelp = !showhelp"><small>Aide</small> <i class="fa fa-question"></i></a><br>
+DEBUG
+
+{{profil}}
+</div>	
+	
 					
 </div></div></div>	
   
