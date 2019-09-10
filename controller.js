@@ -302,9 +302,23 @@ $scope.showusers = true;
 		
 		
 		
-		$scope.addfriend = function(friendid,listid){
-			
+		$scope.addfriend = function(friendid,listid){			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/addfriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
+            .then(function (response) {
+					if (response.data.code !== 200) {
+						$scope.msg_error = response.data.message;
+					}
+					else {
+						$scope.msg_ok = "Cette personne est maintenant dans votre liste d'ami";
+						$route.reload();
+					}
+			});
+		}
+		
+		
+		$scope.removefriend = function(friendid,listid){
+			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/removefriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
             .then(function (response) {	
 
 					if (response.data.code !== 200) {
@@ -314,14 +328,16 @@ $scope.showusers = true;
 					}
 					else {
 						
-						$scope.msg_ok = "Cette personne est maintenant dans votre liste d'ami";
+						$scope.msg_ok = "Cette personne n'est plus dans votre liste d'ami";
 						$route.reload();
 					}
 
 			
 						
 			}); 			
-		}		
+		}	
+		
+		
 		}	
 });
 
@@ -374,6 +390,33 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&
 			};
 			
 });
+
+
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+    .then(function(response) {
+        $scope.users = response.data;
+		
+    });
+
+
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getfriends.php?userid="+$localStorage.currentUser.id)
+			.then(function(response) {
+			
+			
+			if (response.data.code !== 200) {
+						
+			$scope.friends = "";
+						
+			}
+			
+			else {
+				
+			$scope.friends = response.data;
+
+			}
+			
+			
+		});
 
 
 

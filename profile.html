@@ -17,13 +17,18 @@
 
 <!-- listes d'amis -->
 <div ng-if="showfriends">
+
 <div class="card-deck"> 
 <div class="card border-success bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Liste d'amis n°1</div>
   <div class="card-body text-dark">
     <p class="card-text">
-	<i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
-	<i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
+	<span ng-repeat="friend in (friends['result']|filter:{listid:'1'})">{{(users|filter:{id:friend.to}: true)[0].username}}	
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
+	<br>
+		
+	</span>
 	</p>
   </div>
 </div>
@@ -31,8 +36,12 @@
   <div class="card-header">Liste d'amis n°2</div>
   <div class="card-body text-dark">
     <p class="card-text">
-	homer <i class="fa fa-user text-primary"></i><br>
-	marge <i class="fa fa-user text-pink"></i>
+	
+	<span ng-repeat="friend in (friends['result']|filter:{listid:'2'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
+	<br></span>
+	
 	</p>
   </div>
 </div>
@@ -42,13 +51,20 @@
 <div class="card border-success bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Liste d'amis n°3</div>
   <div class="card-body text-dark">
-    <p class="card-text">Liste vide</p>
+    <p class="card-text">
+	
+	<span ng-repeat="friend in (friends['result']|filter:{listid:'3'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
+	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
+	<br></span>
+	
+	</p>
   </div>
 </div>
 <div class="card border-danger bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Liste d'indésirables</div>
   <div class="card-body text-dark">
-    <p class="card-text">Liste vide</p>
+    <p class="card-text">pas encore fait</p>
   </div>
 </div>
 </div>
