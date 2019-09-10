@@ -4,11 +4,10 @@
   <form class="form-inline">
     <a class="btn btn-sm btn-primary" href="#!newsortie">Créer une sortie <i class="fa fa-plus-circle"></i></a>
     <!--a class="btn btn-sm btn-primary" href="#!newsortie" type="button">Smaller button</a-->
+
   </form>	  
 	</ul>
 </nav>
-
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -87,9 +86,7 @@
 <div class="col-sm-3">
 
 
-			<a type="button" class="btn btn-danger d-block d-sm-inline" data-toggle="modal" data-target="#exampleModal" ng-if="showdeletesortie===false">
-			   Supprimer cette sortie ? <i class="fa fa-trash-alt"></i>
-			</a>
+
 
 <form class="form">
         <div class="form-group">
@@ -111,7 +108,7 @@
     </thead>
 
 	
-    <tbody ng-repeat="group in (filteredsorties = (sorties | orderBy : 'date' | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
+    <tbody ng-repeat="group in (filteredsorties = (sorties | orderBy : 'timestamp' | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
 
 	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr>
 	
@@ -303,6 +300,10 @@ Description : <span>{{descsortie[0].description}}</span><br>
   </a>
 
 </div>
+<hr>
+	<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" ng-if="showdeletesortie===false">
+			   Supprimer cette sortie ? <i class="fa fa-trash-alt"></i>
+			</a>
 
 </div>
   
