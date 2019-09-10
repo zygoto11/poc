@@ -234,7 +234,8 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 app.controller("membersCtrl", function ($scope,$http, $routeParams,$localStorage) {
 	
 $scope.showusers = true;
-	
+
+
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
         $scope.users = response.data;
@@ -315,7 +316,7 @@ $http.get("https://zygoto11.github.io/poc/data/cities.json")
 });
 
 
-if ($routeParams.showhelp == "yes") {$scope.showhelp = true}
+$scope.showsettings = true;
 
 $scope.username = $localStorage.currentUser.username;
 $scope.userid = $localStorage.currentUser.id;
@@ -383,7 +384,7 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listlogs&user
     .then(function(response) {
         $scope.logs = response.data;
 			
-			angular.element(document).ready(function() {  
+		angular.element(document).ready(function() {  
 			dTable = $('#tablelogs');  
 			dTable.DataTable();  
 		});  

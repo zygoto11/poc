@@ -2,15 +2,18 @@
 <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
     <ul class="navbar-nav">
   <form class="form-inline">
-    <a class="btn btn-sm btn-primary" href="" ng-click="showfriends = !showfriends" type="button">Listes d'amis <i class="fa fa-users"></i></a>
-    <!--a class="btn btn-sm btn-primary" href="#!newsortie" type="button">Smaller button</a-->
+    <a class="btn btn-sm btn-primary" href="" ng-click="showsettings = true; showfriends = false; showlog = false">Mon profil <i class="fa fa-user"></i></a>
+    <a class="btn btn-sm btn-primary" href="" ng-click="showfriends = true; showsettings = false; showlog = false">Mes amis <i class="fa fa-users"></i></a>
+	<a class="btn btn-sm btn-primary" href="" ng-click="showfriends = false; showsettings = false; showlog = true">Mon historique <i class="fa fa-clipboard-list"></i></a>
   </form>
 	  
 	</ul>
 </nav>
 <br>
 
-
+<div class="container-fluid">
+<div class="row">
+<div class="col">
 
 <!-- listes d'amis -->
 <div ng-if="showfriends">
@@ -51,21 +54,7 @@
 </div>
 </div>
 
-
-<div class="container-fluid">
-<div ng-if="showhelp" class="alert alert-success alert-dismissible">
-<h3>Bienvenue sur CarcaZone</h3>
-Vous pouvez maintenant éditer les détails de votre profil<br>
-Quand vous êtes prêts, vous pouvez aller voir la liste des sorties<br>
-Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, demandez à l'organisateur de valider votre profil, vous pourrez ainsi accéder à l'ensemble des fonctionnalités du site
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-6">
+<div ng-if="showsettings">
 	
 	<div class="row">
 <div class="col-md-3">
@@ -105,13 +94,6 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
 
 
 </div>
-
-<div ng-if="showhelp" class="alert alert-info alert-dismissible">Clique sur ton avatar pour le changer
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
 
 
 <div class="card border-dark bg-light mb-3">
@@ -166,18 +148,9 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
 
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-6" ng-if="showlog">
 
- 
-
-
-<div class="alert alert-success">
-  <a class="bg-success" ng-click="showhelp = !showhelp"><small>Aide</small> <i class="fa fa-question"></i></a><br>
-DEBUG
-
-{{profil}}
-</div>	
-	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
+ 	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
 
 	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
         <thead>
