@@ -10,49 +10,23 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="row">
-<div class="col">
 
-	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-options-tab" data-toggle="pill" data-target="#pills-options" role="tab" aria-controls="pills-options" aria-selected="true"><small>Profil <i class="fa fa-user"></i></small> </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-log-tab" data-toggle="pill" data-target="#pills-log" role="tab" aria-controls="pills-log" aria-selected="false"><small>Journal de bord <i class="fa fa-book"></i></small></a>
-  </li>
-
-</ul>
-
-
-
-
-
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-options" role="tabpanel" aria-labelledby="pills-options-tab">
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-6">
-
-<div class="card border-dark bg-light mb-3">
-  <div class="card-header">Ton Profil</div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-
-
+	
+	<div class="row">
+<div class="col-md-3">
+<h5>Ton avatar</h5>
 <label class="btn btn-default">
     <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" width="120px" height="120px" id="img{{$index}}" alt="">
 	<input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
 <!--a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> Pivoter l'image</span></a>	
 <a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a-->
 </label> 
-<div ng-if="showhelp" class="alert alert-info alert-dismissible">Clique sur ton avatar pour le changer
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
 </div>
-<hr>
-
-<h5>Sexe</h5>
+<div class="col-md-9">
+	<h5>Sexe</h5>
 <div class="form-check abc-radio abc-radio-info form-check-inline">
                         <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio1" value="neutre" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio1"> <i class="fa fa-user"></i> Ne pas indiquer</label>
@@ -74,13 +48,39 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
   </div>
 </div>
 
+
+</div>
+
+
+</div>
+
+<div ng-if="showhelp" class="alert alert-info alert-dismissible">Clique sur ton avatar pour le changer
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+
+<div class="card border-dark bg-light mb-3">
+  <div class="card-header">
+  <a class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne">
+          Options <i class="fa fa-gear"></i>
+        </a>
+
+  </div>
+  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+  <div class="card-body text-dark">
+    <p class="card-text">
+	
 <input type="text" placeholder="Prénom" class="form-control" disabled><br>
 <input type="text" placeholder="Email" class="form-control" disabled><br>
 <input type="text" placeholder="Password" class="form-control" disabled><br>
 <input type="text" placeholder="Password confirm" class="form-control" disabled><br>
 <input type="text" placeholder="Date de naissance" class="form-control" disabled><br>
 <input type="text" placeholder="location" class="form-control" disabled><br>
-<h3>Visibilité</h3>
+	
+	<h3>Visibilité</h3>
 
 <div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -100,16 +100,15 @@ Vous pouvez vous inscrire aux sorties qui autorisent les profils non validés, d
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1" checked>
                         <label class="form-check-label" for="inlineCheckbox4"> Par mail </label>
  </div>
-
-
-
-
-
-
+	
 	</p>
-  </div>
-</div>
+	</div>
+	</div>
+	
 
+	
+	
+	</div>
 
 
 
@@ -160,15 +159,6 @@ DEBUG
 
 {{profil}}
 </div>	
-	
-					
-</div></div></div>	
-  
-  
-  </div>
-  
-    <div class="tab-pane fade" id="pills-log" role="tabpanel" aria-labelledby="pills-log-tab">
-	
 	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
 
 	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
@@ -187,13 +177,12 @@ DEBUG
             </tr>
 			</tbody>
 			</table>
+
 	
-	
-  </div>
+					
+</div></div></div>	
   
 
-  
-  </div>
 
 
 				

@@ -156,7 +156,17 @@
 </div>	
 				
 <div class="col-sm ml-auto">
-				  <table class="table table-condensed table-sm">
+
+<form class="form">
+        <div class="form-group">
+            <input type="text" ng-model="search" class="form-control" placeholder="Rechercher une sortie">
+        </div>
+		<div class="form-group">
+		<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
+		</div>
+    </form>
+
+<table class="table table-condensed table-sm">
     <thead class="thead-light">
       <tr>
         <th>Date</th>
@@ -167,7 +177,8 @@
     </thead>
 
 	
-    <tbody ng-repeat="group in sorties | orderBy : 'date'  | groupBy : 'date'">
+    <tbody ng-repeat="group in (filteredsorties = (sorties | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)  | orderBy : 'date'  | groupBy : 'date' ">
+
 	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr>
 	
       <tr ng-repeat="x in group">
@@ -182,6 +193,9 @@
       </tr>
 	  </tbody>
 	  </table>
+
+	  
+
 					
 </div>
 	  

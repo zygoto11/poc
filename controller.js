@@ -76,18 +76,6 @@ app.filter('pgtimestamp', function () {
     }});
 
 
-app.directive('datatableSetup', ['$timeout',
-    function($timeout) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs) {
-                $timeout(function () {
-                   // do something
-                });
-            }
-        }
-    }
-]);
 
 
 app.run(function($rootScope, $http, $location, $localStorage) {
@@ -118,8 +106,16 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
     .then(function(response) {
-        $scope.sorties = response.data;
+    $scope.sorties = response.data;
+	$scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
+    $scope.maxSize = 5;
+    $scope.totalItems = $scope.sorties.length;
+    
     });
+	
+
+	
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
@@ -242,7 +238,32 @@ $scope.showusers = true;
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
         $scope.users = response.data;
+		
+			angular.element(document).ready(function() {  
+			dTable = $('#users');  
+				dTable.DataTable({
+			"language": {
+            "lengthMenu": "Afficher _MENU_ ",
+            "zeroRecords": "Pas de résultat",
+            "info": "Page _PAGE_ sur _PAGES_",
+            "infoEmpty": "",
+            "infoFiltered": "",
+			"search":"",
+			"searchPlaceholder": "Rechercher",
+			"paginate": {
+				"previous":"Précédent",
+				"next":"Suivant"
+			}
+        }
+	
+	});  
+			}); 
+		
     });
+	
+	
+ 
+
 
 	if ($routeParams.userid) {
 		
@@ -253,7 +274,7 @@ $scope.showusers = true;
 			.then(function(response) {
 			$scope.user = response.data;
 			
-			
+		
 	});
 		
 		
