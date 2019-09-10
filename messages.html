@@ -1,13 +1,33 @@
 <div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!messages" >Mes messages <i class="fa fa-list"></i></a>
+    <a class="btn btn-sm btn-primary" href="#!newmessage" >Nouveau message <i class="fa fa-plus-circle"></i></a>
+  </form>	  
+	</ul>
+	    <ul class="navbar-nav ml-auto">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="" ng-click="showforum = true;showmessages = false" ><i class="fa fa-comment-dots"></i> Forums</a>
+  </form>	  
+	</ul>
+</nav>
+
 <br>
+
+
+
+<div ng-if="showforum">
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md">
-			<a type="button" href="#!newmessage" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewmessage===false">
-				Créer un nouveau message <i class="fa fa-plus-circle"></i>
+		<div class="alert alert-info">Pas prioritaire, cette fonction sera faite en fin de projet</div>
+			<a type="button" href="#!newtopic" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewtopic===true">
+				Créer un nouveau topic <i class="fa fa-plus-circle"></i>
 			</a>
-			<a type="button" href="#!messages" class="btn btn-secondary d-block d-sm-inline" ng-if="showmessages===false">
-				Afficher la liste des messages <i class="fa fa-list"></i>
+			<a type="button" href="#!forums" class="btn btn-secondary d-block d-sm-inline" ng-if="showforums===false">
+				Afficher la liste des forums <i class="fa fa-list"></i>
 			</a>
 		</div>
 	</div>
@@ -16,6 +36,32 @@
 
 			   
 	   
+	   
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-md">
+
+<a href="#!forums/1">annonces</a><br>
+<a href="#!forums/2">blabla</a><br>
+<a href="#!forums/3">bugs</a><br>
+
+{{topics}}
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+
+</div>
+
 	   
 <div class="container-fluid">
 <div class="row">
