@@ -29,12 +29,28 @@
 	</div>
 	<div class="col-md-9" ng-if="user">
 		<h2>{{user[0].username}}</h2>
-		<div ng-if="user[0].avatar"><img width="120px" height="120px" class="img-fluid img-thumbnail" src="{{user[0].avatar}}"></img></div><br>
-		<a type="button" class="btn btn-outline-success" ng-click=""> <i class="fa fa-heart fa-lg text-success"></i> Ajouter en ami</a>
-		<a type="button" class="btn btn-outline-success" ng-click=""> <i class="fa fa-heart fa-lg text-success"></i> Ajouter en ami</a>
-		<a type="button" class="btn btn-outline-success" ng-click=""> <i class="fa fa-heart fa-lg text-success"></i> Ajouter en ami</a>
-		<a type="button" class="btn btn-outline-gray" ng-click=""> <i class="fa far-heart fa-lg"></i> Neutre</a>
+		<img width="120px" height="120px" class="img-fluid img-thumbnail" src="{{user[0].avatar}}"></img><br>
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'1'}).length !== 1" ng-click="addfriend(user[0].id,'1')">
+		<i class="fa fa-heart fa-lg text-success"></i>	Ajouter dans la liste n°1</a>
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'1'}).length == 1" ng-click="removefriend(user[0].id,'1')">
+		<i class="fa fa-heart fa-lg text-success"></i> Retirer de la liste n°1</a>
+		
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'2'}).length !== 1" ng-click="addfriend(user[0].id,'2')">
+		<i class="fa fa-heart fa-lg text-success"></i> Ajouter dans la liste n°2</a>
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'2'}).length == 1" ng-click="removefriend(user[0].id,'2')">
+		<i class="fa fa-heart fa-lg text-success"></i> Retirer de la liste n°2</a>
+		
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'3'}).length !== 1" ng-click="addfriend(user[0].id,'3')">
+		<i class="fa fa-heart fa-lg text-success"></i> Ajouter dans la liste n°3</a>
+		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'3'}).length == 1" ng-click="removefriend(user[0].id,'3')">
+		<i class="fa fa-heart fa-lg text-success"></i> Retirer de la liste n°3</a>
+		
 		<a type="button" class="btn btn-outline-danger" ng-click=""> <i class="fa fa-heart-broken fa-lg text-danger"></i> Bloquer</a>
+		
+
+		
+		<div class="alert alert-danger" ng-if="msg_error">{{msg_error}}</div>
+		<div class="alert alert-success" ng-if="msg_ok">{{msg_ok}}</div>
 	</div>
   </div>
 </div>

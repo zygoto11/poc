@@ -231,7 +231,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 });
 
 
-app.controller("membersCtrl", function ($scope,$http, $routeParams,$localStorage) {
+app.controller("membersCtrl", function ($scope,$http, $routeParams,$location,$route,$localStorage) {
 	
 $scope.showusers = true;
 
@@ -264,6 +264,7 @@ $scope.showusers = true;
 	
 	
  
+	
 
 
 	if ($routeParams.userid) {
@@ -273,15 +274,51 @@ $scope.showusers = true;
 		
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&id="+$scope.userid)
 			.then(function(response) {
-			$scope.user = response.data;
+			$scope.user = response.data;		
+		});
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getfriend.php?from="+$localStorage.currentUser.id+"&to="+$scope.userid)
+			.then(function(response) {
 			
+			
+			if (response.data.code !== 200) {
+						
+			$scope.rels = "";
+						
+			}
+			
+			else {
+				
+			$scope.rels = response.data;
+
+			}
+			
+			
+		});
 		
-	});
 		
 		
-		
-		}
-	
+		$scope.addfriend = function(friendid,listid){
+			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/addfriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
+            .then(function (response) {	
+
+					if (response.data.code !== 200) {
+						
+						$scope.msg_error = response.data.message;
+						
+					}
+					else {
+						
+						$scope.msg_ok = "Cette personne est maintenant dans votre liste d'ami";
+						$route.reload();
+					}
+
+			
+						
+			}); 			
+		}		
+		}	
 });
 
 

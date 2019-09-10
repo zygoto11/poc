@@ -3,8 +3,6 @@
     <ul class="navbar-nav">
   <form class="form-inline">
     <a class="btn btn-sm btn-primary" href="#!newsortie">Créer une sortie <i class="fa fa-plus-circle"></i></a>
-    <!--a class="btn btn-sm btn-primary" href="#!newsortie" type="button">Smaller button</a-->
-
   </form>	  
 	</ul>
 </nav>
@@ -83,10 +81,7 @@
 
 </div-->	
 				
-<div class="col-sm-3">
-
-
-
+<div class="col-sm-3" ng-if="!sortie && !shownewsortie">
 
 <form class="form">
         <div class="form-group">
@@ -309,7 +304,10 @@ Description : <span>{{descsortie[0].description}}</span><br>
   
 
 
-		<div class="col-md" ng-if="shownewsortie">	
+	
+		<div class="container-fluid" ng-if="shownewsortie">	
+		<div class="row">
+		<div class="col">
 			<form name="createsort">
 				<div class="form-group">
 					<input type="text" ng-model="newsortie.name" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
@@ -367,10 +365,26 @@ Description : <span>{{descsortie[0].description}}</span><br>
 				<br><br>
 				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc,newsortie.date,newsortie.time,newsortie.icon,newsortie.scope)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
 			</form>	
-			<hr>
-			<div class="alert alert-info">debug :{{newsortie}}</div>
-		</div>
 
+			
+		</div>
+		
+		<div class="col">
+
+
+<div class="card border-success bg-light mb-3">
+  <div class="card-header"><h4>Aperçu de votre sortie</h4></div>
+  <div class="card-body text-dark">
+    <p class="card-text">
+<h2 class="text-center">{{newsortie.name}}</h2>
+	</p>
+  </div>
+</div>
+		
+		</div>
+		
+</div>
+</div>
 
 </div>
 </div>

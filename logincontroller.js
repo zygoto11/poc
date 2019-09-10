@@ -11,26 +11,6 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
             AuthenticationService.Logout();
         };
 		
-
-		
-		
-			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/readonly.php?action=listsorties")
-				.then(function(response) {
-				$scope.sorties = response.data;
-			});
-			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/readonly.php?action=listusers")
-				.then(function(response) {
-				$scope.users = response.data;
-			});
-			$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/readonly.php?action=listinscriptions")
-				.then(function(response) {
-				$scope.inscriptions = response.data;
-			});
-			
-			
-			
-			
-
         function login() {
             AuthenticationService.Login(vm.username, vm.password, function (result) {
                 if (result === true) {
@@ -42,7 +22,7 @@ app.controller("Login.IndexController", function ($http,$scope,$location, Authen
             });
         };
 		
-		$scope.send_magic =function(username){
+		$scope.send_magic = function(username){
 			
 			if (username) {
 			

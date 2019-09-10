@@ -46,38 +46,6 @@
 <img class="img-fluid img-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/1_carcassonne_aerial_2016.jpg/800px-1_carcassonne_aerial_2016.jpg" width="800px" height="600px"> <br>
 <small><a href="https://commons.wikimedia.org/wiki/File:1_carcassonne_aerial_2016.jpg">© lien copyright</a></small>
 </div>
-<div class="col-sm-4">
-<h4>Prochaines sorties</h4>
-  <table class="table table-condensed table-sm table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th>Date</th>
-        <th>Sortie</th>
-        <th>Inscrits</th>
-		<th>Organisateur</th>
-      </tr>
-    </thead>
-
-	
-    <tbody ng-repeat="group in sorties | limitTo : 5 | orderBy : 'date'  | groupBy : 'date'">
-	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM'}}<td></tr>	
-      <tr ng-repeat="x in group">
-        <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
-        <td><a href="#!sorties/{{x.id}}" ng-click="" class="text-secondary"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
-        <td>		
-		<span ng-repeat="inscription in inscriptions | filter:{ sortieid: x.id } as nbinscrits"></span>
-		<span class="badge badge-secondary">{{nbinscrits.length}}</span>		
-		</td>
-		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
-			   <i ng-if="user.gender==='male'" class="fa fa-user text-navy-light"></i>
-			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
-	</span></td>
-      </tr>
-	  </tbody>
-	  </table>
-
-</div>
-<hr>
 
 </div></div></div>
 
