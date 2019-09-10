@@ -1,6 +1,10 @@
 var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages',"ngSanitize",'ngTagsInput']);
 app.config(function($routeProvider) {
     $routeProvider
+	.when("/", {
+        templateUrl : "sorties.html",
+		controller : "sortiesCtrl"
+    })
     .when("/sorties", {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
