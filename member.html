@@ -70,7 +70,7 @@
 		</table>
 		<br>
 		<a type="button" class="btn btn-outline-danger" ng-click="msg_error = 'fonction bloquer non dispo pour le moment'"> <i class="fa fa-heart-broken fa-lg text-danger"></i> Bloquer</a>
-		<a type="button" class="btn btn-outline-success" ng-click=""> <i class="fa fa-check-circle fa-lg text-success"></i> Valider ce membre</a>
+		<a type="button" class="btn btn-outline-success" ng-click="validatemember(user[0].id)"> <i class="fa fa-check-circle fa-lg text-success"></i> Valider ce membre</a>
 		
 				<div class="alert alert-danger" ng-if="msg_error">{{msg_error}}</div>
 		<div class="alert alert-success" ng-if="msg_ok">{{msg_ok}}</div>

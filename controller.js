@@ -329,6 +329,19 @@ $scope.showusers = true;
 			}); 			
 		}	
 		
+		$scope.validatemember = function(to){			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/validatemember.php',{ from: $localStorage.currentUser.id , to:to })
+            .then(function (response) {
+					if (response.data.code !== 200) {
+						$scope.msg_error = response.data.message;
+					}
+					else {
+						$scope.msg_ok = "Cette personne est maintenant validée";
+						$route.reload();
+					}
+			});
+		}
+		
 		
 		}	
 });
