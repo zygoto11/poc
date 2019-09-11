@@ -23,11 +23,15 @@
                     </legend>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
                         <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio1" value="public" name="radioScope" required>
-                        <label class="form-check-label" for="inlineRadio1"> Tout le monde </label>
+                        <label class="form-check-label" for="inlineRadio1"> Tous les membres </label>
+                    </div>
+					<div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="restricted" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio2"> Tous les membres validés <i class="fa fa-unlock text-orange"></i> </label>
                     </div>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="private" name="radioScope" required>
-                        <label class="form-check-label" for="inlineRadio2"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio3" value="private" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio3"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
                     </div>
                 </fieldset>
 				<hr>
