@@ -71,7 +71,7 @@ app.config(function($routeProvider) {
 		controller : "membersCtrl"
     })
     .when("/members/:userid", {
-        templateUrl : "members.html",
+        templateUrl : "member.html",
 		controller : "membersCtrl"
     })
 	;
