@@ -1,30 +1,55 @@
 <div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+	<a class="btn btn-sm btn-primary" href="#!members">Liste des membres <i class="fa fa-list"></i></a>
+  </form>	  
+	</ul>
+</nav>
+<br>
 
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-3">
-<br>
 
-	<table id="users" class="table table-sm table-striped dt-responsive" style="width:100%">
+
+
+<form class="form">
+        <div class="form-group">
+            <input type="text" ng-model="search" class="form-control" placeholder="Rechercher un membre">
+        </div>
+		<div class="form-group">
+		<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
+		</div>
+    </form>
+
+
+
+	<table id="users" class="table table-sm table-condensed">
         <thead>
-            <tr>
+            <tr class="table-secondary">
       <th scope="col">Pseudo</th>
-      <!--th scope="col">Sexe</th-->
-	  <!--th scope="col">Certified</th-->
+      <th scope="col">Sexe</th>
+	  <th scope="col">Profil validé</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in users | orderBy : 'username'">
+            <tr ng-repeat="x in (users |  filter: search | orderBy : 'username' ).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
     <td>
 	<a href="#!members/{{x.id}}">{{ x.username }}</a>
 	</td>
-  <!-- <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
+   <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
 	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
-	<td ng-if="!x.gender"><i class="fa fa-user"></i></td>
-	<!--td><i ng-if="x.certified ==='t'" class="fa fa-star text-green"></i></td-->
+	<td ng-if="x.gender ==='neutre'"><i class="fa fa-user"></i></td>
+	<td>
+	<i ng-if="x.validated ==='t'" class="fa fa-star text-green"></i>
+	<i ng-if="x.validated ==='f'" class="far fa-times-circle text-danger"></i>
+	</td>
             </tr>
 			</tbody>
 	</table>
+{{users.length}} membres
+
 
 	</div>
 	<div class="col-md-9" ng-if="user">

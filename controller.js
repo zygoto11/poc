@@ -251,26 +251,10 @@ $scope.showusers = true;
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
         $scope.users = response.data;
-		
-			angular.element(document).ready(function() {  
-			dTable = $('#users');  
-				dTable.DataTable({
-			"language": {
-            "lengthMenu": "Afficher _MENU_ ",
-            "zeroRecords": "Pas de résultat",
-            "info": "Page _PAGE_ sur _PAGES_",
-            "infoEmpty": "",
-            "infoFiltered": "",
-			"search":"",
-			"searchPlaceholder": "Rechercher",
-			"paginate": {
-				"previous":"Précédent",
-				"next":"Suivant"
-			}
-        }
-	
-	});  
-			}); 
+	$scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
+    $scope.maxSize = 10;
+    $scope.totalItems = $scope.users.length;		
 		
     });
 	
