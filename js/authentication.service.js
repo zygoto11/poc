@@ -8,7 +8,7 @@ app.factory("AuthenticationService", function ($http, $localStorage) {
         return service;
 
         function Login(username, password, callback) {
-            $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { username: username, password: password,action:"login" })
+            $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/login.php', { username: username, password: password})
                 .then(function (response) {
                     // login successful if there's a token in the response
                     if (response.data.token) {
@@ -27,7 +27,7 @@ app.factory("AuthenticationService", function ($http, $localStorage) {
                     }
                 });
         }
-
+		
         function Logout() {
             // remove user from local storage and clear http auth header
             delete $localStorage.currentUser;
