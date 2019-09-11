@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages',"ngSanitize",'ngTagsInput']);
+var app = angular.module("myApp", ["ngRoute",'angular.filter','ui.bootstrap','ngStorage','ngMessages',"ngSanitize",'ngTagsInput','textAngular']);
 app.config(function($routeProvider) {
     $routeProvider
 	.when("/", {
@@ -9,8 +9,12 @@ app.config(function($routeProvider) {
         templateUrl : "sorties.html",
 		controller : "sortiesCtrl"
     })
+	.when("/eventsarchives", {
+        templateUrl : "events_archive.html",
+		controller : "eventsCtrl"
+    })
 	.when("/newsortie", {
-        templateUrl : "sorties.html",
+        templateUrl : "newevent.html",
 		controller : "sortiesCtrl"
     })
 	.when("/login", {
@@ -114,12 +118,16 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 	$scope.currentPage = 1;
     $scope.itemsPerPage = 5;
     $scope.maxSize = 5;
-    $scope.totalItems = $scope.sorties.length;
-    
+    //$scope.totalItems = $scope.nextsorties.length;
+	
+	$scope.nextsorties = $scope.sorties.filter(function (sortie) {		
+    return ( moment(sortie.timestamp).valueOf() > Date.now());	
+	}); 
+	
+	$scope.totalItems = $scope.nextsorties.length;
+	
     });
-	
 
-	
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {

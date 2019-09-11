@@ -1,0 +1,95 @@
+<div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+	<a class="btn btn-sm btn-primary" href="#!sorties">Sorties à venir <i class="fa fa-list"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!eventsarchives">Toutes les sorties <i class="fa fa-list"></i></a>
+    <a class="btn btn-sm btn-primary" href="#!newsortie">Créer une sortie <i class="fa fa-plus-circle"></i></a>
+  </form>	  
+	</ul>
+</nav>
+<br>
+<div class="container-fluid">
+	<div class="row">
+			<div class="col">
+			<form name="createsort">
+				<div class="form-group">
+					<input type="text" ng-model="newsortie.name" class="form-control" id="formGroupExampleInput" placeholder="Nom de la sortie" required>
+				</div> 
+				<hr>
+				<fieldset>
+                    <legend>
+                        Visibilité
+                    </legend>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio1" value="public" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio1"> Tout le monde </label>
+                    </div>
+                    <div class="form-check abc-radio abc-radio-info form-check-inline">
+                        <input ng-model="newsortie.scope" class="form-check-input" type="radio" id="inlineRadio2" value="private" name="radioScope" required>
+                        <label class="form-check-label" for="inlineRadio2"> Mes amis <i class="fa fa-lock text-danger"></i> </label>
+                    </div>
+                </fieldset>
+				<hr>
+				
+
+				
+				<div class="btn-group btn-group-toggle">
+<label class="btn btn-secondary active" uib-btn-radio="'walking'" ng-model="newsortie.icon"><i class="fa fa-walking"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'beer'" ng-model="newsortie.icon"><i class="fa fa-beer"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'utensils'" ng-model="newsortie.icon"><i class="fa fa-utensils"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'film'" ng-model="newsortie.icon"><i class="fa fa-film"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'chess'" ng-model="newsortie.icon"><i class="fa fa-chess"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'theater-masks'" ng-model="newsortie.icon"><i class="fa fa-theater-masks"></i></label>
+<label class="btn btn-secondary active" uib-btn-radio="'music'" ng-model="newsortie.icon"><i class="fa fa-music"></i></label>
+</div>
+<div class="alert alert-info" ng-if="newsortie.icon">
+<span ng-if="newsortie.icon ==='beer'">Apéro</span>
+<span ng-if="newsortie.icon ==='utensils'">Restaurant</span>
+<span ng-if="newsortie.icon ==='walking'">Sport</span>
+<span ng-if="newsortie.icon ==='film'">Cinéma</span>
+<span ng-if="newsortie.icon ==='chess'">Jeux</span>
+<span ng-if="newsortie.icon ==='theater-masks'">Theatre</span>
+<span ng-if="newsortie.icon ==='music'">Concert</span>
+</div>
+				
+				<hr>
+				<div class="form-group">
+					<input ng-model="newsortie.date" type="date" class="form-control" id="formGroupExampleInput" placeholder="Date" required>
+				</div>
+				<div class="form-group">
+					<input ng-model="newsortie.time" type="time" class="form-control" id="formGroupExampleInput" placeholder="Time" required>
+					 					 
+				</div>
+				<hr>
+				 <textarea ng-model="newsortie.desc" class="form-control" placeholder="Description de la sortie" required></textarea>
+				 
+				 <text-angular ng-model="newsortie.html"></text-angular>
+
+				<hr>
+				
+				<input type="text" placeholder="Emplacement de la sortie" ng-model="newsortie.location" uib-typeahead="poi as poi.name for poi in poilist | filter:{name:$viewValue}"  class="form-control" typeahead-show-hint="true" typeahead-min-length="1">
+				<br><br>
+				<button type="button" ng-disabled="createsort.$invalid" ng-click="createsortie(newsortie.name,newsortie.desc,newsortie.date,newsortie.time,newsortie.icon,newsortie.scope)" class="btn btn-secondary">Créér <i class="fa fa-plus-square"></i></button>	
+			</form>	
+
+			
+		</div>
+				<div class="col">
+
+
+<div class="card border-success bg-light mb-3">
+  <div class="card-header"><h4>Aperçu de votre sortie</h4></div>
+  <div class="card-body text-dark">
+    <p class="card-text">
+<h2 class="text-center">{{newsortie.name}}</h2>
+
+<p ng-bind-html="newsortie.html"></p>
+
+	</p>
+  </div>
+</div>
+		
+		</div>
+		</div>
+</div>
