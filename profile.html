@@ -18,19 +18,19 @@
 <!-- listes d'amis -->
 <div ng-if="showfriends">
 
-<div class="alert alert-info" ng-if="friends === ''">Vous n'avez pas d'amis dans vos listes, vous pouvez en ajouter depuis la section membres</div>
+<div class="alert alert-info" ng-if="relations.friends === ''">Vous n'avez pas d'amis dans vos listes, vous pouvez en ajouter depuis la section membres</div>
 
 <div class="card-deck"> 
 <div class="card border-success bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Liste d'amis n°1</div>
   <div class="card-body text-dark">
     <p class="card-text">
-	<span ng-repeat="friend in (friends['result']|filter:{listid:'1'})">{{(users|filter:{id:friend.to}: true)[0].username}}	
+	<span ng-repeat="friend in (relations['friends']|filter:{listid:'1'})">{{(users|filter:{id:friend.to}: true)[0].username}}	
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
 	<br>
 		
-	<div class="alert alert-info" ng-if="(friends['result']|filter:{listid:'1'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
+	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'1'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
 		
 	</span>
 	</p>
@@ -41,12 +41,12 @@
   <div class="card-body text-dark">
     <p class="card-text">
 	
-	<span ng-repeat="friend in (friends['result']|filter:{listid:'2'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
+	<span ng-repeat="friend in (relations['friends']|filter:{listid:'2'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
 	<br></span>
 	
-	<div class="alert alert-info" ng-if="(friends['result']|filter:{listid:'2'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
+	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'2'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
 	
 	</p>
   </div>
@@ -59,12 +59,12 @@
   <div class="card-body text-dark">
     <p class="card-text">
 	
-	<span ng-repeat="friend in (friends['result']|filter:{listid:'3'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
+	<span ng-repeat="friend in (relations['friends']|filter:{listid:'3'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
 	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
 	<br></span>
 	
-	<div class="alert alert-info" ng-if="(friends['result']|filter:{listid:'3'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
+	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'3'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
 	
 	</p>
   </div>
@@ -72,7 +72,16 @@
 <div class="card border-danger bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Liste d'indésirables</div>
   <div class="card-body text-dark">
-    <p class="card-text">pas encore fait</p>
+    <p class="card-text">
+	
+	<span ng-repeat="ban in relations['bans']">{{(users|filter:{id:ban.to}:true)[0].username}}	
+	<i ng-if="(users|filter:{id:ban.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
+	<i ng-if="(users|filter:{id:ban.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
+	<br></span>
+	
+	<div class="alert alert-info" ng-if="(relations['bans']).length == 0">Liste vide</div>
+	
+	</p>
   </div>
 </div>
 </div>

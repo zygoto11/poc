@@ -10,7 +10,6 @@
 
 <div class="container-fluid">
 <div class="row">
-
 	<div class="col">
 		<h2>{{user[0].username}}</h2>
 		
@@ -31,37 +30,37 @@
 		<td>Liste d'ami N°1
 		</td>
 		<td>
-		<span ng-if="(rels['result']|filter:{listid:'1'}).length == 1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
-		<span ng-if="(rels['result']|filter:{listid:'1'}).length !== 1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
+		<span ng-if="userrel.friends.indexOf('1') > -1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
+		<span ng-if="userrel.friends.indexOf('1') == -1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
 		</td>
 		<td>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'1'}).length !== 1" ng-click="addfriend(user[0].id,'1')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('1') == -1" ng-click="addfriend(user[0].id,'1')">
 		Ajouter dans la liste d'amis n°1</a>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'1'}).length == 1" ng-click="removefriend(user[0].id,'1')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('1') > -1" ng-click="removefriend(user[0].id,'1')">
 		Retirer de la liste d'amis n°1</a>
 		</td>
 		</tr>
 		<tr><td>Liste d'ami N°2</td>
 		<td>
-		<span ng-if="(rels['result']|filter:{listid:'2'}).length == 1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
-		<span ng-if="(rels['result']|filter:{listid:'2'}).length !== 1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
+		<span ng-if="userrel.friends.indexOf('2') > -1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
+		<span ng-if="userrel.friends.indexOf('2') == -1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
 		</td>
 		<td>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'2'}).length !== 1" ng-click="addfriend(user[0].id,'2')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('2') == -1" ng-click="addfriend(user[0].id,'2')">
 		Ajouter dans la liste d'amis n°2</a>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'2'}).length == 1" ng-click="removefriend(user[0].id,'2')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('2') > -1" ng-click="removefriend(user[0].id,'2')">
 		Retirer de la liste d'amis n°2</a>
 		</td>
 		</tr>
 		<tr><td>Liste d'ami N°3</td>
 		<td>
-		<span ng-if="(rels['result']|filter:{listid:'3'}).length == 1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
-		<span ng-if="(rels['result']|filter:{listid:'3'}).length !== 1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
+		<span ng-if="userrel.friends.indexOf('3') > -1"><i class="fa fa-check-circle fa-lg text-success"></i></span>
+		<span ng-if="userrel.friends.indexOf('3') == -1"> <i class="fa fa-times-circle fa-lg text-danger"></i></span>
 		</td>
 		<td>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'3'}).length !== 1" ng-click="addfriend(user[0].id,'3')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('3') == -1" ng-click="addfriend(user[0].id,'3')">
 		Ajouter dans la liste d'amis n°3</a>
-		<a type="button" class="btn btn-outline-success" ng-if="(rels['result']|filter:{listid:'3'}).length == 1" ng-click="removefriend(user[0].id,'3')">
+		<a type="button" class="btn btn-outline-success" ng-if="userrel.friends.indexOf('3') > -1" ng-click="removefriend(user[0].id,'3')">
 		Retirer de la liste d'amis n°3</a>
 		</td>
 		</tr>
@@ -69,7 +68,8 @@
 		
 		</table>
 		<br>
-		<a type="button" class="btn btn-outline-danger" ng-click="msg_error = 'fonction bloquer non dispo pour le moment'"> <i class="fa fa-heart-broken fa-lg text-danger"></i> Bloquer</a>
+		<a type="button" class="btn btn-outline-danger" ng-if="userrel.bans == true" ng-click="unblockmember(user[0].id)"> <i class="fa fa-heart-broken fa-lg text-danger"></i> Débloquer</a>
+		<a type="button" class="btn btn-outline-danger" ng-if="userrel.bans == false" ng-click="blockmember(user[0].id)"> <i class="fa fa-heart-broken fa-lg text-danger"></i> Bloquer</a>
 		<a type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-check-circle fa-lg text-success"></i> Valider ce membre</a>
 		
 				<div class="alert alert-danger" ng-if="msg_error">{{msg_error}}</div>

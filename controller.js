@@ -267,7 +267,12 @@ $scope.showusers = true;
 		
 		$scope.showusers = false;
 		$scope.userid = $routeParams.userid;
-		
+
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmember.php?to="+$scope.userid)
+			.then(function(response) {
+			$scope.userrel = response.data.result;		
+		});
+
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&id="+$scope.userid)
 			.then(function(response) {
 			$scope.user = response.data;		
@@ -308,6 +313,7 @@ $scope.showusers = true;
 		}
 		
 		
+		
 		$scope.removefriend = function(friendid,listid){
 			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/removefriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
@@ -327,7 +333,34 @@ $scope.showusers = true;
 			
 						
 			}); 			
-		}	
+		}
+		
+		$scope.blockmember = function(member){			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/blockmember.php',{ to:member })
+            .then(function (response) {
+					if (response.data.code !== 200) {
+						$scope.msg_error = response.data.message;
+					}
+					else {
+						$scope.msg_ok = "Cette personne est maintenant bloquée";
+						$route.reload();
+					}
+			});
+		}
+		
+		$scope.unblockmember = function(member){			
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/unblockmember.php',{ to:member })
+            .then(function (response) {
+					if (response.data.code !== 200) {
+						$scope.msg_error = response.data.message;
+					}
+					else {
+						$scope.msg_ok = "Cette personne est maintenant débloquée";
+						$route.reload();
+					}
+			});
+		}
+		
 		
 		$scope.validatemember = function(to){			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/validatemember.php',{ from: $localStorage.currentUser.id , to:to })
@@ -422,6 +455,13 @@ $http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&
 			
 			
 		});
+		
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmembers.php")
+			.then(function(response) {
+			$scope.relations = response.data.result;		
+		});
+		
+		
 
 
 
