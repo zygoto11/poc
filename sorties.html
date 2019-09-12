@@ -164,8 +164,8 @@ On reconnait bien carca lol
 
 <div class="col-sm-6" ng-if="sortie">
 <h2 class="text-center">{{descsortie[0].name}}</h2>
-Date: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}</span><br>
-Heure: <span class="badge badge-info">{{descsortie[0].timestamp | pgtimestamp | date:'HH:mm'}}</span><br>
+Date: <span class="badge badge-info">{{descsortie[0].timestamp | moment: 'format': 'dddd D MMMM YYYY'}}</span><br>
+Heure: <span class="badge badge-info">{{descsortie[0].timestamp | moment: 'format': 'HH:mm'}}</span><br>
 Organisateur 
 <span class="badge badge-info" ng-repeat="user in users | filter:{'id': descsortie[0].leader}:true">{{user.username}} 
 <img class="img-responsive" height="120px" class="img-fluid img-thumbnail" src="{{user.avatar}}" onMouseOver="this.class=''"></img>
@@ -188,7 +188,7 @@ Description : <span>{{descsortie[0].description}}</span><br>
         	    <div class="col-md-2" ng-repeat="user in users | filter:{'username': comment.username}:true">
         	        <img  src="{{user.avatar}}" height="50px" class="img img-responsive"/>
 										
-        	        <small class="text-secondary">{{comment.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}</small>
+        	        <small class="text-secondary">{{comment.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}</small>
 					<p><a class="float-left" href="#!members/{{comment.username}}"><strong>{{comment.username}}</strong></a></p>
         	    </div>
         	    <div class="col-md-10">
