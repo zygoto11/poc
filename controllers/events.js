@@ -5,7 +5,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 	$scope.userid = $localStorage.currentUser.id;
 	$scope.username = $localStorage.currentUser.username;
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/events/getevents.php")
     .then(function(response) {
     $scope.sorties = response.data;
 	$scope.currentPage = 1;
