@@ -68,7 +68,11 @@
       <tr ng-repeat="x in group">
         <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
         <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
-        <td><i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i><i class="fa fa-unlock text-orange" ng-if="x.scope==='restricted'"></i> 2/12</td>
+        <td>
+		<i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
+		<i class="fa fa-unlock text-orange" ng-if="x.scope==='restricted'"></i>
+		<span class="badge badge-secondary">{{x.nbinscrits}}</span>
+		</td>
 		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
 			   <img height="40px" class="img img-rounded img-responsive" src="{{user.avatar}}" onMouseOver="this.class=''"></img>
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>

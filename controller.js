@@ -112,7 +112,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
 	$scope.userid = $localStorage.currentUser.id;
 	$scope.username = $localStorage.currentUser.username;
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listsorties")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/events/getevents.php")
     .then(function(response) {
     $scope.sorties = response.data;
 	$scope.currentPage = 1;
