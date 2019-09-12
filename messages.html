@@ -112,7 +112,7 @@
 				<i class="fa fa-user text-pink" ng-if="user.gender==='female'"></i>
 				</span></td>
                 <td><a href="#!messages/{{msg.id}}">{{msg.title}}</a></td>
-				<td><small>{{msg.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (HH:mm)'}}<small></td>
+				<td><small>{{msg.timestamp | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}<small></td>
             </tr>
 			</tbody>
 			</table>
@@ -129,7 +129,7 @@
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 			   </span>
                 {{desc.content}}<br>
-				{{desc.timestamp  | pgtimestamp | date:'EEEE dd MMMM yyyy (hh:mm)'}}
+				{{desc.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}
 				<!--span ng-if="desc.from==userid" class="float-right"><small>Modifier votre message <i class="fa fa-edit"></i><small></span-->
             </div>
 			

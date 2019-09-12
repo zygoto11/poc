@@ -80,10 +80,10 @@
     </thead>	
     <tbody ng-repeat="group in (filteredsorties = (sorties | orderBy : 'timestamp' | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
 
-	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr>
+	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | moment: 'format': 'dddd D MMMM YYYY'}}<td></tr>
 	
       <tr ng-repeat="x in group">
-        <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | pgtimestamp | date:'HH:mm'}}</span></td>
+        <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | moment: 'format': 'HH:mm'}}</span></td>
         <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
         <td>
 		<i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>

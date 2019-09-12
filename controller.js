@@ -78,12 +78,22 @@ app.config(function($routeProvider) {
 });
 
 
+moment.locale('fr');
+
 app.filter('pgtimestamp', function () {
     return function (input) {
       return new Date(input);
     }});
 
 
+
+app.filter('moment', function () {
+  return function (input, momentFn /*, param1, param2, ...param n */) {
+    var args = Array.prototype.slice.call(arguments, 2),
+        momentObj = moment(input);
+    return momentObj[momentFn].apply(momentObj, args);
+  };
+});
 
 
 app.run(function($rootScope, $http, $location, $localStorage) {
@@ -121,7 +131,7 @@ app.controller("sortiesCtrl", function ($scope,$http, $location,$routeParams,$ro
     //$scope.totalItems = $scope.nextsorties.length;
 	
 	$scope.nextsorties = $scope.sorties.filter(function (sortie) {		
-    return ( moment(sortie.timestamp).valueOf() > Date.now());	
+		return ( moment(sortie.timestamp).valueOf() > Date.now());	
 	}); 
 	
 	$scope.totalItems = $scope.nextsorties.length;
