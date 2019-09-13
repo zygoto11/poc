@@ -1,0 +1,36 @@
+<div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!profile">Mon profil <i class="fa fa-user"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!privacy">Confidentialité <i class="fa fa-eye-slash"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!notifications">Notifications <i class="fa fa-envelope-open-text"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!log">Mon historique <i class="fa fa-clipboard-list"></i></a>
+  </form>
+	  
+	</ul>
+</nav>
+<br>
+<div class="container-fluid">
+<div class="row">
+<div class="col">
+<h3>Notifications</h3>
+					<div class="form-check abc-checkbox  abc-checkbox-primary">
+                        <input class="form-check-input" ng-model="notifications.register" type="checkbox" id="register" value="option1">
+                        <label class="form-check-label" for="register"> Me prévenir quand un utilisateur s'inscrit à une sortie que j'organise. </label>
+                    </div>
+					<div class="form-check abc-checkbox  abc-checkbox-primary">
+                        <input class="form-check-input" ng-model="notifications.unregister" type="checkbox" id="unregister" value="option1">
+                        <label class="form-check-label" for="unregister"> Me prévenir quand un utilisateur se désinscrit à une sortie que j'organise. </label>
+                    </div>
+					<div class="form-check abc-checkbox  abc-checkbox-primary">
+                        <input class="form-check-input" ng-model="notifications.comment" type="checkbox" id="comment" value="option1">
+                        <label class="form-check-label" for="comment"> Me prévenir quand un utilisateur commente une sortie que j'organise. </label>
+                    </div><br>
+					
+{{notifications}}
+	<a class="btn btn-danger btn-sm" ng-click="msg = 'fonction pas encore dispo'">Enregistrer les modifications <i class="fa fa-save"></i></a>
+<div class="alert alert-danger" ng-if="msg">{{msg}}</div>
+</div>
+</div>
+</div>

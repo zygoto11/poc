@@ -42,6 +42,18 @@ app.config(function($routeProvider) {
         templateUrl : "profile.html",
 		controller : "profileCtrl"
     })
+	.when("/log", {
+        templateUrl : "log.html",
+		controller : "logCtrl"
+    })
+	.when("/privacy", {
+        templateUrl : "privacy.html",
+		controller : "privacyCtrl"
+    })
+	.when("/notifications", {
+        templateUrl : "notifications.html",
+		controller : "notificationsCtrl"
+    })
 	.when("/newmessage", {
         templateUrl : "messages.html",
 		controller : "messagesCtrl"
@@ -74,19 +86,15 @@ app.config(function($routeProvider) {
         templateUrl : "member.html",
 		controller : "membersCtrl"
     })
+	.when("/friends", {
+        templateUrl : "friends.html",
+		controller : "friendsCtrl"
+    })
 	;
 });
 
 
 moment.locale('fr');
-
-app.filter('pgtimestamp', function () {
-    return function (input) {
-      return new Date(input);
-    }});
-
-
-
 app.filter('moment', function () {
   return function (input, momentFn /*, param1, param2, ...param n */) {
     var args = Array.prototype.slice.call(arguments, 2),
@@ -518,18 +526,6 @@ $scope.RotateImage = function (id,deg) {
 }
 	
 
-
-$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listlogs&userid="+$scope.userid)
-    .then(function(response) {
-        $scope.logs = response.data;
-			
-		angular.element(document).ready(function() {  
-			dTable = $('#tablelogs');  
-			dTable.DataTable();  
-		});  
-
-
-});
 
 });
 

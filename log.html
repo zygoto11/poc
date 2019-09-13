@@ -1,0 +1,38 @@
+<div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!profile">Mon profil <i class="fa fa-user"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!privacy">Confidentialité <i class="fa fa-eye-slash"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!notifications">Notifications <i class="fa fa-envelope-open-text"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!log">Mon historique <i class="fa fa-clipboard-list"></i></a>
+  </form>
+	  
+	</ul>
+</nav>
+<br>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col">
+ 	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
+
+	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
+        <thead>
+            <tr>
+                <th>Action</th>
+				<th>Description</th>
+				<th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="log in logs">
+                <td>{{log.action}}</td>
+				<td>{{log.description}}</td>
+				<td>{{log.timestamp | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}</td>
+            </tr>
+			</tbody>
+			</table>
+</div>
+</div>
+</div>

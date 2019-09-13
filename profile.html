@@ -2,9 +2,10 @@
 <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
     <ul class="navbar-nav">
   <form class="form-inline">
-    <a class="btn btn-sm btn-primary" href="" ng-click="showsettings = true; showfriends = false; showlog = false">Mon profil <i class="fa fa-user"></i></a>
-    <a class="btn btn-sm btn-primary" href="" ng-click="showfriends = true; showsettings = false; showlog = false">Mes amis <i class="fa fa-users"></i></a>
-	<a class="btn btn-sm btn-primary" href="" ng-click="showfriends = false; showsettings = false; showlog = true">Mon historique <i class="fa fa-clipboard-list"></i></a>
+    <a class="btn btn-sm btn-primary" href="#!profile">Mon profil <i class="fa fa-user"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!privacy">Confidentialité <i class="fa fa-eye-slash"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!notifications">Notifications <i class="fa fa-envelope-open-text"></i></a>
+	<a class="btn btn-sm btn-primary" href="#!log">Mon historique <i class="fa fa-clipboard-list"></i></a>
   </form>
 	  
 	</ul>
@@ -13,84 +14,7 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col">
-
-<!-- listes d'amis -->
-<div ng-if="showfriends">
-
-<div class="alert alert-info" ng-if="relations.friends === ''">Vous n'avez pas d'amis dans vos listes, vous pouvez en ajouter depuis la section membres</div>
-
-<div class="card-deck"> 
-<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header">Liste d'amis n°1</div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-	<span ng-repeat="friend in (relations['friends']|filter:{listid:'1'})">{{(users|filter:{id:friend.to}: true)[0].username}}	
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
-	<br>
-		
-	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'1'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
-		
-	</span>
-	</p>
-  </div>
-</div>
-<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header">Liste d'amis n°2</div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-	
-	<span ng-repeat="friend in (relations['friends']|filter:{listid:'2'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
-	<br></span>
-	
-	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'2'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
-	
-	</p>
-  </div>
-</div>
-</div>
-
-<div class="card-deck">
-<div class="card border-success bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header">Liste d'amis n°3</div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-	
-	<span ng-repeat="friend in (relations['friends']|filter:{listid:'3'})">{{(users|filter:{id:friend.to}:true)[0].username}}	
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
-	<i ng-if="(users|filter:{id:friend.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
-	<br></span>
-	
-	<div class="alert alert-info" ng-if="(relations['friends']|filter:{listid:'3'}).length == 0">Vous n'avez pas d'amis dans cette liste, vous pouvez en ajouter depuis la section membres</div>
-	
-	</p>
-  </div>
-</div>
-<div class="card border-danger bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header">Liste d'indésirables</div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-	
-	<span ng-repeat="ban in relations['bans']">{{(users|filter:{id:ban.to}:true)[0].username}}	
-	<i ng-if="(users|filter:{id:ban.to}:true)[0].gender === 'male'" class="fa fa-user text-primary"></i>
-	<i ng-if="(users|filter:{id:ban.to}:true)[0].gender === 'female'" class="fa fa-user text-pink"></i>
-	<br></span>
-	
-	<div class="alert alert-info" ng-if="(relations['bans']).length == 0">Liste vide</div>
-	
-	</p>
-  </div>
-</div>
-</div>
-</div>
-
-<div ng-if="showsettings">
-	
-	<div class="row">
-<div class="col-md-3">
+<div class="col-md-2">
 <h5>Ton avatar</h5>
 <label class="btn btn-default">
     <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" width="120px" height="120px" id="img{{$index}}" alt="">
@@ -99,7 +23,7 @@
 <a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a-->
 </label> 
 </div>
-<div class="col-md-9">
+<div class="col-md-10">
 	<h5>Sexe</h5>
 <div class="form-check abc-radio abc-radio-info form-check-inline">
                         <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio1" value="neutre" name="radioScope" required>
@@ -121,92 +45,13 @@
     <button class="btn btn-secondary" type="button" id="button-addon2">Effacer <i class="fa fa-times"></i></button>
   </div>
 </div>
+<br>
+	<a class="btn btn-danger btn-sm" ng-click="msg = 'fonction pas encore dispo'">Enregistrer les modifications <i class="fa fa-save"></i></a>
+<div class="alert alert-danger" ng-if="msg">{{msg}}</div>
+</div>
 
+</div>
 
 </div>
 
 
-</div>
-
-
-<div class="card border-dark bg-light mb-3">
-  <div class="card-header">
-  <a class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne">
-          Options <i class="fa fa-gear"></i>
-        </a>
-
-  </div>
-  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-  <div class="card-body text-dark">
-    <p class="card-text">
-	
-<input type="text" placeholder="Prénom" class="form-control" disabled><br>
-<input type="text" placeholder="Email" class="form-control" disabled><br>
-<input type="text" placeholder="Password" class="form-control" disabled><br>
-<input type="text" placeholder="Password confirm" class="form-control" disabled><br>
-<input type="text" placeholder="Date de naissance" class="form-control" disabled><br>
-<input type="text" placeholder="location" class="form-control" disabled><br>
-	
-	<h3>Visibilité</h3>
-
-<div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                        <label class="form-check-label" for="inlineCheckbox1"> Afficher mon profil </label>
-                    </div>
-                    <div class="form-check abc-checkbox abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1" checked>
-                        <label class="form-check-label" for="inlineCheckbox2"> Afficher ma date de naissance </label>
-                    </div>
-
-<h3>Notifications</h3>
-					<div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1">
-                        <label class="form-check-label" for="inlineCheckbox3"> Par sms </label>
-                    </div>
-                    <div class="form-check abc-checkbox abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1" checked>
-                        <label class="form-check-label" for="inlineCheckbox4"> Par mail </label>
- </div>
-	
-	</p>
-	</div>
-	</div>
-	
-
-	
-	
-	</div>
-
-
-
-</div>
-
-<div class="col-sm-6" ng-if="showlog">
-
- 	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
-
-	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
-        <thead>
-            <tr>
-                <th>Action</th>
-				<th>Description</th>
-				<th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="log in logs">
-                <td>{{log.action}}</td>
-				<td>{{log.description}}</td>
-				<td>{{log.timestamp | pgtimestamp | date:'dd-MM-yyyy (hh:mm)'}}</td>
-            </tr>
-			</tbody>
-			</table>
-
-	
-					
-</div></div></div>	
-  
-
-
-
-				
