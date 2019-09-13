@@ -484,7 +484,7 @@ $scope.fileReaderSupported = window.FileReader != null;
     };
 
 	$scope.saveavatar = function(avatar,rd){
-		
+		rd = 1;
 		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , avatar:avatar,avatarrd:rd,action:"saveavatar" })
             .then(function (response) {					
 
