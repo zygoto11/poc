@@ -19,35 +19,50 @@
 <label class="btn btn-default">
     <img class="img-fluid img-thumbnail" src="{{ thumbnail.dataUrl }}" width="120px" height="120px" id="img{{$index}}" alt="">
 	<input type="file" hidden id="file" name="file" onchange="angular.element(this).scope().updateavatar(this.files)">
-<!--a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> Pivoter l'image</span></a>	
-<a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Enregistrer</a-->
+<!--a href="" type="button" class="btn btn-secondary"><span class="fa fa-sync" data-ng-init="rd=1;" data-ng-click="RotateImage('img'+ $index,rd);rd=rd+1;rd==4?rd=0:''"> Pivoter l'image</span></a-->	
+<br>Clique sur ton avatar pour le modifier<br>
+<a type="button" class="btn btn-outline-primary" ng-click="saveavatar(thumbnail.dataUrl,rd)"> <i class="fa fa-save"></i> Modifier</a>
 </label> 
 </div>
 <div class="col-md-10">
 	<h5>Sexe</h5>
 <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio1" value="neutre" name="radioScope" required>
+                        <input ng-model="profile.gender" class="form-check-input" type="radio" id="inlineRadio1" value="neutre" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio1"> <i class="fa fa-user"></i> Ne pas indiquer</label>
 </div>
                     <div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio2" value="man" name="radioScope" required>
+                        <input ng-model="profile.gender" class="form-check-input" type="radio" id="inlineRadio2" value="man" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio2">  <i class="fa fa-user text-primary"></i> Homme  </label>
                     </div>
 					<div class="form-check abc-radio abc-radio-info form-check-inline">
-                        <input ng-model="profil.gender" class="form-check-input" type="radio" id="inlineRadio3" value="woman" name="radioScope" required>
+                        <input ng-model="profile.gender" class="form-check-input" type="radio" id="inlineRadio3" value="woman" name="radioScope" required>
                         <label class="form-check-label" for="inlineRadio3"> <i class="fa fa-user text-pink"></i> Femme </label>
                     </div>
 
 <h5>Ville</h5>
 <div class="input-group mb-3">
-  <input type="text" class="typeahead form-control" ng-model="profil.city" placeholder="Ville" data-provide="typeahead">
+  <input type="text" ng-model="profile.city" uib-typeahead="city as city.name for city in cities | filter:$viewValue | limitTo:8" class="form-control">
   <div class="input-group-append">
     <button class="btn btn-secondary" type="button" id="button-addon2">Effacer <i class="fa fa-times"></i></button>
   </div>
 </div>
+
+<h5>Date de naissance</h5>
+        <div class="input-group mb-3">
+          <input type="date" class="form-control" ng-model="profile.birthday"/>
+         <div class="input-group-append">
+            <button type="button" class="btn btn-secondary">
+              <i class="far fa-calendar-alt"></i>
+            </button>
+          </div>
+        </div>
+
+
 <br>
 	<a class="btn btn-danger btn-sm" ng-click="msg = 'fonction pas encore dispo'">Enregistrer les modifications <i class="fa fa-save"></i></a>
 <div class="alert alert-danger" ng-if="msg">{{msg}}</div>
+{{profile}}
+
 </div>
 
 </div>
