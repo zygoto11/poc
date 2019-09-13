@@ -30,9 +30,8 @@
                     </div>
 					<br>
 					
-{{privacy}}
-	<a class="btn btn-danger btn-sm" ng-click="msg = 'fonction pas encore dispo'">Enregistrer les modifications <i class="fa fa-save"></i></a>
-<div class="alert alert-danger" ng-if="msg">{{msg}}</div>
+	<a class="btn btn-danger btn-sm" ng-click="msg='';updateprivacy(privacy.city,privacy.birthday,privacy.online)">Enregistrer les modifications <i class="fa fa-save"></i></a>
+	<div class="alert alert-success"ng-if="msg">{{msg}}</div>
 
 </div>
 </div>

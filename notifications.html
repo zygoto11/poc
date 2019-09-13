@@ -14,6 +14,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col">
+
 <h3>Notifications</h3>
 					<div class="form-check abc-checkbox  abc-checkbox-primary">
                         <input class="form-check-input" ng-model="notifications.register" type="checkbox" id="register" value="option1">
@@ -28,9 +29,8 @@
                         <label class="form-check-label" for="comment"> Me prévenir quand un utilisateur commente une sortie que j'organise. </label>
                     </div><br>
 					
-{{notifications}}
-	<a class="btn btn-danger btn-sm" ng-click="msg = 'fonction pas encore dispo'">Enregistrer les modifications <i class="fa fa-save"></i></a>
-<div class="alert alert-danger" ng-if="msg">{{msg}}</div>
+	<a class="btn btn-danger btn-sm" ng-click="msg='';updatenotifications(notifications.register,notifications.unregister,notifications.comment)">Enregistrer les modifications <i class="fa fa-save"></i></a>
+	<div class="alert alert-success"ng-if="msg">{{msg}}</div>
 </div>
 </div>
 </div>
