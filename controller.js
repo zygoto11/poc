@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
     })
 	.when("/newsortie", {
         templateUrl : "newevent.html",
-		controller : "sortiesCtrl"
+		controller : "eventsCtrl"
     })
 	.when("/login", {
         templateUrl : "login.html",
