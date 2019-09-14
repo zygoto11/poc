@@ -63,7 +63,6 @@
 	
     <tbody ng-repeat="group in (filteredsorties = (nextsorties | orderBy : 'timestamp' | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
 
-	<!--tr class="table-primary"><td colspan=3>{{group[0].timestamp | pgtimestamp | date:'EEEE dd MMMM yyyy'}}<td></tr-->
 	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | moment: 'format': 'dddd D MMMM YYYY'}}<td></tr>
 	
       <tr ng-repeat="x in group">
@@ -163,6 +162,9 @@ On reconnait bien carca lol
 
 
 <div class="col-sm-6" ng-if="sortie">
+
+{{reg}}
+
 <h2 class="text-center">{{descsortie[0].name}}</h2>
 Date: <span class="badge badge-info">{{descsortie[0].timestamp | moment: 'format': 'dddd D MMMM YYYY'}}</span><br>
 Heure: <span class="badge badge-info">{{descsortie[0].timestamp | moment: 'format': 'HH:mm'}}</span><br>
