@@ -92,21 +92,18 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 		
 		$scope.register = function(sortie){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/registerevent.php?',{eventid:sortie})
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/registerevent.php',{eventid:sortie})
             .then(function (response) {	
 				$scope.reg = response.data;
-				$route.reload();	
+				$route.reload();
 				});
-			
 		}
 		
-		$scope.unregister = function(sortie){
-			
-			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=unregistersortie&sortieid='+sortie+'&userid='+$scope.userid)
+		$scope.unregister = function(sortie){			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/unregisterevent.php',{eventid:sortie})
             .then(function (response) {					
 					$route.reload();	
 				});
-			
 		}
 		
 		$scope.addcomment = function(sortie,comment){
