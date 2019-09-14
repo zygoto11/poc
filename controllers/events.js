@@ -29,42 +29,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 	
 	
 	
-	if($location.path()=="/newsortie"){
-		$scope.shownewsortie = true;
-		$scope.showsorties = false;
-		$scope.showdeletesortie = true;
-		
-		//default values for form
-		$scope.newsortie = {};
-		$scope.newsortie.scope = "public";
-
-  
-   $scope.poilist = [{'name':'Celt','location':'rue d\'armagnac'},
-   {'name':'Divine Comédie','location':'rue de la zaza'},
-   {'name':'la cavayere','location':'route du lac'},
-   {'name':'paicherou','location':'à côté du tennis'}
-];
-  
-		$scope.createsortie = function(name,desc,date,time,icon,scope){
-			
-			//"2018-08-07T22:00:00.000Z"
-			
-			var sortiedate = moment(date).format("YYYY-MM-DD");
-			var sortietime = moment(time).format("HH:mm");
-			var timestamp = sortiedate + ' ' + sortietime;
-			
-			   $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/create_event.php', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope, leader: $scope.userid })
-             .then(function (response) {
-					
-					 $location.path('/sorties');
-			
-				 });  
-			
-		}
-  
-  
-		
-	}
+	
 	
 	
 	if ($routeParams.sortie) {
@@ -90,8 +55,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 		});
 		
 		
-		$scope.register = function(sortie){
-			
+		$scope.register = function(sortie){			
 			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/registerevent.php',{eventid:sortie})
             .then(function (response) {	
 				$scope.reg = response.data;
@@ -106,13 +70,11 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 				});
 		}
 		
-		$scope.addcomment = function(sortie,comment){
-			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , sortieid:sortie,comment:comment,action:"addcomment" })
+		$scope.addcomment = function(sortie,comment){			
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/addcomment.php',{ eventid:sortie,comment:comment })
             .then(function (response) {					
 					$route.reload();	
-				});
-			
+				});			
 		}
 		
 		
@@ -147,27 +109,19 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
 	$scope.currentPage = 1;
     $scope.itemsPerPage = 5;
     $scope.maxSize = 5;
-    $scope.totalItems = $scope.sorties.length;
-	
-    });
-
-	
+    $scope.totalItems = $scope.sorties.length;	
+    });	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
     .then(function(response) {
         $scope.users = response.data;
     });
-	
-	
-	
-	if($location.path()=="/newsortie"){
-		$scope.shownewsortie = true;
-		$scope.showsorties = false;
-		$scope.showdeletesortie = true;
-		
-		//default values for form
-		$scope.newsortie = {};
-		$scope.newsortie.scope = "public";
+});
 
+app.controller("neweventCtrl", function ($scope,$http, $location,$routeParams,$route,$localStorage) {
+	
+	//default values for form
+	$scope.newsortie = {};
+	$scope.newsortie.scope = "public";
   
    $scope.poilist = [{'name':'Celt','location':'rue d\'armagnac'},
    {'name':'Divine Comédie','location':'rue de la zaza'},
@@ -175,28 +129,13 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
    {'name':'paicherou','location':'à côté du tennis'}
 ];
   
-		$scope.createsortie = function(name,desc,date,time,icon,scope){
-			
-			//"2018-08-07T22:00:00.000Z"
-			
-			var sortiedate = moment(date).format("YYYY-MM-DD");
-			var sortietime = moment(time).format("HH:mm");
-			var timestamp = moment(sortiedate + ' ' + sortietime);
-			
-			  $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope, leader: $scope.userid,action:"createsortie" })
-             .then(function (response) {
-					
-					 $location.path('/sorties');
-			
-				 }); 
-			
-		}
-  
-  
-		
+	$scope.createsortie = function(name,desc,date,time,icon,scope){
+		var sortiedate = moment(date).format("YYYY-MM-DD");
+		var sortietime = moment(time).format("HH:mm");
+		var timestamp = sortiedate + ' ' + sortietime;
+		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/create_event.php', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope, leader: $scope.userid })
+		.then(function (response) {
+			$location.path('/sorties');
+		});
 	}
-	
-	
-		
-
 });
