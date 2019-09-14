@@ -3,7 +3,7 @@ app.config(function($routeProvider) {
     $routeProvider
 	.when("/", {
         templateUrl : "sorties.html",
-		controller : "sortiesCtrl"
+		controller : "eventsCtrl"
     })
     .when("/sorties", {
         templateUrl : "sorties.html",
@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
     })
 	.when("/newsortie", {
         templateUrl : "newevent.html",
-		controller : "eventsCtrl"
+		controller : "neweventCtrl"
     })
 	.when("/login", {
         templateUrl : "login.html",
