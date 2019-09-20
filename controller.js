@@ -124,257 +124,6 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 
 
 
-
-
-app.controller("membersCtrl", function ($scope,$http, $routeParams,$location,$route,$localStorage) {
-	
-$scope.showusers = true;
-
-
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
-    .then(function(response) {
-        $scope.users = response.data;
-	$scope.currentPage = 1;
-    $scope.itemsPerPage = 5;
-    $scope.maxSize = 10;
-    $scope.totalItems = $scope.users.length;		
-		
-    });
-	
-	
- 
-	
-
-
-	if ($routeParams.userid) {
-		
-		$scope.showusers = false;
-		$scope.userid = $routeParams.userid;
-
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmember.php?to="+$scope.userid)
-			.then(function(response) {
-			$scope.userrel = response.data.result;		
-		});
-
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&id="+$scope.userid)
-			.then(function(response) {
-			$scope.user = response.data;		
-		});
-		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getfriend.php?from="+$localStorage.currentUser.id+"&to="+$scope.userid)
-			.then(function(response) {
-			
-			
-			if (response.data.code !== 200) {
-						
-			$scope.rels = "";
-						
-			}
-			
-			else {
-				
-			$scope.rels = response.data;
-
-			}
-			
-			
-		});
-		
-		
-		
-		$scope.addfriend = function(friendid,listid){			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/addfriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
-            .then(function (response) {
-					if (response.data.code !== 200) {
-						$scope.msg_error = response.data.message;
-					}
-					else {
-						$scope.msg_ok = "Cette personne est maintenant dans votre liste d'ami";
-						$route.reload();
-					}
-			});
-		}
-		
-		
-		
-		$scope.removefriend = function(friendid,listid){
-			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/removefriend.php',{ from: $localStorage.currentUser.id , to:friendid,listid:listid })
-            .then(function (response) {	
-
-					if (response.data.code !== 200) {
-						
-						$scope.msg_error = response.data.message;
-						
-					}
-					else {
-						
-						$scope.msg_ok = "Cette personne n'est plus dans votre liste d'ami";
-						$route.reload();
-					}
-
-			
-						
-			}); 			
-		}
-		
-		$scope.blockmember = function(member){			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/blockmember.php',{ to:member })
-            .then(function (response) {
-					if (response.data.code !== 200) {
-						$scope.msg_error = response.data.message;
-					}
-					else {
-						$scope.msg_ok = "Cette personne est maintenant bloquée";
-						$route.reload();
-					}
-			});
-		}
-		
-		$scope.unblockmember = function(member){			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/unblockmember.php',{ to:member })
-            .then(function (response) {
-					if (response.data.code !== 200) {
-						$scope.msg_error = response.data.message;
-					}
-					else {
-						$scope.msg_ok = "Cette personne est maintenant débloquée";
-						$route.reload();
-					}
-			});
-		}
-		
-		
-		$scope.validatemember = function(to){			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/members/validatemember.php',{ from: $localStorage.currentUser.id , to:to })
-            .then(function (response) {
-					if (response.data.code !== 200) {
-						$scope.msg_error = response.data.message;
-					}
-					else {
-						$scope.msg_ok = "Cette personne est maintenant validée";
-						$route.reload();
-					}
-			});
-		}
-		
-		
-		}	
-});
-
-
-
-
-
-
-app.controller("profileCtrl", function ($scope,$http, $routeParams,$localStorage,$timeout) {	
-
-$http.get("https://zygoto11.github.io/poc/data/cities.json")
-    .then(function(response) {
-        $scope.cities = response.data;
-});
-
-
-$scope.showsettings = true;
-
-$scope.username = $localStorage.currentUser.username;
-$scope.userid = $localStorage.currentUser.id;
-$scope.noavatar = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAAAAACupDjxAAAFGUlEQVR4XuzTsQqAMAxFUf//A9u36OAggoM42KxSaQno4GY73CwhaaGHBx1i5wUQIECAADssgAABAgQIECBAgAABAgQIMET5oM/bvwND7Xo9rrpyvZokWLue9rySj60+iUo4uonjvO6nmSVLx7ZM+azo1AroAV3Fmsty6kgQROf//28qC8TDPI2NH1wMBgSqnBhHBYtZjKVWV3MWwAbikKlqotUM5ruaPxid5rAZAa75kIr1Xt7sT0PHcdXjeiiAAip4gKDPwepEuyfH/7y6vQ1d7zEVK+YX/j/NVuGOBQXVH0Z7/k69cjtoGUFRhbfbsA3Nn4ECUJ/oaEGBQlUA/fRZ+J3zBIBooYpVfvSGJ2N7Fj7zUmxIqkvL9HzG11J2isfXlno0f96Iz0l8xQCGF2tIM3ZgqW4Yn6AMTp5NF2wGKTUkO6ZwqyDBFbvfmsbuGI9SZorHxiSMW6gUEDyQqYojFEhwlehnJL8KVKxXY2qExnl8xc+eB5P4jk+wdrlEZnGC4ldgD4z2BQDQuAQP7IdVsRVXPfXIjfcRJLhmT+wEABoiqIAc2ZsqsmJt2Jt1pOATe2O7QEHZsD/fkQm+sz+mgQv1FzNQBSZ4ZgamQYIKlZoZmEUJCtAwA8vAipmDVZCgKGCPEOzClf2xRZSgAHWmKZYQQRU9MQPjwIp3zMAwbJlReWV/rghMcGXsix0kSlCBMfuzDUwwyxjPEgRLTokNAIVECS74gzGZPUIT1Cutn+E8TFBFgb8/mI7ReEPsvlgnqfF55u/R92awd8M0RasUUIQNiQJT9uETiLwGBRB8kekBDhFesY7T/fgKQDT6IOc1VY8XdwsW1O97KLRWbo5NVTReUDFqXK0dZv70En/S5CxpCWd1R2iRihXAq8t1qfg0KHlevDNatwwvQ1+hywjKjrQuE1yPCp64i9+J6xDhqUI5QWdDWlvD4wDlBXVatzV8hZQVdIb7Vnr1TESluKAKROdn/oZtARRP0A2BpyN/YT/T+/9GywqKDp5P/B2rX4eeYVnB6u3Wcp1p+DGBAlpU8N267JW4G6nECyqgEAiwvrEjtlX1pjVEUAV3pt9M4LpUHxYJStAVB7vUfd1xfB+w/ILi15BOL5a8b2+WgPpnZa/Yd3Yvxj58qgAadgwhwwN7cp7ACUhQx7VvlZJbJm9zQCW/oACY3tjvxgdJslllPoYQjxALYx5e4IhmEPR2VdYeRH/s/b5cawZBj3DDXBj5qV5MrgRFl2ROw63/6kkGQRVAZw0tU8NmNHIjAsmX4LTJGyBpa0iuKVYZN/5bldGwmeVbB/VMx5iP2yiLoADYGbNjtJP2Wmb83RCsSWMEH/ftlCYmKAB0YhYkyKV4FmkViyiAwZkMitCakeulVSyAKD6MNGMM315UUoKigGJKhiVI4wYqiQm64ilIz3w1rAQCqCYJKvDMKLyTP4BCkCYIVA2jeUJyxaKyN0ZzThcEnozxPAPQFEEBDozHrgAkLcGZsQQvqRXLgSWwm6YJyrSIHsm1iqYI7lnIsE5LsCKNZVikCMqWxThod0HRC8sxTkhwwYK8JST4xYLU3ae4MpZk1llww3KGRu46C34bjeW4dhUcsTDzjoJrFuazm6B8sTDXToKiV5Zm1CnBKYvz3EnwhcXZCxTSVvBgLE2tAkBbCt5YnkqhbSue8AGs0F5wwQew7TAkbzQW59BeUA58ANcOglc+gkFrQTU+gklrwQkfwqq14JwJBI3xPwpOpY0EIp9cAAAAAElFTkSuQmCC';
-
-$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describeuser&id="+$scope.userid)
-			.then(function(response) {
-			$scope.user = response.data;
-			
-
-			$scope.thumbnail = {	
-				dataUrl:$scope.user[0].avatar,
-				rd:$scope.user[0].avatarrd
-			};
-			
-});
-
-
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
-    .then(function(response) {
-        $scope.users = response.data;
-		
-    });
-
-
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getfriends.php?userid="+$localStorage.currentUser.id)
-			.then(function(response) {
-			
-			
-			if (response.data.code !== 200) {
-						
-			$scope.friends = "";
-						
-			}
-			
-			else {
-				
-			$scope.friends = response.data;
-
-			}
-			
-			
-		});
-		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmembers.php")
-			.then(function(response) {
-			$scope.relations = response.data.result;		
-		});
-		
-		
-
-
-
-$scope.fileReaderSupported = window.FileReader != null;
-
- $scope.updateavatar = function(files){
-        if (files != null) {
-            var file = files[0];
-        if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
-            $timeout(function() {
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function(){
-						$scope.thumbnail.dataUrl = e.target.result;
-                    });
-                }
-            });
-        }
-    }
-    };
-
-	$scope.saveavatar = function(avatar,rd){
-		rd = 1;
-		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ userid: $scope.userid , avatar:avatar,avatarrd:rd,action:"saveavatar" })
-            .then(function (response) {					
-
-				});
-		
-	}
-
-	
-	
-$scope.RotateImage = function (id,deg) {
-    var deg = 90 * deg;
-    $('#' + id).css({
-        '-webkit-transform': 'rotate(' + deg + 'deg)',  //Safari 3.1+, Chrome  
-        '-moz-transform': 'rotate(' + deg + 'deg)',     //Firefox 3.5-15  
-        '-ms-transform': 'rotate(' + deg + 'deg)',      //IE9+  
-        '-o-transform': 'rotate(' + deg + 'deg)',       //Opera 10.5-12.00  
-        'transform': 'rotate(' + deg + 'deg)'          //Firefox 16+, Opera 12.50+  
-
-    });
-}
-	
-
-
-});
-
 app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
 	
 	$scope.userid = $localStorage.currentUser.id;
@@ -382,12 +131,12 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 	$scope.showmessages = true;
 	$scope.shownewmessage = false;
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
         $scope.users = response.data;		
     });
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listmessages&userid="+$scope.userid)
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessages.php")
     .then(function(response) {
         $scope.messages = response.data;
 			
@@ -407,7 +156,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		$scope.showmessages = false;
 		$scope.userid = $localStorage.currentUser.id;
 		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describemessage&id="+$scope.message)
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessage.php?id="+$scope.message)
 		.then(function(response) {
         $scope.descmessage = response.data;		
 		});
@@ -415,7 +164,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		
 		$scope.replymessage = function(msgcontent){
 			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , msgid:$scope.message,msgcontent:msgcontent,action:"replymessage" })
+			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/replymessage.php',{ msgid:$scope.message,msgcontent:msgcontent})
             .then(function (response) {					
 				$route.reload();		
 				});
@@ -434,7 +183,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 		$scope.createmessage = function(dest,msgname,msgcontent){
 
 			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/',{ from: $scope.userid , to:dest,msgname:msgname,msgcontent:msgcontent,action:"createmessage" })
+			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/createmessage.php',{  to:dest,msgname:msgname,msgcontent:msgcontent })
             .then(function (response) {					
 					$location.path('/messages');	
 				}); 
@@ -463,7 +212,7 @@ app.controller("forumsCtrl", function ($scope,$route,$http, $routeParams,$localS
 		$scope.showforums = false;
 		$scope.userid = $localStorage.currentUser.id;
 		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listtopics&forumid="+$scope.forumid)
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/forums/gettopics.php?forumid="+$scope.forumid)
 		.then(function(response) {
         $scope.topics = response.data;		
 		});		
