@@ -22,7 +22,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
     });
 
 	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
         $scope.users = response.data;
     });
@@ -39,17 +39,17 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 		$scope.showdeletesortie = false;
 		
 		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=describesortie&id="+$scope.sortie)
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/events/getevent.php?id="+$scope.sortie)
 			.then(function(response) {
 			$scope.descsortie = response.data;
 		});
 		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listinscriptions&sortieid="+$scope.sortie)
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/events/getregistrations.php?sortieid="+$scope.sortie)
 			.then(function(response) {
 			$scope.inscriptions = response.data;
 		});
 		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listcomments&sortieid="+$scope.sortie)
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/events/getcomments.php?sortieid="+$scope.sortie)
 			.then(function(response) {
 			$scope.comments = response.data;
 		});
@@ -80,7 +80,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 		
 		$scope.deletesortie = function(sortie){
 			
-			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/?action=deletesortie&id='+sortie)
+			$http.get('https://zygotopoc.westeurope.cloudapp.azure.com/events/deleteevent.php?id='+sortie)
             .then(function (response) {					
 					$location.path('/sorties');
 					$route.reload();				
@@ -111,7 +111,7 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
     $scope.maxSize = 5;
     $scope.totalItems = $scope.sorties.length;	
     });	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/?action=listusers")
+	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
         $scope.users = response.data;
     });
