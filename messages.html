@@ -8,88 +8,20 @@
 	</ul>
 	    <ul class="navbar-nav ml-auto">
   <form class="form-inline">
-    <a class="btn btn-sm btn-primary" href="" ng-click="showforum = true;showmessages = false" ><i class="fa fa-comment-dots"></i> Forums</a>
+    <a class="btn btn-sm btn-primary" href="#!forums" ><i class="fa fa-comment-dots"></i> Forums</a>
   </form>	  
 	</ul>
 </nav>
 
 <br>
 
-
-
-<div ng-if="showforum">
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md">
-		<div class="alert alert-info">Pas prioritaire, cette fonction sera faite en fin de projet</div>
-			<a type="button" href="#!newtopic" class="btn btn-secondary d-block d-sm-inline" ng-if="shownewtopic===true">
-				Créer un nouveau topic <i class="fa fa-plus-circle"></i>
-			</a>
-			<a type="button" href="#!forums" class="btn btn-secondary d-block d-sm-inline" ng-if="showforums===false">
-				Afficher la liste des forums <i class="fa fa-list"></i>
-			</a>
-		</div>
-	</div>
-</div>	   
-	   <br>
-
-			   
-	   
 	   
 <div class="container-fluid">
 <div class="row">
 
 <div class="col-md">
 
-<a href="#!forums/1">annonces</a><br>
-<a href="#!forums/2">blabla</a><br>
-<a href="#!forums/3">bugs</a><br>
-
-{{topics}}
-
-
-</div>
-
-
-
-
-
-</div>
-</div>
-
-
-
-</div>
-
-	   
-<div class="container-fluid">
-<div class="row">
-<div class="col-md" ng-if="shownewmessage">	
-
-
-
-
-<div class="form-group">
-<tags-input class="bootstrap" ng-model="newmessage.dest" display-property="username" placeholder="Ajouter un destinataire" add-from-autocomplete-only="true">
-      <auto-complete source="users"></auto-complete>
-    </tags-input>
-<input type="text" 
-	   ng-model="newmessage.name" 
-	   placeholder="Sujet" 
-	   class="form-control" >	   
-	   
-  <textarea ng-model="newmessage.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest[0].id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
-</div><br><br> 
-	 
-<div class="alert alert-info">{{newmessage}}</div>
-	 
-</div>
-
-<div class="col-md" ng-if="showmessages">
-
-	<table id="tablemessages" class="table table-striped dt-responsive" style="width:100%">
+	<table id="tablemessages" class="table table-condensed table-sm" style="width:100%">
         <thead>
             <tr>
                 <th>Contact</th>
@@ -98,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="msg in messages">
+            <tr ng-repeat="msg in messages.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
                 <td ng-if="msg.userfrom !==userid">
 				<span ng-repeat="user in users | filter:{'id': msg.userfrom}:true">
 				{{user.username}} 
@@ -117,28 +49,12 @@
 			</tbody>
 			</table>
 
+<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
 
 
 </div>
 
-<div class="col-md" ng-if="message">
-            <div class="alert alert-info" ng-repeat="desc in descmessage">
-				
-               <span class="badge badge-teal" ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}} 
-			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
-			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
-			   </span>
-                {{desc.content}}<br>
-				{{desc.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}
-				<!--span ng-if="desc.from==userid" class="float-right"><small>Modifier votre message <i class="fa fa-edit"></i><small></span-->
-            </div>
-			
-<div class="form-group">
-  <textarea ng-model="replymsg.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2" ng-click="replymessage(replymsg.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
-</div>
 
-</div>
 
 
 

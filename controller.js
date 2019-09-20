@@ -55,16 +55,16 @@ app.config(function($routeProvider) {
 		controller : "notificationsCtrl"
     })
 	.when("/newmessage", {
-        templateUrl : "messages.html",
-		controller : "messagesCtrl"
+        templateUrl : "newmessage.html",
+		controller : "newmessageCtrl"
     })
 	.when("/messages", {
         templateUrl : "messages.html",
 		controller : "messagesCtrl"
     })
 	.when("/messages/:message", {
-        templateUrl : "messages.html",
-		controller : "messagesCtrl"
+        templateUrl : "message.html",
+		controller : "messageCtrl"
     })
 	.when("/forums", {
         templateUrl : "forums.html",
@@ -124,79 +124,7 @@ app.run(function($rootScope, $http, $location, $localStorage) {
 
 
 
-app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
-	
-	$scope.userid = $localStorage.currentUser.id;
-	$scope.username = $localStorage.currentUser.username;
-	$scope.showmessages = true;
-	$scope.shownewmessage = false;
-	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
-    .then(function(response) {
-        $scope.users = response.data;		
-    });
-	
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessages.php")
-    .then(function(response) {
-        $scope.messages = response.data;
-			
-			angular.element(document).ready(function() {  
-			dTable = $('#tablemessages');  
-			dTable.DataTable();  
-});  
-			
-    });
-	
-	
-	
-	
-		if ($routeParams.message) {
-		
-		$scope.message = $routeParams.message;
-		$scope.showmessages = false;
-		$scope.userid = $localStorage.currentUser.id;
-		
-		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessage.php?id="+$scope.message)
-		.then(function(response) {
-        $scope.descmessage = response.data;		
-		});
-		
-		
-		$scope.replymessage = function(msgcontent){
-			
-			$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/replymessage.php',{ msgid:$scope.message,msgcontent:msgcontent})
-            .then(function (response) {					
-				$route.reload();		
-				});
-			
-		}
-		
-		
-	
-		}
-	
-	
-	if($location.path()=="/newmessage"){
-		$scope.shownewmessage = true;
-		$scope.showmessages = false;
-		$scope.userid = $localStorage.currentUser.id;
-		$scope.createmessage = function(dest,msgname,msgcontent){
 
-			
-			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/createmessage.php',{  to:dest,msgname:msgname,msgcontent:msgcontent })
-            .then(function (response) {					
-					$location.path('/messages');	
-				}); 
-			
-	}
-	
-
-	
-	
-	}
-	
-	
-});
 
 
 app.controller("forumsCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
