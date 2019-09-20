@@ -21,22 +21,22 @@
 <div class="col-md">	
 
 
-
-
 <div class="form-group">
-<tags-input class="bootstrap" ng-model="newmessage.dest" display-property="username" placeholder="Ajouter un destinataire" add-from-autocomplete-only="true">
-      <auto-complete source="users"></auto-complete>
-    </tags-input>
+	<input type="text" ng-model="newmessage.dest" required uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:8" class="form-control" placeholder="Destinataire">
+	
 <input type="text" 
 	   ng-model="newmessage.name" 
 	   placeholder="Sujet" 
 	   class="form-control" >	   
 	   
+<!--text-angular ng-model="newmessage.msg" placeholder="Message..." rows="5"></text-angular-->
   <textarea ng-model="newmessage.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2" ng-click="createmessage(newmessage.dest[0].id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
+  <button class="float-right btn btn-outline-primary ml-2" ng-disabled="!newmessage.dest.id" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</button>
+  
+  
 </div><br><br> 
 	 
-<div class="alert alert-info">{{newmessage}}</div>
+
 	 
 </div>
 

@@ -27,7 +27,7 @@
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 			   </span>
-                {{desc.content}}<br>
+               <p ng-bind-html="desc.content"></p><br>
 				{{desc.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}
 				<!--span ng-if="desc.from==userid" class="float-right"><small>Modifier votre message <i class="fa fa-edit"></i><small></span-->
             </div>

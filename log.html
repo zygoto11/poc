@@ -17,7 +17,7 @@
 <div class="col">
  	<div class="alert alert-info">Journal de bord des actions de l'utilisateur</div>
 
-	<table id="tablelogs" class="table table-striped dt-responsive" style="width:100%">
+	<table id="tablelogs" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Action</th>
@@ -26,13 +26,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="log in logs">
+            <tr ng-repeat="log in logs.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
                 <td>{{log.action}}</td>
 				<td>{{log.description}}</td>
 				<td>{{log.timestamp | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}</td>
             </tr>
 			</tbody>
 			</table>
+			
+			<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
 </div>
 </div>
 </div>
