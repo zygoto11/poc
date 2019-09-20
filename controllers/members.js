@@ -1,14 +1,11 @@
 app.controller("friendsCtrl", function ($scope,$http, $routeParams,$localStorage,$timeout) {
-	$scope.username = $localStorage.currentUser.username;
-	$scope.userid = $localStorage.currentUser.id;
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;		
+        $scope.users = response.data.result.users;
+		$scope.friends = response.data.result.friends;
+		$scope.bans = response.data.result.bans;
+		
     });
-	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmembers.php")
-	.then(function(response) {
-		$scope.relations = response.data.result;
-	});
 });
 
 
@@ -19,7 +16,7 @@ $scope.showusers = true;
 
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;
+        $scope.users = response.data.result.users;
 	$scope.currentPage = 1;
     $scope.itemsPerPage = 5;
     $scope.maxSize = 10;

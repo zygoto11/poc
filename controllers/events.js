@@ -24,7 +24,7 @@ app.controller("eventsCtrl", function ($scope,$http, $location,$routeParams,$rou
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;
+        $scope.users = response.data.result.users;
     });
 	
 	
@@ -113,7 +113,7 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
     });	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;
+        $scope.users = response.data.result.users;
     });
 });
 
