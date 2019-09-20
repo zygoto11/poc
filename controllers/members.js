@@ -10,28 +10,20 @@ app.controller("friendsCtrl", function ($scope,$http, $routeParams,$localStorage
 
 
 app.controller("membersCtrl", function ($scope,$http, $routeParams,$location,$route,$localStorage) {
-	
-$scope.showusers = true;
-
-
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
         $scope.users = response.data.result.users;
 	$scope.currentPage = 1;
     $scope.itemsPerPage = 5;
     $scope.maxSize = 10;
-    $scope.totalItems = $scope.users.length;		
-		
+    $scope.totalItems = $scope.users.length;
     });
-	
-	
- 
-	
+});
 
 
+app.controller("memberCtrl", function ($scope,$http, $routeParams,$location,$route,$localStorage) {
 	if ($routeParams.userid) {
 		
-		$scope.showusers = false;
 		$scope.userid = $routeParams.userid;
 
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getmember.php?to="+$scope.userid)

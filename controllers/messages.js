@@ -5,7 +5,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;		
+        $scope.users = response.data.result.users;		
     });
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessages.php")
@@ -31,7 +31,7 @@ app.controller("messageCtrl", function ($scope,$route,$http, $routeParams,$local
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;		
+        $scope.users = response.data.result.users;		
     });
 	
 
@@ -70,7 +70,7 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data;		
+        $scope.users = response.data.result.users;		
     });
 	
 	$scope.createmessage = function(dest,msgname,msgcontent){			
