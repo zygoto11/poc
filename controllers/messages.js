@@ -91,6 +91,17 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
         $scope.users = response.data.result.users;		
     });
 	
+	$scope.showdest = true;
+	
+ 	if ($routeParams.to) {
+
+		$scope.newmessage = {};
+		$scope.newmessage.dest = {};
+		$scope.newmessage.dest.id = $routeParams.to;
+		$scope.showdest = false;
+		
+	} 
+	
 	
 	 $scope.tinyMceOptions = {
                         plugins: ['lists','emoticons template paste textcolor textpattern imagetools'],
