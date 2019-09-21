@@ -103,7 +103,13 @@ app.filter('moment', function () {
   };
 });
 
-
+app.filter('trusted', function($sce){
+        return function(html){
+            return $sce.trustAsHtml(html)
+        }
+     })
+	 
+	 
 app.run(function($rootScope, $http, $location, $localStorage) {
 	
 	 // keep user logged in after page refresh
