@@ -21,20 +21,33 @@
 
 
 <div class="col-md">
-            <div class="alert alert-info" ng-repeat="desc in descmessage">
-				
-               <span class="badge badge-teal" ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}} 
+
+
+
+
+            <div class="card mb-2" ng-class="{'ml-auto w-50' : desc.from !== userid , 'w-50' : desc.from == userid}" ng-repeat="desc in descmessage.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
+				<div class="card-header">				
+				<span ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}} 
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 			   </span>
-               <p ng-bind-html="desc.content"></p><br>
-				{{desc.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}
-				<!--span ng-if="desc.from==userid" class="float-right"><small>Modifier votre message <i class="fa fa-edit"></i><small></span-->
-            </div>
-			
+               
+				<span class="float-right"><small>{{desc.timestamp  | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}</small></span>				
+				</div>
+				<div class="card-body"><p ng-bind-html="desc.content | trusted"></p></div>
+				
+			</div><br>
+			<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
+
+</div>
+<div class="col-md">
+<h4>Envoyer un message</h4>
 <div class="form-group">
-  <textarea ng-model="replymsg.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <a class="float-right btn btn-outline-primary ml-2" ng-click="replymessage(replymsg.msg)"> <i class="fa fa-reply"></i> Envoyer</a>
+ <textarea ui-tinymce="tinyMceOptions"
+      ng-model="replymsg.msg" 
+      ></textarea>
+ <br>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="replymessage(replymsg.msg)"> <i class="fa fa-reply"></i> Envoyer</a><br><br>
 </div>
 
 </div>

@@ -30,13 +30,14 @@
 	   class="form-control mb-2" >	   
 	   
   <textarea ui-tinymce="tinyMceOptions"
-      ng-model="newmessage.msg" placeholder="Votre message..."
+      ng-model="newmessage.msg" 
       ></textarea>
   <br>
   <button class="float-right btn btn-primary ml-2" ng-disabled="!newmessage.dest.id || !newmessage.name || !newmessage.msg" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</button>
   
   
 </div><br><br> 
+<div class="alert alert-danger" ng-if="error_msg">{{error_msg}}</div>
 
 
 	 
