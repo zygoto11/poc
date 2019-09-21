@@ -66,9 +66,11 @@
 					 					 
 				</div>
 				<hr>
-				 <textarea ng-model="newsortie.desc" class="form-control" placeholder="Description de la sortie" required></textarea>
+
 				 
-				 <text-angular ng-model="newsortie.html"></text-angular>
+				 <textarea ui-tinymce="tinyMceOptions"
+      ng-model="newsortie.desc" required
+      ></textarea>
 
 				<hr>
 				
@@ -79,21 +81,6 @@
 
 			
 		</div>
-				<div class="col">
-
-
-<div class="card border-success bg-light mb-3">
-  <div class="card-header"><h4>Aperçu de votre sortie</h4></div>
-  <div class="card-body text-dark">
-    <p class="card-text">
-<h2 class="text-center">{{newsortie.name}}</h2>
-
-<p ng-bind-html="newsortie.html"></p>
-
-	</p>
-  </div>
-</div>
-		
-		</div>
+			
 		</div>
 </div>

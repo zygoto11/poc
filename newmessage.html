@@ -22,19 +22,23 @@
 
 
 <div class="form-group">
-	<input type="text" ng-model="newmessage.dest" required uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:8" class="form-control" placeholder="Destinataire">
+	<input type="text" ng-model="newmessage.dest" required uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:8" class="form-control mb-2" placeholder="Destinataire">
 	
 <input type="text" 
 	   ng-model="newmessage.name" 
 	   placeholder="Sujet" 
-	   class="form-control" >	   
+	   class="form-control mb-2" >	   
 	   
-<!--text-angular ng-model="newmessage.msg" placeholder="Message..." rows="5"></text-angular-->
-  <textarea ng-model="newmessage.msg" class="form-control" rows="5" id="message" placeholder="Message..."></textarea><br>
-  <button class="float-right btn btn-outline-primary ml-2" ng-disabled="!newmessage.dest.id" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</button>
+  <textarea ui-tinymce="tinyMceOptions"
+      ng-model="newmessage.msg" placeholder="Votre message..."
+      ></textarea>
+  <br>
+  <button class="float-right btn btn-primary ml-2" ng-disabled="!newmessage.dest.id || !newmessage.name || !newmessage.msg" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</button>
   
   
 </div><br><br> 
+
+
 	 
 
 	 
