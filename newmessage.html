@@ -20,9 +20,11 @@
 <div class="row">
 <div class="col-md">	
 
-
 <div class="form-group">
-	<input type="text" ng-model="newmessage.dest" required uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:8" class="form-control mb-2" placeholder="Destinataire">
+<input type="text" class="form-control mb-2" ng-show="!showdest" disabled ng-value="(users | filter:{id:newmessage.dest.id}:true)[0].username">
+
+
+<input type="text" ng-show="showdest" ng-model="newmessage.dest" required uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:8" class="form-control mb-2" placeholder="Destinataire">
 	
 <input type="text" 
 	   ng-model="newmessage.name" 

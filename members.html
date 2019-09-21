@@ -32,6 +32,7 @@
       <th scope="col">Pseudo</th>
       <th scope="col">Sexe</th>
 	  <th scope="col">Profil validé</th>
+	  <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
 	<i ng-if="x.validated ==='t'" class="fa fa-check-circle text-green"></i>
 	<i ng-if="x.validated ==='f'" class="far fa-times-circle text-danger"></i>
 	</td>
+	<td><a href="#!newmessage/{{x.id}}"><i class="fa fa-envelope"></i></a></td>
             </tr>
 			</tbody>
 	</table>

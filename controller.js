@@ -58,6 +58,10 @@ app.config(function($routeProvider) {
         templateUrl : "newmessage.html",
 		controller : "newmessageCtrl"
     })
+	.when("/newmessage/:to", {
+        templateUrl : "newmessage.html",
+		controller : "newmessageCtrl"
+    })
 	.when("/messages", {
         templateUrl : "messages.html",
 		controller : "messagesCtrl"

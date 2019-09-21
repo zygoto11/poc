@@ -25,7 +25,7 @@
 
 
 
-            <div class="card mb-2" ng-class="{'ml-auto w-50' : desc.from !== userid , 'w-50' : desc.from == userid}" ng-repeat="desc in descmessage.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
+            <div class="card mb-2" ng-class="{'mr-5' : desc.from !== userid , 'ml-5' : desc.from == userid}" ng-repeat="desc in descmessage.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
 				<div class="card-header">				
 				<span ng-repeat="user in users | filter:{'id': desc.from}:true">{{user.username}} 
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
