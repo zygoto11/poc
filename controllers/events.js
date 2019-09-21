@@ -128,6 +128,18 @@ app.controller("neweventCtrl", function ($scope,$http, $location,$routeParams,$r
    {'name':'la cavayere','location':'route du lac'},
    {'name':'paicherou','location':'à côté du tennis'}
 ];
+
+ $scope.tinyMceOptions = {
+                        plugins: ['lists','emoticons template paste textcolor textpattern imagetools'],
+                        statusbar: false,
+                        menubar: false,
+                        resize: false,
+                        language: 'fr_FR',
+						readonly : 0,
+                        language_url:'https://cdn.jsdelivr.net/npm/tinymce-lang@0.0.1/langs/fr_FR.js',
+                        toolbar: 'bold italic underline | bullist numlist | alignleft aligncenter alignright | undo redo | forecolor backcolor'
+
+                    };
   
 	$scope.createsortie = function(name,desc,date,time,icon,scope){
 		var sortiedate = moment(date).format("YYYY-MM-DD");

@@ -73,6 +73,22 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
         $scope.users = response.data.result.users;		
     });
 	
+	
+	 $scope.tinyMceOptions = {
+                        plugins: ['lists','emoticons template paste textcolor textpattern imagetools'],
+                        statusbar: false,
+                        menubar: false,
+                        resize: false,
+                        language: 'fr_FR',
+						readonly : 0,
+                        language_url:'https://cdn.jsdelivr.net/npm/tinymce-lang@0.0.1/langs/fr_FR.js',
+                        toolbar: 'bold italic underline | bullist numlist | alignleft aligncenter alignright | undo redo | forecolor backcolor'
+
+                    };
+					
+	
+
+	
 	$scope.createmessage = function(dest,msgname,msgcontent){			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/createmessage.php',{  to:dest,msgname:msgname,msgcontent:msgcontent })
             .then(function (response) {					
