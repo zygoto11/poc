@@ -42,9 +42,27 @@ app.controller("messageCtrl", function ($scope,$route,$http, $routeParams,$local
 		
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/messages/getmessage.php?id="+$scope.message)
 		.then(function(response) {
-        $scope.descmessage = response.data;		
+        $scope.descmessage = response.data;	
+		$scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
+    $scope.maxSize = 5;
+    $scope.totalItems = $scope.descmessage.length;	
 		});
 		
+		
+		
+		
+		 $scope.tinyMceOptions = {
+                        plugins: ['lists','emoticons template paste textcolor textpattern imagetools'],
+                        statusbar: false,
+                        menubar: false,
+                        resize: false,
+                        language: 'fr_FR',
+						readonly : 0,
+                        language_url:'https://cdn.jsdelivr.net/npm/tinymce-lang@0.0.1/langs/fr_FR.js',
+                        toolbar: 'bold italic underline | bullist numlist | alignleft aligncenter alignright | undo redo | forecolor backcolor'
+
+                    };
 		
 		$scope.replymessage = function(msgcontent){
 			
@@ -91,8 +109,13 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
 	
 	$scope.createmessage = function(dest,msgname,msgcontent){			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/createmessage.php',{  to:dest,msgname:msgname,msgcontent:msgcontent })
-            .then(function (response) {					
+            .then(function (response) {
+				if (response.data.code == 200) {
 					$location.path('/messages');	
+				}
+				else{
+					$scope.error_msg = response.data.message;
+				}
 				}); 
 			
 	}
