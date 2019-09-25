@@ -1,0 +1,70 @@
+<div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+	    <ul class="navbar-nav">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!forums" ><i class="fa fa-comment-dots"></i> Forums</a>
+  </form>	  
+	</ul>
+</nav>
+
+<br>
+
+			   
+	   
+	   
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-md">
+
+
+<br>
+
+
+	<table class="table table-sm table-condensed">
+        <thead>
+            <tr class="table-secondary">
+	  <th>Auteur</th>
+	  <th>Message</th>
+	  <th>Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+		<tr ng-repeat="content in topic"	>
+		<td>
+		{{(users | filter:{id:content.author})[0].username}}
+		<span ng-if="content.author == (online | filter:{id:content.author}:true)[0].id"><i class="fas fa-signal text-success"> En ligne</i></span>
+		<span ng-if="content.author !== (online | filter:{id:content.author}:true)[0].id"><i class="fas fa-signal"></i></span>	
+		</td>
+		<td>
+<p ng-bind-html="content.content | trusted"></p>
+		
+		</td>
+		<td>{{content.timestamp | moment: 'format': 'dddd D MMMM YYYY (HH:mm)'}}</td>
+		</tr>
+</tbody>
+</table>
+
+<h4>Envoyer un message</h4>
+<div class="form-group">
+ <textarea ui-tinymce="tinyMceOptions"
+      ng-model="replymsg.msg" 
+      ></textarea>
+ <br>
+  <a class="float-right btn btn-outline-primary ml-2" ng-click="replytopic(replymsg.msg)"> <i class="fa fa-reply"></i> Envoyer</a><br><br>
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+
+
