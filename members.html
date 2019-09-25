@@ -39,6 +39,8 @@
             <tr ng-repeat="x in (users |  filter: search | orderBy : 'username' ).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
     <td>
 	<a href="#!members/{{x.id}}">{{ x.username }}</a>
+		<span ng-if="x.id == (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal text-success"> En ligne</i></span>
+	<span ng-if="x.id !== (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal"></i></span>
 	</td>
    <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
 	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
