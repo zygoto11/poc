@@ -14,9 +14,10 @@ app.controller("membersCtrl", function ($scope,$http, $routeParams,$location,$ro
     .then(function(response) {
         $scope.users = response.data.result.users;
 	$scope.currentPage = 1;
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 10;
     $scope.maxSize = 10;
     $scope.totalItems = $scope.users.length;
+	$scope.online = response.data.result.online;
     });
 });
 
