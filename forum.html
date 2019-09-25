@@ -21,10 +21,10 @@
 <div class="container-fluid">
 <div class="row">
 
-<div class="col-md-9">
+<div class="col-md">
 
 
-	<table id="users" class="table table-sm table-condensed">
+	<table class="table table-sm table-condensed">
         <thead>
             <tr class="table-secondary">
       <th>Forum</th>
@@ -32,9 +32,11 @@
             </tr>
         </thead>
         <tbody>
-		<tr><td><a href="#!forums/1">Aider au projet</a><td></tr>
-<tr><td><a href="#!forums/2">blabla</a></td></tr>
-<tr><td><a href="#!forums/3">annonces</a></td></tr>
+		<tr ng-repeat="topic in topics"	>
+		<td>
+		<a href="#!topic/1">{{topic.title}}</a>
+		<td>
+		</tr>
 </tbody>
 </table>
 

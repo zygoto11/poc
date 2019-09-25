@@ -1,0 +1,83 @@
+<div ng-include="'header.html'"></div>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-primary py-0">
+    <ul class="navbar-nav">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!messages" >Mes messages <i class="fa fa-list"></i></a>
+    <a class="btn btn-sm btn-primary" href="#!newmessage" >Nouveau message <i class="fa fa-plus-circle"></i></a>
+  </form>	  
+	</ul>
+	    <ul class="navbar-nav ml-auto">
+  <form class="form-inline">
+    <a class="btn btn-sm btn-primary" href="#!forums" ><i class="fa fa-comment-dots"></i> Forums</a>
+  </form>	  
+	</ul>
+</nav>
+
+<br>
+
+	   
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-2">	
+
+        <div class="form-group">
+            <input type="text" ng-model="search" class="form-control" placeholder="Rechercher un membre">
+        </div>
+		<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
+	
+	<table id="users" class="table table-sm table-condensed">
+        <thead>
+            <tr class="table-secondary">
+      <th scope="col">Pseudo</th>
+
+	  <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in (users |  filter: search | orderBy : 'username' ).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
+    <td>
+	<a href="#!/newmessage/{{x.id}}">{{ x.username }}</a>
+	<span ng-if="x.id == (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal text-success"> En ligne</i></span>
+	<span ng-if="x.id !== (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal"></i></span>
+	</td>
+
+
+            </tr>
+			</tbody>
+	</table>
+
+</div>
+
+<div class="form-group col-md-10">
+<input type="text" class="form-control mb-2" ng-show="newmessage.dest.id" disabled ng-value="(users | filter:{id:newmessage.dest.id}:true)[0].username">
+
+	
+<input type="text" 
+	   ng-model="newmessage.name" 
+	   placeholder="Sujet" 
+	   class="form-control mb-2" >	   
+	   
+  <textarea ui-tinymce="tinyMceOptions"
+      ng-model="newmessage.msg" 
+      ></textarea>
+  <br>
+  <button class="float-right btn btn-primary ml-2" ng-disabled="!newmessage.dest.id || !newmessage.name || !newmessage.msg" ng-click="createmessage(newmessage.dest.id,newmessage.name,newmessage.msg)"> <i class="fa fa-reply"></i> Envoyer</button>
+  
+  
+</div><br><br> 
+<div class="alert alert-danger" ng-if="error_msg">{{error_msg}}</div>
+
+
+	 
+
+	 
+</div>
+
+
+
+
+
+
+
+</div>
+</div>

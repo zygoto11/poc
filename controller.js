@@ -75,7 +75,7 @@ app.config(function($routeProvider) {
 		controller : "forumsCtrl"
     })
 	.when("/forums/:forumid", {
-        templateUrl : "forums.html",
+        templateUrl : "forum.html",
 		controller : "forumsCtrl"
     })
 	.when("/newtopic/:forumid/", {
