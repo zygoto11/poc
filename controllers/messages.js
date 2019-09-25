@@ -85,11 +85,19 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
 	
 	$scope.userid = $localStorage.currentUser.id;
 	$scope.username = $localStorage.currentUser.username;
+
 	
 	$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-        $scope.users = response.data.result.users;		
+       $scope.users = response.data.result.users;
+	$scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+    $scope.maxSize = 10;
+    $scope.totalItems = $scope.users.length;
+	$scope.online = response.data.result.online;
     });
+	
+	
 	
 	$scope.showdest = true;
 	
@@ -121,11 +129,12 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
 	$scope.createmessage = function(dest,msgname,msgcontent){			
 			 $http.post('https://zygotopoc.westeurope.cloudapp.azure.com/messages/createmessage.php',{  to:dest,msgname:msgname,msgcontent:msgcontent })
             .then(function (response) {
-				if (response.data.code == 200) {
-					$location.path('/messages');	
+				if (response.data.code !== 200) {
+					$scope.error_msg = response.data.message;
 				}
 				else{
-					$scope.error_msg = response.data.message;
+					
+					$location.path('/messages');	
 				}
 				}); 
 			
