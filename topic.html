@@ -33,7 +33,15 @@
         <tbody>
 		<tr ng-repeat="content in topic"	>
 		<td>
-		{{(users | filter:{id:content.author})[0].username}}
+		
+		<div style="overflow:hidden;height:80px;width:80px">
+		<img src="https://zygotopoc.westeurope.cloudapp.azure.com/images/{{content.author}}.png" class="img-responsive rounded-circle" style="width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-origin: border-box;"></img>
+		</div><br>
+		{{(users | filter:{id:content.author})[0].username}} 
 		<span ng-if="content.author == (online | filter:{id:content.author}:true)[0].id"><i class="fas fa-signal text-success"> En ligne</i></span>
 		<span ng-if="content.author !== (online | filter:{id:content.author}:true)[0].id"><i class="fas fa-signal"></i></span>	
 		</td>

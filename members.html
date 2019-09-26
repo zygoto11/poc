@@ -30,6 +30,7 @@
         <thead>
             <tr class="table-secondary">
       <th scope="col">Pseudo</th>
+	  <th>Avatar</th>
       <th scope="col">Sexe</th>
 	  <th scope="col">Profil validé</th>
 	  <th scope="col"></th>
@@ -41,6 +42,16 @@
 	<a href="#!members/{{x.id}}">{{ x.username }}</a>
 		<span ng-if="x.id == (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal text-success"> En ligne</i></span>
 	<span ng-if="x.id !== (online | filter:{id:x.id}:true)[0].id"><i class="fas fa-signal"></i></span>
+	</td>
+	<td>
+	<div style="overflow:hidden;height:50px;width:50px">
+		<img src="https://zygotopoc.westeurope.cloudapp.azure.com/images/{{x.id}}.png" class="img-responsive" style="width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-origin: border-box;"></img>
+		</div>
+	
 	</td>
    <td ng-if="x.gender ==='male'"><i class="fa fa-user text-primary"></i></td>
 	<td ng-if="x.gender ==='female'"><i class="fa fa-user text-pink"></i></td>
