@@ -107,7 +107,7 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
     .then(function(response) {
     $scope.sorties = response.data;
 	$scope.currentPage = 1;
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 10;
     $scope.maxSize = 5;
     $scope.totalItems = $scope.sorties.length;	
     });	
@@ -115,6 +115,25 @@ app.controller("pasteventsCtrl", function ($scope,$http, $location,$routeParams,
     .then(function(response) {
         $scope.users = response.data.result.users;
     });
+	
+
+  $scope.options = {
+    showWeeks: false,
+	showButtonBar: false,
+	minMode:'day',
+	maxMode:'month',
+	customClass: getDayClass
+  };
+ 
+
+  function getDayClass(data) {
+	 return "mycal";
+  }
+
+
+	
+	
+	
 });
 
 app.controller("neweventCtrl", function ($scope,$http, $location,$routeParams,$route,$localStorage) {
