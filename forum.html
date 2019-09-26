@@ -15,6 +15,27 @@
 <div class="container-fluid">
 <div class="row">
 
+<div class="col-md-2">
+
+
+	<table  class="table table-sm table-condensed">
+        <thead>
+            <tr class="table-secondary">
+      <th>Forum</th>
+
+            </tr>
+        </thead>
+        <tbody>
+		<tr><td><a href="#!forums/1">Aider au projet</a></td></tr>
+<tr><td><a href="#!forums/2">blabla</a></td></tr>
+<tr><td><a href="#!forums/3">annonces</a></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+
 <div class="col-md">
 
 <div class="alert alert-info" ng-if="forumid == 1">Projet Carcazone</div>
@@ -37,7 +58,7 @@
         <tbody>
 		<tr ng-repeat="topic in topics"	>
 		<td>
-		<a href="#!topic/{{topic.id}}">{{topic.title}}</a>		
+		<a href="#!topic/{{forumid}}/{{topic.id}}">{{topic.title}}</a>		
 		</td>
 		<td>
 		{{(users | filter:{id:topic.author})[0].username}}

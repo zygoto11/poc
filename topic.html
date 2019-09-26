@@ -15,11 +15,31 @@
 <div class="container-fluid">
 <div class="row">
 
+<div class="col-md-2">
+
+
+	<table  class="table table-sm table-condensed">
+        <thead>
+            <tr class="table-secondary">
+      <th>Forum</th>
+
+            </tr>
+        </thead>
+        <tbody>
+		<tr><td><a href="#!forums/1">Aider au projet</a></td></tr>
+<tr><td><a href="#!forums/2">blabla</a></td></tr>
+<tr><td><a href="#!forums/3">annonces</a></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
 <div class="col-md">
-
-
-<br>
-
+<div class="alert alert-info" ng-if="forumid == 1">Projet Carcazone</div>
+<div class="alert alert-info" ng-if="forumid == 2">blabla</div>
+<div class="alert alert-info" ng-if="forumid == 3">annonces</div>
+<h2>{{(topics | filter:{id:topicid}:true)[0].title}}</h2>
 
 	<table class="table table-sm table-condensed">
         <thead>
