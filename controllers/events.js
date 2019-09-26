@@ -145,7 +145,7 @@ app.controller("neweventCtrl", function ($scope,$http, $location,$routeParams,$r
 		var sortiedate = moment(date).format("YYYY-MM-DD");
 		var sortietime = moment(time).format("HH:mm");
 		var timestamp = sortiedate + ' ' + sortietime;
-		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/create_event.php', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope, leader: $scope.userid })
+		$http.post('https://zygotopoc.westeurope.cloudapp.azure.com/events/create_event.php', { name: name, desc:desc,date:sortiedate,time:sortietime,timestamp:timestamp,icon:icon,scope:scope })
 		.then(function (response) {
 			$location.path('/sorties');
 		});

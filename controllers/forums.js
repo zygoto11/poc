@@ -37,7 +37,7 @@ app.controller("topicCtrl", function ($scope,$route,$http, $routeParams,$localSt
 	
 				$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/members/getusers.php")
     .then(function(response) {
-       $scope.users = response.data.result.users;
+    $scope.users = response.data.result.users;
 	$scope.online = response.data.result.online;
     });
 	

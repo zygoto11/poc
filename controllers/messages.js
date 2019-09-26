@@ -12,7 +12,7 @@ app.controller("messagesCtrl", function ($scope,$route,$http, $routeParams,$loca
     .then(function(response) {
         $scope.messages = response.data;
 			$scope.currentPage = 1;
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 10;
     $scope.maxSize = 5;
     $scope.totalItems = $scope.messages.length;	
 
@@ -112,7 +112,7 @@ app.controller("newmessageCtrl", function ($scope,$route,$http, $routeParams,$lo
 	
 	
 	 $scope.tinyMceOptions = {
-                        plugins: ['lists','emoticons template paste textcolor textpattern imagetools'],
+                        plugins: ['lists','emoticons template paste textcolor textpattern imagetools placeholder'],
                         statusbar: false,
                         menubar: false,
                         resize: false,
