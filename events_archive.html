@@ -12,23 +12,14 @@
 <div class="container-fluid">
 	<div class="row">
 	
-<div class="col-sm-3">
+<div class="col-md-2">
 
-<div class="card">
-<h4 class="card-header">Sorties</h4>
-<div class="card-body">
+
 
 {{sorties.length}} Sorties
 <hr>
 <h4>Filtres</h4>
-<div class="form-check abc-checkbox  abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                        <label class="form-check-label" for="inlineCheckbox1"> Aujourd'hui </label>
-                    </div>
-                    <div class="form-check abc-checkbox abc-checkbox-primary form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1" checked>
-                        <label class="form-check-label" for="inlineCheckbox2"> Dans la semaine </label>
-                    </div><hr>
+
 
 			<div class="btn-group btn-group-toggle">
 <label class="btn btn-secondary active" uib-btn-radio="'walking'" ng-model="newsortie.icon"><i class="fa fa-walking"></i></label>
@@ -49,17 +40,26 @@
 <span ng-if="newsortie.icon ==='music'">Concert</span>
 </div>
 
+<a ng-click="dt = ''" href="">toutes les sorties</a>
+
 <div style="display:inline-block; min-height:290px;">
-      <div uib-datepicker ng-model="dt" datepicker-options="options"></div>
+      <div uib-datepicker ng-model="dt" datepicker-options="options" class="bg-light"></div>
     </div>
-
-</div>
-</div>
-
-</div>
 	
 	
-<div class="col-sm-3">
+
+
+
+</div>
+
+
+
+
+<div class="col-md">
+
+
+
+
 
 <form class="form">
         <div class="form-group">
@@ -69,7 +69,7 @@
 		<ul uib-pagination total-items="totalItems" items-per-page= "itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" previous-text="Précédent" next-text="Suivant"></ul>
 		</div>
     </form>
-<table class="table table-condensed table-sm">
+<table class="table table-condensed table-sm" ng-if="!dt">
     <thead class="thead-light">
       <tr>
         <th>Date</th>
@@ -78,8 +78,7 @@
 		<th>Organisateur</th>
       </tr>
     </thead>	
-    <tbody ng-repeat="group in (filteredsorties = (sorties | orderBy : 'timestamp' | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
-
+    <tbody  ng-repeat="group in (filteredsorties = (sorties | orderBy : 'timestamp'  | filter: search)).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage) | groupBy : 'date' ">
 	<tr class="table-primary"><td colspan=3>{{group[0].timestamp | moment: 'format': 'dddd D MMMM YYYY'}}<td></tr>
 	
       <tr ng-repeat="x in group">
@@ -91,13 +90,41 @@
 		<span class="badge badge-secondary">{{x.nbinscrits}}</span>
 		</td>
 		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
-			   <img height="40px" class="img img-rounded img-responsive" src="{{user.avatar}}" onMouseOver="this.class=''"></img>
+			   
 			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
 			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
 	</span></td>
       </tr>
 	  </tbody>
-	  </table>
+</table>
+
+<table class="table table-condensed table-sm" ng-if="dt">
+    <thead class="thead-light">
+      <tr>
+        <th>{{dt | moment: 'format': 'dddd D MMMM YYYY'}}</th>
+        <th>Sortie</th>
+        <th>Inscrits</th>
+		<th>Organisateur</th>
+      </tr>
+    </thead>	
+    <tbody>
+      <tr ng-repeat="x in (sorties | orderBy : 'timestamp' | filter : {date:(dt  | moment: 'format': 'YYYY-MM-DD' )} | filter: search).slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)  ">
+        <td><span class="badge badge-secondary"> <i class="fa fa-clock"></i> {{x.timestamp | moment: 'format': 'HH:mm'}}</span></td>
+        <td><a href="#!sorties/{{x.id}}"><small>{{x.name}} </small><i class="fa fa-{{x.icon}}"></i></a></td>
+        <td>
+		<i class="fa fa-lock text-danger" ng-if="x.scope==='private'"></i>
+		<i class="fa fa-unlock text-orange" ng-if="x.scope==='restricted'"></i>
+		<span class="badge badge-secondary">{{x.nbinscrits}}</span>
+		</td>
+		<td>	 <span ng-repeat="user in users | filter:{'id': x.leader}:true">{{user.username}} 
+			   
+			   <i ng-if="user.gender==='male'" class="fa fa-user text-primary"></i>
+			   <i ng-if="user.gender==='female'" class="fa fa-user text-pink"></i>
+	</span></td>
+      </tr>
+	  </tbody>
+</table>
+
 </div>
 
 
