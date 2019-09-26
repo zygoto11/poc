@@ -25,10 +25,21 @@ app.controller("forumsCtrl", function ($scope,$route,$http, $routeParams,$localS
 
 
 app.controller("topicCtrl", function ($scope,$route,$http, $routeParams,$localStorage,$location) {
+	
+	if ($routeParams.forumid) {
+		
+		$scope.forumid = $routeParams.forumid;
+		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/forums/gettopics.php?forumid="+$scope.forumid)
+		.then(function(response) {
+        $scope.topics = response.data;		
+		});		
+		
+	
 		if ($routeParams.topicid) {
 		
 		$scope.topicid = $routeParams.topicid;
 		$scope.userid = $localStorage.currentUser.id;
+	
 		
 		$http.get("https://zygotopoc.westeurope.cloudapp.azure.com/forums/gettopic.php?id="+$scope.topicid)
 		.then(function(response) {
@@ -66,6 +77,8 @@ app.controller("topicCtrl", function ($scope,$route,$http, $routeParams,$localSt
 		
 		
 		}
+		
+	}
 
 	
 });
